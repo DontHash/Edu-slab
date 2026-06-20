@@ -1,0 +1,461 @@
+{
+  "grade": 9,
+  "subject": "Mathematics",
+  "chapters": [
+    {
+      "chapter": "Set Theory",
+      "questions": [
+        "Define a set with an example.",
+        "Write the set of vowels in English alphabet using roster form.",
+        "Write the set of first ten natural numbers in set-builder form.",
+        "If A = {2, 4, 6, 8} and B = {4, 8, 12}, find A ∩ B.",
+        "If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, find A ∪ B.",
+        "If U = {1,2,3,4,5,6,7,8} and A = {2,4,6,8}, find A′.",
+        "Find the cardinal number of the set A = {5, 7, 9, 11, 13}.",
+        "State the universal set for natural numbers less than 20.",
+        "Draw a Venn diagram for two overlapping sets.",
+        "If A = {x : x is an even number less than 12}, write set A.",
+        "Write any two examples of finite sets.",
+        "Write any two examples of infinite sets.",
+        "Write two examples of disjoint sets.",
+        "If n(U)=50 and n(A)=30, find n(A′).",
+        "If n(A)=18, n(B)=13 and n(A ∩ B)=5, find n(A ∪ B).",
+        "Define subset with an example.",
+        "How many subsets does a set of 4 elements have?",
+        "Define power set with example.",
+        "Write two real life applications of sets.",
+        "If A ⊂ B and B ⊂ C, what is the relation between A and C?",
+        "If U = {x : x < 10, x ∈ N}, A = {x: x is a factor of 6}, B = {y: y is a prime number} and C = {z: z is a multiple of 3}, what is the cardinal number of set U?",
+        "Write (A ∪ B) in listing method where A = {1, 2, 3, 6} and B = {2, 3, 5, 7}.",
+        "Find (A ∪ B) − C and illustrate it in a Venn-diagram.",
+        "Define equal sets with example.",
+        "Define equivalent sets with example.",
+        "What is null set or empty set?",
+        "Define proper subset and improper subset."
+      ]
+    },
+    {
+      "chapter": "Number System",
+      "questions": [
+        "Write five integers greater than −5.",
+        "Write five rational numbers between 2 and 3.",
+        "Convert 0.375 into fraction.",
+        "Convert 7/8 into decimal.",
+        "Classify the following as rational or irrational: √4, √7, 3/5, 0.23̅.",
+        "Define irrational numbers with example.",
+        "Separate rational and irrational numbers from {√2, 4, 7/5, √9, 0.333...}.",
+        "Write the additive inverse of −9.",
+        "Write the multiplicative inverse of 5/7.",
+        "Simplify (3/5)² × (5/3)².",
+        "Simplify √196.",
+        "Simplify √49x².",
+        "Arrange in ascending order: 2.5, 2.05, 2.15, 2.005.",
+        "Rationalize the denominator of 5/√7.",
+        "Rationalize the denominator of 6/(√3 + √2).",
+        "Find the HCF of 24 and 36.",
+        "Find the LCM of 12, 18 and 24.",
+        "State Euclid's Division Lemma.",
+        "State the Fundamental Theorem of Arithmetic.",
+        "How many natural numbers lie between 100 and 150?",
+        "How many zeros are there in the prime factorization of 1000?",
+        "Write difference between rational and irrational numbers.",
+        "Find the H.C.F. of 8a³ + b³ and 16a⁴ + 4a²b² + b⁴.",
+        "Express 0.6̅ as a fraction.",
+        "Prove that √3 is an irrational number.",
+        "Show that 5 − √2 is an irrational number."
+      ]
+    },
+    {
+      "chapter": "Profit and Loss",
+      "questions": [
+        "Define cost price (CP) and selling price (SP).",
+        "Write the formula to calculate profit percentage.",
+        "Write the formula to calculate loss percentage.",
+        "If CP = Rs. 800 and SP = Rs. 960, find profit percentage.",
+        "If CP = Rs. 1200 and loss is 10%, find SP.",
+        "A shopkeeper buys 50 kg of rice at Rs. 60 per kg. At what price per kg should he sell to gain 20%?",
+        "An article is sold at Rs. 1350 with a loss of 10%. Find its CP.",
+        "If SP = Rs. 2400 and profit is 20%, find CP.",
+        "A man buys a cycle for Rs. 5000, marks it at Rs. 6000 and allows 10% discount. Find his profit percentage.",
+        "Define marked price and discount.",
+        "If marked price is Rs. 2000 and discount is 15%, find SP.",
+        "A shopkeeper allows 20% discount on marked price and still gains 20%. If CP is Rs. 1000, find marked price.",
+        "Define VAT (Value Added Tax).",
+        "If SP excluding VAT is Rs. 5000 and VAT is 13%, find total SP.",
+        "An item is sold at Rs. 4500 including 13% VAT. Find SP excluding VAT.",
+        "Mr. Yadav buys 100 cycles at Rs. 5000 each, marks each at Rs. 5000, allows 10% discount and sells with 13% VAT. Calculate total selling price."
+      ]
+    },
+    {
+      "chapter": "Commission and Taxation",
+      "questions": [
+        "Define commission with example.",
+        "Write the formula to calculate commission.",
+        "An agent sells goods worth Rs. 50,000 and gets 5% commission. Find his commission.",
+        "A salesman gets 8% commission on sales. If he gets Rs. 4000 as commission, find total sales.",
+        "Define income tax.",
+        "What is taxable income?",
+        "If annual income is Rs. 600,000 and tax-free allowance is Rs. 500,000, find taxable income.",
+        "Calculate income tax at 10% if taxable income is Rs. 200,000.",
+        "A person's monthly salary is Rs. 50,000. If 1% social security tax is deducted, find the deduction amount.",
+        "Define dividend in context of shares.",
+        "If a company distributes Rs. 500,000 as dividend among 40,000 shares, find dividend per share.",
+        "A person has 4,800 shares of Rs. 100 each. If 5% cash dividend is distributed, how much dividend will he get?",
+        "Define share and share value.",
+        "A company has 400,000 shares each of Rs. 100. What is the total share capital?",
+        "If net profit is Rs. 2,500,000 and distributed dividend is Rs. 500,000, what percent dividend was distributed?"
+      ]
+    },
+    {
+      "chapter": "Household Arithmetic (Home Arithmetic)",
+      "questions": [
+        "Define electricity consumption unit (kWh).",
+        "If meter reading on 1st day is 1045 units and on 31st day is 1070 units, find consumption.",
+        "Calculate electricity bill if 25 units are consumed with service charge Rs. 30 and rate Rs. 3 per unit for units 0-20 and Rs. 6.50 for units 21-30.",
+        "A 5A meter shows consumption of 35 units. Calculate bill using given rate structure.",
+        "Define minimum taxi fare.",
+        "If minimum taxi fare is Rs. 14 and additional fare is Rs. 7.20 per 200m, find fare for 2 km distance.",
+        "A family consumes 150 units of electricity. Calculate the bill with appropriate rate slabs.",
+        "Define water meter reading and consumption calculation.",
+        "If water charges are Rs. 10 per unit for first 10 units and Rs. 15 for additional units, calculate bill for 25 units.",
+        "Calculate monthly telephone bill if rental is Rs. 200 and call charges are Rs. 150."
+      ]
+    },
+    {
+      "chapter": "Algebra and Polynomials",
+      "questions": [
+        "Define polynomial with example.",
+        "Classify 3x² + 5, 5, 7x³ − 2x as constant, linear or polynomial.",
+        "Find the degree of the polynomial 7x³ − 5x + 4.",
+        "Find the value of polynomial 2x² − 3x at x = 4.",
+        "Simplify (3x + 4) + (4x − 7).",
+        "Simplify (7x − 8) − (4x + 2).",
+        "Multiply (x + 5)(x − 5).",
+        "Multiply (3x + 2)(x + 4).",
+        "Factorize x² − 9.",
+        "Factorize x² + 7x + 10.",
+        "Define monomial, binomial and trinomial.",
+        "Expand (2x + 3)².",
+        "Expand (x − 4)².",
+        "Factorize 4x² − 9.",
+        "Factorize x² − 5x + 6.",
+        "Simplify (a + b)/x ÷ (a² − b²)/x.",
+        "Add: 2x² + 3x + 1 and 3x² − 2x + 4.",
+        "Subtract: 5x² + 2x − 3 from 7x² − x + 5."
+      ]
+    },
+    {
+      "chapter": "Indices (Exponents)",
+      "questions": [
+        "Define indices with example.",
+        "Simplify 2³ × 2⁴.",
+        "Simplify 5⁶ ÷ 5².",
+        "Simplify (3²)³.",
+        "Write the value of any number raised to power 0.",
+        "Simplify a⁵ × a³.",
+        "Simplify x⁸ ÷ x⁵.",
+        "Evaluate 2⁻³.",
+        "Simplify (x³y²)².",
+        "Write 1/8 in terms of power of 2.",
+        "State the laws of indices.",
+        "Simplify (2x²)³.",
+        "Simplify a⁰ × b⁰.",
+        "Express 0.001 in negative power of 10.",
+        "Simplify (am)n.",
+        "If 2ˣ = 8, find the value of x.",
+        "If 3ˣ = 27, find x."
+      ]
+    },
+    {
+      "chapter": "Linear Equations",
+      "questions": [
+        "Solve 2x + 5 = 17.",
+        "Solve 7x − 9 = 26.",
+        "Solve 4x + 5 = 2x + 17.",
+        "Solve 3(2x − 5) = 21.",
+        "If the sum of two numbers is 20 and one is 6 more than the other, find the numbers.",
+        "Define linear equation in one variable.",
+        "Solve: x/3 + 2 = 5.",
+        "Solve: 5x − 3 = 2x + 9.",
+        "The sum of two consecutive numbers is 35. Find the numbers.",
+        "Zeena bought 3 kg apples and 5 kg oranges for Rs. 1155. Represent this in linear equation form.",
+        "Form two linear equations from: 3 kg apples and 5 kg oranges cost Rs. 1155.",
+        "Solve simultaneous equations: x + y = 10 and x − y = 2.",
+        "Solve: 2x + 3y = 12 and x − y = 1.",
+        "The sum of two numbers is 50 and their difference is 10. Find the numbers."
+      ]
+    },
+    {
+      "chapter": "Quadratic Equations",
+      "questions": [
+        "Define quadratic equation with example.",
+        "Write the general form of quadratic equation.",
+        "Solve x² − 5x + 6 = 0 by factorization.",
+        "Solve x² − 9 = 0.",
+        "Solve 2x² − 7x + 3 = 0 by factorization.",
+        "State the quadratic formula.",
+        "Solve x² + 5x + 6 = 0 using formula.",
+        "Find the roots of x² − 4x + 4 = 0.",
+        "Solve (x − 3)(x + 2) = 0.",
+        "Define discriminant of quadratic equation.",
+        "Find the nature of roots of x² + 3x + 2 = 0.",
+        "Solve x² = 16.",
+        "Form a quadratic equation whose roots are 2 and 3."
+      ]
+    },
+    {
+      "chapter": "Ratio and Proportion",
+      "questions": [
+        "Define ratio with example.",
+        "Express the ratio 12:18 in simplest form.",
+        "If a:b = 2:3 and b:c = 4:5, find a:b:c.",
+        "Define proportion with example.",
+        "If 3:4 = x:12, find x.",
+        "Check whether 2, 4, 6, 12 are in proportion.",
+        "The ratio of two numbers is 3:5 and their sum is 80. Find the numbers.",
+        "Divide Rs. 1500 in the ratio 2:3:5.",
+        "If x:y = 3:4, find (3x + 2y):(5x − y).",
+        "State the properties of proportion.",
+        "Define mean proportional between two numbers.",
+        "Find mean proportional between 4 and 9."
+      ]
+    },
+    {
+      "chapter": "Arithmetic Sequence (AP)",
+      "questions": [
+        "Define arithmetic sequence with example.",
+        "Find the first 10 terms of the sequence 2, 6, 10,...",
+        "Find the 10th term of AP with first term 5 and common difference 3.",
+        "Find common difference of the sequence 4, 9, 14, 19,...",
+        "If 5th term is 17 and 8th term is 26 of an AP, find common difference.",
+        "Write the formula for nth term of AP.",
+        "Find the sum of first 10 terms of AP: 2, 4, 6,...",
+        "Write the formula for sum of n terms of AP.",
+        "Find 20th term of AP: 5, 8, 11, 14,...",
+        "If first term is 7 and common difference is 5, find 15th term.",
+        "Which term of AP 3, 7, 11, 15,... is 99?"
+      ]
+    },
+    {
+      "chapter": "Geometric Sequence (GP)",
+      "questions": [
+        "Define geometric sequence with example.",
+        "Find the 5th term of GP: 3, 6, 12,...",
+        "If second term of GP is 6 and fifth term is 162, find the common ratio.",
+        "Write the formula for nth term of GP.",
+        "Find common ratio of GP: 2, 6, 18,...",
+        "If first term is 5 and common ratio is 2, find 6th term.",
+        "Find the sum of first 5 terms of GP: 1, 2, 4, 8,...",
+        "Write the formula for sum of n terms of GP.",
+        "The marks obtained by students are 16, 24, 36,... in GP. Find common ratio.",
+        "If a = 3, r = 1.5, find t₅."
+      ]
+    },
+    {
+      "chapter": "Mensuration - Area and Perimeter",
+      "questions": [
+        "Find the area of a rectangle of length 12 cm and breadth 8 cm.",
+        "Find the perimeter of a rectangle with length 15 cm and breadth 10 cm.",
+        "Find the area of a square whose side is 9 cm.",
+        "Find the perimeter of a square of side 14 cm.",
+        "Find the area of a triangle with base 10 cm and height 8 cm.",
+        "Find the area of a triangle when its sides are 7 cm, 8 cm and 9 cm using Heron's formula.",
+        "Find the area of a circle whose radius is 7 cm.",
+        "Find the circumference of a circle whose radius is 14 cm.",
+        "Find the radius of a circle whose area is 154 cm².",
+        "Find the radius of a circle whose circumference is 44 cm.",
+        "Find the area of 4 walls of a room of length 10 m, breadth 8 m and height 5 m.",
+        "Find the cost of carpeting a room of 10 m × 8 m at Rs. 200 per sq. meter.",
+        "Find the cost of painting walls of room if total area is 120 m² at Rs. 150 per m².",
+        "A room is 15 m long, 10 m broad and 5 m high. Find cost of coloring walls excluding door and windows at Rs. 250 per sq. m.",
+        "State Heron's formula for area of triangle."
+      ]
+    },
+    {
+      "chapter": "Mensuration - Solids (Volume and Surface Area)",
+      "questions": [
+        "Find the curved surface area of cylinder of radius 3 cm and height 7 cm.",
+        "Find the volume of a cylinder of radius 7 cm and height 10 cm.",
+        "Find the volume of a cuboid of dimensions 8 cm × 6 cm × 4 cm.",
+        "Find the total surface area of cuboid of sides 5 cm, 4 cm and 3 cm.",
+        "Find the volume of a cube of side 5 cm.",
+        "Find the total surface area of a cube of side 6 cm.",
+        "A room is 8 m long, 6 m wide and 4 m high. Find its volume.",
+        "A cylindrical can has inner radius 5 cm and height 14 cm. Find volume in liters.",
+        "Write the formula to calculate volume of cylinder.",
+        "Write the formula for total surface area of cylinder.",
+        "Find volume of cone with radius 7 cm and height 12 cm.",
+        "Find curved surface area of cone with radius 7 cm and slant height 10 cm.",
+        "Write the formula for volume of sphere.",
+        "Find volume of sphere with radius 7 cm.",
+        "How many square feet of canvas was used to make an equilateral triangular tent with edge 12 ft and length 20 ft including floor?"
+      ]
+    },
+    {
+      "chapter": "Triangles",
+      "questions": [
+        "State the triangle inequality theorem.",
+        "Draw two triangles ABC of different shapes and explore relation between sum of any two sides and third side.",
+        "Define congruent triangles.",
+        "State SSS congruence rule.",
+        "State SAS congruence rule.",
+        "State ASA congruence rule.",
+        "State RHS congruence rule.",
+        "In triangle ABC, if AB = AC, what type of triangle is it?",
+        "If two angles of a triangle are 60° and 70°, find the third angle.",
+        "State the angle sum property of triangle.",
+        "Define exterior angle of triangle.",
+        "State exterior angle theorem.",
+        "If exterior angle of triangle is 120° and one interior opposite angle is 50°, find the other.",
+        "Prove that sum of angles of triangle is 180°."
+      ]
+    },
+    {
+      "chapter": "Similarity",
+      "questions": [
+        "Define similar triangles.",
+        "State AA similarity criterion.",
+        "State SAS similarity criterion.",
+        "State SSS similarity criterion.",
+        "If a boy 1.8 m tall casts shadow of 3 m and a tree casts shadow of 30 m at same time, find height of tree.",
+        "State basic proportionality theorem (Thales theorem).",
+        "If a line divides two sides of triangle proportionally, what can you conclude?",
+        "Two triangles are similar. If sides of first are 3, 4, 5 and smallest side of second is 6, find other sides.",
+        "Define scale factor in similar figures.",
+        "If two triangles are similar with scale factor 2:3, find ratio of their areas."
+      ]
+    },
+    {
+      "chapter": "Parallelograms",
+      "questions": [
+        "Define parallelogram with properties.",
+        "What is the relation between diagonals of parallelogram?",
+        "State the properties of parallelogram.",
+        "In parallelogram ABCD, if ∠ABC = 30° + p and ∠ADC = 60° − p, find p.",
+        "Prove that diagonals of parallelogram bisect each other.",
+        "Define rhombus with properties.",
+        "Construct a rhombus ABCD with diagonal AC = 6 cm and BD = 8 cm.",
+        "What is the relation between diagonals of rhombus?",
+        "Define rectangle with properties.",
+        "Define square with properties.",
+        "Prove that opposite angles of parallelogram are equal.",
+        "If one angle of parallelogram is 70°, find other angles."
+      ]
+    },
+    {
+      "chapter": "Circles",
+      "questions": [
+        "Define circle with its parts (radius, diameter, chord, arc, sector).",
+        "What is the relation between radius and diameter?",
+        "Define chord of circle.",
+        "State: perpendicular from center to chord bisects the chord.",
+        "A circle has center O and radius 5 cm. A chord PQ is 6 cm long. Find perpendicular distance from O to PQ.",
+        "What is the relationship between OM and PQ if M is midpoint of chord PQ?",
+        "State the theorem: equal chords are equidistant from center.",
+        "Define tangent to circle.",
+        "State: tangent is perpendicular to radius at point of contact.",
+        "How many tangents can be drawn from external point to circle?",
+        "Define secant of circle.",
+        "State angle in semicircle theorem.",
+        "If angle in semicircle is inscribed, what is its measure?",
+        "Define arc, sector and segment of circle."
+      ]
+    },
+    {
+      "chapter": "Construction",
+      "questions": [
+        "Construct a triangle ABC with AB = 6 cm, BC = 7 cm and AC = 5 cm.",
+        "Construct an equilateral triangle with side 6 cm.",
+        "Construct a right triangle with hypotenuse 10 cm and one side 6 cm.",
+        "Construct angle of 60° using compass and ruler.",
+        "Construct angle of 90° using compass and ruler.",
+        "Construct perpendicular bisector of line segment AB = 8 cm.",
+        "Construct angle bisector of given angle.",
+        "Construct a rhombus with diagonals 6 cm and 8 cm.",
+        "Construct a parallelogram with adjacent sides 5 cm and 7 cm and included angle 60°.",
+        "Divide a line segment of 8 cm in ratio 2:3 by construction."
+      ]
+    },
+    {
+      "chapter": "Trigonometry",
+      "questions": [
+        "Define trigonometric ratios (sin, cos, tan).",
+        "In right triangle, if perpendicular = 3 and base = 4, find sin θ, cos θ, tan θ.",
+        "State the values of sin 30°, sin 45°, sin 60°.",
+        "State the values of cos 0°, cos 30°, cos 45°, cos 60°, cos 90°.",
+        "State the values of tan 0°, tan 30°, tan 45°, tan 60°.",
+        "Find the value of sin²θ + cos²θ.",
+        "If sin θ = 3/5, find cos θ.",
+        "If tan θ = 1, find θ.",
+        "A ladder 18 ft long rests against wall making angle 60° with ground. Find height of wall.",
+        "Which trigonometric ratio is represented by AB/AC in right triangle?",
+        "What is the value of tan 60°?",
+        "If wall height equals distance of ladder foot from wall, find angle.",
+        "State sin²θ + cos²θ = 1 identity.",
+        "If cos θ = 4/5, find sin θ and tan θ.",
+        "Define angle of elevation and depression."
+      ]
+    },
+    {
+      "chapter": "Statistics",
+      "questions": [
+        "Define data with example.",
+        "Write difference between primary and secondary data.",
+        "Construct frequency table for: 2, 3, 3, 4, 5, 5, 5, 6.",
+        "Find mean of 5, 7, 9, 11, 13.",
+        "Find median of 3, 5, 7, 9, 11.",
+        "Find mode of the data: 2, 4, 4, 5, 5, 5, 6.",
+        "Convert discrete data into continuous data.",
+        "Construct cumulative frequency table of given data.",
+        "Draw histogram from given frequency table.",
+        "Construct frequency polygon from histogram.",
+        "Find mean from grouped data.",
+        "Find median from grouped data.",
+        "Find mode from grouped data.",
+        "What is class interval?",
+        "What is class mark?",
+        "What is cumulative frequency?",
+        "Define histogram.",
+        "Define frequency polygon.",
+        "Define bar graph.",
+        "Write one real-life use of statistics.",
+        "The marks obtained by students are: 15, 30, 45, 60, 75, 90 with frequencies 2, 3, 7, 10, 8, 4. Construct cumulative frequency table.",
+        "Calculate median mark from given frequency distribution.",
+        "What is the average mark of students who secured more than median mark?",
+        "Define range of data.",
+        "Define quartiles (Q₁, Q₂, Q₃)."
+      ]
+    },
+    {
+      "chapter": "Probability",
+      "questions": [
+        "Define probability with example.",
+        "How many outcomes are possible when a coin is tossed once?",
+        "How many outcomes are possible when a coin is tossed twice?",
+        "Write sample space when a coin is tossed twice.",
+        "Write the sample space when a die is rolled once.",
+        "How many outcomes are possible when a die is rolled once?",
+        "Find the probability of getting head when a coin is tossed.",
+        "Find the probability of getting a tail when a coin is tossed.",
+        "Find probability of getting an even number on a die.",
+        "Find probability of getting an odd number on a die.",
+        "Find probability of getting number greater than 3 on a die.",
+        "Find the probability of getting 6 on a die.",
+        "A die is thrown. What is probability of getting a prime number?",
+        "Two coins are tossed. What is probability of getting two heads?",
+        "Two coins are tossed. What is probability of getting one head and one tail?",
+        "Define impossible event with example.",
+        "Define sure event with example.",
+        "What is probability of an impossible event?",
+        "What is probability of a sure event?",
+        "Write any two real-life applications of probability.",
+        "Write down sample space when a die is rolled to select student from group.",
+        "What is probability of selecting student numbered by even number when die is rolled?",
+        "What is probability of not selecting student numbered by multiple of 3?",
+        "Define experimental probability.",
+        "Define theoretical probability.",
+        "If a bag contains 5 red and 3 blue balls, find probability of drawing a red ball."
+      ]
+    }
+  ]
+}

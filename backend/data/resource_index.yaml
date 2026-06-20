@@ -1,0 +1,14 @@
+# Curated free resources — v1 stub (expand per topic in later phases)
+# LLM must select from this list only; never invent URLs.
+
+mathematics:
+  Geometry:
+    prerequisites:
+      - title: "Basic Angles"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/basic-geo/basic-geo-angle"
+    resources: []
+
+science: {}
+writing_english: {}
+speaking_english: {}

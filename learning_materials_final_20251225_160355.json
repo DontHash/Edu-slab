@@ -1,0 +1,530 @@
+{
+  "generated_at": "2025-12-25T10:18:20.325259+00:00",
+  "schema_version": "1.0",
+  "generator_model": "mistral-small-latest",
+  "chapters": [
+    {
+      "chapter_name": "Reading Comprehension",
+      "weakness_level": "severe",
+      "priority": 3,
+      "estimated_time_hours": 5,
+      "prerequisites": [
+        {
+          "concept": "Basic Vocabulary",
+          "why": "Understanding basic vocabulary is essential for comprehending texts.",
+          "recommended_resource": "Khan Academy Vocabulary Course"
+        },
+        {
+          "concept": "Sentence Structure",
+          "why": "Knowing sentence structure helps in understanding the flow of information.",
+          "recommended_resource": "OWL Purdue Sentence Structure Guide"
+        }
+      ],
+      "roadmap_steps": [
+        {
+          "step_number": 1,
+          "objective": "Understand basic reading strategies",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 2,
+          "objective": "Practice identifying main ideas",
+          "estimated_time_minutes": 90
+        },
+        {
+          "step_number": 3,
+          "objective": "Improve vocabulary through context clues",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 4,
+          "objective": "Read and summarize short passages",
+          "estimated_time_minutes": 90
+        },
+        {
+          "step_number": 5,
+          "objective": "Review and practice comprehension exercises",
+          "estimated_time_minutes": 60
+        }
+      ],
+      "resources": [
+        {
+          "id": "RC1",
+          "type": "video",
+          "title": "Introduction to Reading Comprehension",
+          "url": "https://www.khanacademy.org/humanities/grammar/parts-of-speech",
+          "description": "An introduction to reading comprehension strategies.",
+          "level": "beginner",
+          "estimated_time_minutes": 15
+        },
+        {
+          "id": "RC2",
+          "type": "article",
+          "title": "Reading Comprehension Strategies",
+          "url": "https://www.owl.purdue.edu/owl/general_writing/academic_writing/reading_in_college.html",
+          "description": "Strategies for improving reading comprehension.",
+          "level": "beginner",
+          "estimated_time_minutes": 20
+        },
+        {
+          "id": "RC3",
+          "type": "website",
+          "title": "BBC Bitesize Reading Comprehension",
+          "url": "https://www.bbc.co.uk/bitesize/topics/ztbzkqt/articles/z3c6tfr",
+          "description": "Interactive exercises and tips for better reading comprehension.",
+          "level": "beginner",
+          "estimated_time_minutes": 30
+        },
+        {
+          "id": "RC4",
+          "type": "exercise",
+          "title": "Reading Comprehension Practice",
+          "url": "https://www.khanacademy.org/humanities/grammar/parts-of-speech",
+          "description": "Practice exercises to improve reading comprehension.",
+          "level": "beginner",
+          "estimated_time_minutes": 45
+        }
+      ]
+    },
+    {
+      "chapter_name": "Grammar",
+      "weakness_level": "severe",
+      "priority": 5,
+      "estimated_time_hours": 10,
+      "prerequisites": [
+        {
+          "concept": "Basic English Vocabulary",
+          "why": "Understanding basic vocabulary is essential for grasping grammar rules.",
+          "recommended_resource": "https://www.bbc.co.uk/bitesize/topics/zqxycdm/articles/z3c6tfr"
+        }
+      ],
+      "roadmap_steps": [
+        {
+          "step_number": 1,
+          "objective": "Understand the basic parts of speech.",
+          "estimated_time_minutes": 120
+        },
+        {
+          "step_number": 2,
+          "objective": "Learn about sentence structure and types.",
+          "estimated_time_minutes": 120
+        },
+        {
+          "step_number": 3,
+          "objective": "Practice identifying and correcting common grammatical errors.",
+          "estimated_time_minutes": 180
+        },
+        {
+          "step_number": 4,
+          "objective": "Write a short paragraph demonstrating correct grammar usage.",
+          "estimated_time_minutes": 120
+        }
+      ],
+      "resources": [
+        {
+          "id": "grammar1",
+          "type": "video",
+          "title": "Introduction to Grammar",
+          "url": "https://www.khanacademy.org/humanities/grammar",
+          "description": "An introduction to the basic concepts of grammar.",
+          "level": "beginner",
+          "estimated_time_minutes": 30
+        },
+        {
+          "id": "grammar2",
+          "type": "article",
+          "title": "Parts of Speech",
+          "url": "https://www.owlpurdue.edu/owl/general_writing/grammar/parts_of_speech.html",
+          "description": "A detailed explanation of the different parts of speech.",
+          "level": "beginner",
+          "estimated_time_minutes": 45
+        },
+        {
+          "id": "grammar3",
+          "type": "website",
+          "title": "Sentence Structure",
+          "url": "https://www.bbc.co.uk/bitesize/topics/zqxycdm/articles/z3c6tfr",
+          "description": "Learn about the structure of sentences and how to construct them correctly.",
+          "level": "beginner",
+          "estimated_time_minutes": 60
+        },
+        {
+          "id": "grammar4",
+          "type": "exercise",
+          "title": "Grammar Practice Exercises",
+          "url": "https://www.khanacademy.org/humanities/grammar/exercises",
+          "description": "Practice exercises to reinforce grammar concepts.",
+          "level": "beginner",
+          "estimated_time_minutes": 90
+        }
+      ]
+    },
+    {
+      "chapter_name": "Writing Skills",
+      "weakness_level": "severe",
+      "priority": 3,
+      "estimated_time_hours": 10,
+      "prerequisites": [
+        {
+          "concept": "Basic Grammar",
+          "why": "Understanding basic grammar is essential for effective writing.",
+          "recommended_resource": "Khan Academy"
+        },
+        {
+          "concept": "Sentence Structure",
+          "why": "Knowing how to structure sentences properly improves clarity.",
+          "recommended_resource": "OWL Purdue"
+        }
+      ],
+      "roadmap_steps": [
+        {
+          "step_number": 1,
+          "objective": "Learn basic grammar rules",
+          "estimated_time_minutes": 120
+        },
+        {
+          "step_number": 2,
+          "objective": "Practice sentence structure",
+          "estimated_time_minutes": 90
+        },
+        {
+          "step_number": 3,
+          "objective": "Write a short paragraph",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 4,
+          "objective": "Review and edit the paragraph",
+          "estimated_time_minutes": 30
+        }
+      ],
+      "resources": [
+        {
+          "id": "res1",
+          "type": "video",
+          "title": "Basic Grammar Rules",
+          "url": "https://www.khanacademy.org/humanities/grammar",
+          "description": "Learn the fundamental rules of grammar.",
+          "level": "beginner",
+          "estimated_time_minutes": 30
+        },
+        {
+          "id": "res2",
+          "type": "article",
+          "title": "Sentence Structure Guide",
+          "url": "https://owl.purdue.edu/owl/general_writing/grammar/sentence_structure.html",
+          "description": "Understand the different types of sentence structures.",
+          "level": "beginner",
+          "estimated_time_minutes": 20
+        },
+        {
+          "id": "res3",
+          "type": "website",
+          "title": "Writing Tips",
+          "url": "https://www.bbc.co.uk/bitesize/guides/zqhyfg8/revision/1",
+          "description": "Tips and tricks for improving your writing skills.",
+          "level": "beginner",
+          "estimated_time_minutes": 25
+        },
+        {
+          "id": "res4",
+          "type": "exercise",
+          "title": "Grammar Practice",
+          "url": "https://www.khanacademy.org/humanities/grammar/exercises",
+          "description": "Practice exercises to reinforce grammar concepts.",
+          "level": "beginner",
+          "estimated_time_minutes": 45
+        }
+      ]
+    },
+    {
+      "chapter_name": "Literature",
+      "weakness_level": "moderate",
+      "priority": 3,
+      "estimated_time_hours": 5,
+      "prerequisites": [
+        {
+          "concept": "Basic Reading Skills",
+          "why": "To understand and analyze literary texts effectively.",
+          "recommended_resource": "BBC Bitesize - Reading Skills"
+        }
+      ],
+      "roadmap_steps": [
+        {
+          "step_number": 1,
+          "objective": "Understand the basics of literature and its history.",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 2,
+          "objective": "Learn about different genres and literary devices.",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 3,
+          "objective": "Analyze and interpret literary texts.",
+          "estimated_time_minutes": 60
+        }
+      ],
+      "resources": [
+        {
+          "id": "res1",
+          "type": "video",
+          "title": "Introduction to Literature",
+          "url": "https://www.youtube.com/watch?v=8kFYRjXE0kU",
+          "description": "A comprehensive introduction to literature and its history.",
+          "level": "beginner",
+          "estimated_time_minutes": 15
+        },
+        {
+          "id": "res2",
+          "type": "article",
+          "title": "Literary Devices and Genres",
+          "url": "https://www.poetryfoundation.org/articles/69164/literary-devices",
+          "description": "An article explaining various literary devices and genres.",
+          "level": "beginner",
+          "estimated_time_minutes": 20
+        },
+        {
+          "id": "res3",
+          "type": "website",
+          "title": "Literary Analysis Guide",
+          "url": "https://www.sparknotes.com/lit/",
+          "description": "A guide to analyzing and interpreting literary texts.",
+          "level": "beginner",
+          "estimated_time_minutes": 25
+        }
+      ]
+    },
+    {
+      "chapter_name": "Poetry Analysis",
+      "weakness_level": "severe",
+      "priority": 3,
+      "estimated_time_hours": 5,
+      "prerequisites": [
+        {
+          "concept": "Basic understanding of literary devices",
+          "why": "To identify and analyze the techniques used in poetry",
+          "recommended_resource": "https://www.poetryfoundation.org/articles/69982/glossary-of-poetic-terms"
+        },
+        {
+          "concept": "Reading comprehension",
+          "why": "To understand the content and context of poems",
+          "recommended_resource": "https://www.owlpurdue.edu/owl/general_writing/academic_writing/reading_in_college.html"
+        }
+      ],
+      "roadmap_steps": [
+        {
+          "step_number": 1,
+          "objective": "Understand basic poetic terms and devices",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 2,
+          "objective": "Read and analyze sample poems",
+          "estimated_time_minutes": 90
+        },
+        {
+          "step_number": 3,
+          "objective": "Practice identifying poetic devices in poems",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 4,
+          "objective": "Write a short analysis of a poem",
+          "estimated_time_minutes": 60
+        }
+      ],
+      "resources": [
+        {
+          "id": "res1",
+          "type": "video",
+          "title": "Introduction to Poetry",
+          "url": "https://www.youtube.com/watch?v=FoV3j3vDVx8",
+          "description": "A beginner-friendly introduction to poetry and its elements",
+          "level": "beginner",
+          "estimated_time_minutes": 15
+        },
+        {
+          "id": "res2",
+          "type": "article",
+          "title": "How to Analyze a Poem",
+          "url": "https://www.poetryfoundation.org/articles/69994/how-to-read-a-poem",
+          "description": "A step-by-step guide to analyzing poems",
+          "level": "beginner",
+          "estimated_time_minutes": 20
+        },
+        {
+          "id": "res3",
+          "type": "website",
+          "title": "Poetic Terms and Definitions",
+          "url": "https://www.poetryfoundation.org/articles/69982/glossary-of-poetic-terms",
+          "description": "A comprehensive glossary of poetic terms",
+          "level": "beginner",
+          "estimated_time_minutes": 30
+        },
+        {
+          "id": "res4",
+          "type": "exercise",
+          "title": "Poetry Analysis Practice",
+          "url": "https://learnenglish.britishcouncil.org/skills/reading/poetry-analysis",
+          "description": "Practice analyzing poems with interactive exercises",
+          "level": "beginner",
+          "estimated_time_minutes": 45
+        }
+      ]
+    },
+    {
+      "chapter_name": "Essay Writing",
+      "weakness_level": "severe",
+      "priority": 3,
+      "estimated_time_hours": 10,
+      "prerequisites": [
+        {
+          "concept": "Basic Grammar",
+          "why": "Understanding grammar is essential for constructing clear and coherent sentences in your essay.",
+          "recommended_resource": "Khan Academy"
+        },
+        {
+          "concept": "Reading Comprehension",
+          "why": "Improving your reading skills will help you understand different essay structures and styles.",
+          "recommended_resource": "BBC Bitesize"
+        }
+      ],
+      "roadmap_steps": [
+        {
+          "step_number": 1,
+          "objective": "Understand the basic structure of an essay.",
+          "estimated_time_minutes": 60
+        },
+        {
+          "step_number": 2,
+          "objective": "Learn how to write a thesis statement.",
+          "estimated_time_minutes": 45
+        },
+        {
+          "step_number": 3,
+          "objective": "Practice writing body paragraphs.",
+          "estimated_time_minutes": 90
+        },
+        {
+          "step_number": 4,
+          "objective": "Learn how to write a conclusion.",
+          "estimated_time_minutes": 45
+        },
+        {
+          "step_number": 5,
+          "objective": "Revise and edit your essay.",
+          "estimated_time_minutes": 60
+        }
+      ],
+      "resources": [
+        {
+          "id": "res1",
+          "type": "video",
+          "title": "Introduction to Essay Writing",
+          "url": "https://www.khanacademy.org/humanities/grammar/essay-writing",
+          "description": "A comprehensive introduction to essay writing, covering the basic structure and key components.",
+          "level": "beginner",
+          "estimated_time_minutes": 15
+        },
+        {
+          "id": "res2",
+          "type": "article",
+          "title": "How to Write a Thesis Statement",
+          "url": "https://owl.purdue.edu/owl/general_writing/academic_writing/thesis_statements.html",
+          "description": "A detailed guide on how to write an effective thesis statement for your essay.",
+          "level": "beginner",
+          "estimated_time_minutes": 20
+        },
+        {
+          "id": "res3",
+          "type": "website",
+          "title": "Essay Writing Tips",
+          "url": "https://www.bbc.co.uk/bitesize/guides/zqhyvcw/revision/1",
+          "description": "Tips and strategies for improving your essay writing skills.",
+          "level": "beginner",
+          "estimated_time_minutes": 25
+        },
+        {
+          "id": "res4",
+          "type": "exercise",
+          "title": "Essay Writing Practice",
+          "url": "https://www.khanacademy.org/humanities/grammar/essay-writing/practice",
+          "description": "Practice exercises to help you apply what you've learned about essay writing.",
+          "level": "beginner",
+          "estimated_time_minutes": 30
+        }
+      ]
+    },
+    {
+      "chapter_name": "Letter Writing",
+      "weakness_level": "moderate",
+      "priority": 3,
+      "estimated_time_hours": 2,
+      "prerequisites": [
+        {
+          "concept": "Basic English Grammar",
+          "why": "Understanding grammar is essential for constructing clear and effective letters.",
+          "recommended_resource": "https://www.englishgrammar.org/"
+        }
+      ],
+      "roadmap_steps": [
+        {
+          "step_number": 1,
+          "objective": "Understand the structure of a formal letter.",
+          "estimated_time_minutes": 30
+        },
+        {
+          "step_number": 2,
+          "objective": "Learn the key components of a formal letter.",
+          "estimated_time_minutes": 30
+        },
+        {
+          "step_number": 3,
+          "objective": "Practice writing a formal letter.",
+          "estimated_time_minutes": 60
+        }
+      ],
+      "resources": [
+        {
+          "id": "res1",
+          "type": "article",
+          "title": "How to Write a Formal Letter",
+          "url": "https://www.owl.purdue.edu/owl/general_writing/common_writing_situations/business_letters/how_to_write_a_formal_letter.html",
+          "description": "A comprehensive guide on writing formal letters, including structure and key components.",
+          "level": "beginner",
+          "estimated_time_minutes": 20
+        },
+        {
+          "id": "res2",
+          "type": "video",
+          "title": "Writing a Formal Letter",
+          "url": "https://www.youtube.com/watch?v=5r8q4pY9ZkU",
+          "description": "A video tutorial on writing formal letters, covering all essential aspects.",
+          "level": "beginner",
+          "estimated_time_minutes": 15
+        },
+        {
+          "id": "res3",
+          "type": "exercise",
+          "title": "Formal Letter Writing Practice",
+          "url": "https://www.englishclub.com/writing/letter-writing-exercises.htm",
+          "description": "Practice exercises to improve your formal letter writing skills.",
+          "level": "beginner",
+          "estimated_time_minutes": 45
+        }
+      ]
+    }
+  ],
+  "global_recommendations": {
+    "weekly_study_hours": 6,
+    "assessment_checkpoints_weeks": [
+      2,
+      4,
+      6
+    ],
+    "minimum_duration_weeks": 6,
+    "notes": "Focus on foundational writing & comprehension skills."
+  }
+}

@@ -1,0 +1,381 @@
+{
+  "grade": 10,
+  "subject": "Mathematics",
+  "chapters": [
+    {
+      "chapter": "Set Theory",
+      "questions": [
+        "Define Cartesian product of any two non-empty sets with example.",
+        "If A = {1, 2, 3} and B = {3, 4}, find A × B.",
+        "If n(A) = 5 and n(B) = 3, find n(A × B).",
+        "In a survey of 300 people, 150 like iPhones and 200 like Android. 25 don't like any. Find how many like both.",
+        "In a class, 45% passed Science only, 25% passed English only, 5% failed both. If 200 passed English, find total students.",
+        "In a survey, 60% families don't have electricity, 55% don't have water supply, 36 have neither. Find total families.",
+        "If n(U) = 100, n(A) = 60, n(B) = 40 and n(A ∩ B) = 20, find n(A' ∩ B').",
+        "Draw a Venn diagram showing A ∪ B.",
+        "Draw a Venn diagram showing A ∩ B.",
+        "Define complement of a set with example.",
+        "Prove that (A ∪ B)' = A' ∩ B'.",
+        "Prove that (A ∩ B)' = A' ∪ B'.",
+        "If 85 bought Gorkhapatra, 75 bought Kantipur, 65 didn't buy Gorkhapatra, find total people surveyed.",
+        "In a survey of farmers, 48% use organic fertilizer, 64% use chemical fertilizer, 22% use both. Find percentage using at least one.",
+        "If A and B are disjoint sets with n(A) = 8 and n(B) = 5, find n(A ∪ B).",
+        "If n(A − B) = 10, n(B − A) = 5 and n(A ∩ B) = 3, find n(A ∪ B).",
+        "Define symmetric difference of two sets.",
+        "Represent the relation between sets A, B and C in a Venn diagram where A ⊂ B and B ⊂ C."
+      ]
+    },
+    {
+      "chapter": "Money Exchange and Tax",
+      "questions": [
+        "Define exchange rate with example.",
+        "Convert Rs. 150,000 to US dollars if exchange rate is $1 = Rs. 120.",
+        "If buying rate of $1 is Rs. 132 and selling rate is Rs. 133, find profit on exchanging $5000.",
+        "A person exchanges Rs. 157,980 to dollars at rate $1 = Rs. 131.65. How many dollars will he get?",
+        "After 10 days, if selling rate changes from Rs. 131.65 to Rs. 138.32 for $1, by what percent did Nepali currency devaluate?",
+        "Define commission with example.",
+        "A money exchanger charges 2% commission. Find total cost to buy $2000 at rate $1 = Rs. 130.",
+        "If a person exchanges 2800 dollars to Nepali rupees at rate Rs. 131.65 per dollar, find amount received.",
+        "Define buying rate and selling rate in currency exchange.",
+        "What is the difference between buying rate and selling rate called?",
+        "A tourist wants to exchange 1000 Euros to Nepali rupees. If €1 = Rs. 140, find amount in NPR.",
+        "Convert ¥50,000 to Nepali rupees if ¥1 = Rs. 0.95.",
+        "If £1 = Rs. 165, how many pounds will you get for Rs. 82,500?",
+        "Calculate profit/loss if someone buys $1000 at Rs. 130 per dollar and sells at Rs. 132 per dollar."
+      ]
+    },
+    {
+      "chapter": "Compound Interest",
+      "questions": [
+        "Define compound interest with example.",
+        "Find compound interest on Rs. 10,000 for 2 years at 10% per annum compounded annually.",
+        "Write the formula for compound amount when interest is compounded annually.",
+        "A retired teacher deposits Rs. 80,000 for 2 years at 10% p.a. compounded half-yearly. Find amount.",
+        "Find compound amount on Rs. 50,000 for 3 years at 8% p.a. compounded annually.",
+        "What is the difference between simple interest and compound interest?",
+        "Calculate CI on Rs. 25,000 for 1.5 years at 12% p.a. compounded half-yearly.",
+        "If compound amount is Rs. 121,000 and principal is Rs. 100,000 for 2 years, find rate of interest.",
+        "Write the formula for compound amount when compounded half-yearly.",
+        "Find the time in which Rs. 8000 becomes Rs. 9261 at 10% p.a. compounded annually.",
+        "Shashwat's father deposits Rs. 20,000 on his 4th birthday at 6% p.a. How much will he receive on 7th birthday?",
+        "A person deposits Rs. 60,000 in a bank for 2 years at 10% p.a. If 5% income tax is deducted from interest, find net interest.",
+        "Find compound amount when P = Rs. 40,000, R = 8% p.a., T = 2 years and interest is compounded quarterly.",
+        "Calculate depreciation on a machine worth Rs. 500,000 after 3 years at 10% p.a. depreciation rate.",
+        "If population of a town is 50,000 and grows at 2% per annum, find population after 3 years."
+      ]
+    },
+    {
+      "chapter": "Shares and Dividends",
+      "questions": [
+        "Define share and share capital.",
+        "A company has 400,000 shares each of Rs. 100. What is total share capital?",
+        "If net profit is Rs. 25,00,000 and Rs. 5,00,000 is distributed as dividend, what percent dividend was given?",
+        "A person owns 4,800 shares of Rs. 100 each. If 5% dividend is declared, how much will he receive?",
+        "Define dividend in context of shares.",
+        "A company made net profit of Rs. 30,00,000 and declared 12.5% dividend. How much dividend does a person with 4,800 shares get?",
+        "From which amount is cash dividend distributed?",
+        "If a company has 50,000 shares of Rs. 200 each and declares 8% dividend, find total dividend amount.",
+        "What is the difference between face value and market value of shares?",
+        "A person buys 1000 shares at Rs. 120 per share with face value Rs. 100. If 10% dividend is declared, find his return.",
+        "Define bonus shares.",
+        "If market value of a share is Rs. 150 and face value is Rs. 100, what is the premium?",
+        "Calculate income from 500 shares of face value Rs. 100 bought at Rs. 120 if 8% dividend is declared."
+      ]
+    },
+    {
+      "chapter": "Polygons",
+      "questions": [
+        "Define polygon with examples.",
+        "Find the sum of interior angles of a hexagon.",
+        "How many sides does a polygon have if sum of its interior angles is 1080°?",
+        "Find each interior angle of a regular octagon.",
+        "What is the sum of exterior angles of any polygon?",
+        "Define regular polygon with example.",
+        "Find the number of diagonals in a decagon.",
+        "If each interior angle of a regular polygon is 144°, find number of sides.",
+        "Calculate each exterior angle of a regular pentagon.",
+        "Find the measure of each interior angle of a regular dodecagon.",
+        "How many triangles can be formed in a polygon of n sides by drawing diagonals from one vertex?",
+        "If exterior angle of a regular polygon is 40°, how many sides does it have?",
+        "State the formula for sum of interior angles of a polygon.",
+        "Define convex and concave polygon.",
+        "What is the difference between regular and irregular polygon?"
+      ]
+    },
+    {
+      "chapter": "Mensuration - Area",
+      "questions": [
+        "Find the area of a rectangular room 15m long, 10m broad and 5m high.",
+        "Calculate cost to paint four walls excluding 2 windows (2m × 1.5m) and a door (1m × 4m) at Rs. 250 per sq.m.",
+        "A room is 14 ft long, 13 ft broad and 10 ft high with two windows (3ft × 3ft) and two doors (6ft × 3ft). Find painting cost at Rs. 36 per sq.ft.",
+        "Find area of a triangle with sides 7 cm, 8 cm and 9 cm using Heron's formula.",
+        "Calculate the cost of carpeting a room 10m × 8m at Rs. 200 per square meter.",
+        "If length of rectangle is increased by 20% and breadth decreased by 20%, find percentage change in area.",
+        "Find the area of a rhombus whose diagonals are 12 cm and 16 cm.",
+        "A rectangular field is 80m long and 50m wide. Find cost of fencing at Rs. 15 per meter.",
+        "Calculate area of trapezium with parallel sides 20cm and 30cm and height 12cm.",
+        "Find area of circle whose circumference is 88 cm.",
+        "A circular park of radius 35m has a path of width 3.5m around it. Find area of path.",
+        "Calculate area of sector of circle with radius 21cm and central angle 60°.",
+        "Find area of equilateral triangle with side 12 cm.",
+        "A rectangular plot 80m × 60m has a path of width 2m inside along the boundary. Find area of path."
+      ]
+    },
+    {
+      "chapter": "Mensuration - Volume and Surface Area",
+      "questions": [
+        "A square-based pyramid has base length 10 cm and height 12 cm. Find volume.",
+        "Find cost of coloring triangular faces of pyramid (base 10cm, height 12cm) at 50 paisa per sq.cm.",
+        "How many triangular faces are in a square-based pyramid?",
+        "A metallic solid has a cone (height 10cm) and hemisphere (diameter 6cm). Find total volume.",
+        "If the solid from previous question is melted into cylinder of radius 3cm, find height.",
+        "A cylindrical can has radius 5cm and height 14cm. Find volume in liters.",
+        "Calculate curved surface area of cone with radius 7cm and slant height 10cm.",
+        "Find volume of sphere with radius 7 cm.",
+        "Write formula for total surface area of cone.",
+        "A tent is cylindrical with radius 7m and height 10m, topped by cone of height 3m. Find total canvas needed.",
+        "Calculate volume of frustum of cone with radii 7cm and 3cm and height 8cm.",
+        "Find lateral surface area of cube with edge 12 cm.",
+        "A water tank is hemispherical with radius 2m. Find capacity in liters.",
+        "Calculate total surface area of a cylinder with radius 14cm and height 20cm.",
+        "How many cubes of edge 2cm can be cut from a cube of edge 10cm?"
+      ]
+    },
+    {
+      "chapter": "Algebraic Expressions",
+      "questions": [
+        "Simplify: (a + b)/x ÷ (a² − b²)/x",
+        "Find HCF of 8a³ + b³ and 16a⁴ + 4a²b² + b⁴.",
+        "Factorize: x³ + 8.",
+        "Factorize: 27x³ − 64y³.",
+        "If p(x) = x − 1 and q(x) = x² + x + 1, find p(x) · q(x).",
+        "Simplify: (x + 2)/(x − 2) − (x − 2)/(x + 2).",
+        "Find LCM of 4x² − 9 and 2x² + 3x.",
+        "Divide: (6x³ + 11x² + 3x − 2) by (2x + 1).",
+        "Simplify: (a³ − b³)/(a² − b²).",
+        "If a + b = 5 and ab = 6, find a² + b².",
+        "Factorize: x⁴ − 16.",
+        "Simplify: [(a + b)/(x − y)] × [(x² − y²)/(a² − b²)].",
+        "Find the remainder when x³ + 2x² − 5x + 6 is divided by (x − 1).",
+        "If x + 1/x = 5, find x² + 1/x²."
+      ]
+    },
+    {
+      "chapter": "Linear Equations",
+      "questions": [
+        "Zeena bought 3 kg apples and 5 kg oranges for Rs. 1155. Chhiring bought 2 kg oranges with price of 1 kg apples. Form equations.",
+        "Solve: 2x + 3y = 13 and 3x − y = 3.",
+        "The sum of two numbers is 50 and their difference is 10. Find the numbers.",
+        "If cost of 3 pens and 4 pencils is Rs. 57 and cost of 2 pens and 3 pencils is Rs. 41, find cost of each.",
+        "Solve: x + y = 20 and x − y = 4.",
+        "The perimeter of rectangle is 60m. If length is twice the breadth, find dimensions.",
+        "Solve by elimination: 2x + y = 8 and 3x − 2y = 1.",
+        "A number consists of two digits whose sum is 9. If 27 is added to number, digits interchange. Find the number.",
+        "Solve: 5x + 2y = 16 and 3x + y = 9.",
+        "The sum of digits of a two-digit number is 12. If new number formed by reversing digits is 18 less than original, find number.",
+        "Solve graphically: x + y = 6 and x − y = 2.",
+        "If 3x + 2y = 12 and x/2 + y/3 = 2, find x and y."
+      ]
+    },
+    {
+      "chapter": "Quadratic Equations",
+      "questions": [
+        "Define quadratic equation with example.",
+        "Solve: x² − 5x + 6 = 0 by factorization.",
+        "Solve: 2x² − 7x + 3 = 0 using quadratic formula.",
+        "If one root of x² − 7x + k = 0 is 3, find k and other root.",
+        "Find the nature of roots of 2x² − 3x + 5 = 0.",
+        "Solve: (x − 2)(x + 3) = 0.",
+        "Form a quadratic equation whose roots are 2 and −5.",
+        "If α and β are roots of x² − 5x + 6 = 0, find α + β and αβ.",
+        "Solve: x² − 4 = 0.",
+        "Find discriminant of 3x² + 5x − 2 = 0 and determine nature of roots.",
+        "Solve by completing square: x² + 6x + 5 = 0.",
+        "If sum of roots is 8 and product is 15, form the quadratic equation.",
+        "Solve: 4x² = 9.",
+        "Find the value of k for which x² + kx + 4 = 0 has equal roots."
+      ]
+    },
+    {
+      "chapter": "Ratio, Proportion and Variation",
+      "questions": [
+        "If a:b = 2:3 and b:c = 4:5, find a:b:c.",
+        "Divide Rs. 1800 in ratio 2:3:4.",
+        "If x:y = 3:4, find (2x + 3y):(3x + 4y).",
+        "The ratio of two numbers is 5:7 and their sum is 96. Find the numbers.",
+        "Check whether 3, 6, 9, 18 are in proportion.",
+        "Find mean proportional between 9 and 16.",
+        "If a, b, c are in continued proportion and a = 3, c = 27, find b.",
+        "If x varies directly as y and x = 12 when y = 4, find x when y = 7.",
+        "If x varies inversely as y and x = 8 when y = 3, find y when x = 6.",
+        "The cost of 12 pens is Rs. 360. Find cost of 8 pens using direct proportion.",
+        "If 15 workers can complete a work in 20 days, how many days will 25 workers take?",
+        "If a:b = 3:4 and b:c = 8:9, find a:b:c.",
+        "Define joint variation with example.",
+        "If z varies jointly as x and y, and z = 24 when x = 3 and y = 4, find z when x = 5 and y = 6."
+      ]
+    },
+    {
+      "chapter": "Geometric Sequences",
+      "questions": [
+        "Find the 5th term of GP: 3, 6, 12, ...",
+        "The marks obtained by students in a test form GP: 16, 24, 36, ... Find common ratio.",
+        "There are 3 geometric means between 3 and 243. Find them.",
+        "Write formula to find nth term of GP.",
+        "If 2nd term of GP is 6 and 5th term is 162, find 9th term.",
+        "Find sum of first 6 terms of GP: 2, 6, 18, ...",
+        "If first term is 5 and common ratio is 2, find 8th term.",
+        "Find sum of infinite GP: 1, 1/2, 1/4, 1/8, ...",
+        "How many terms of GP 2, 4, 8, ... must be taken to get sum 1022?",
+        "If a = 3, r = 1.5, find t₅.",
+        "Find three numbers in GP whose sum is 35 and product is 1000.",
+        "The 4th term of GP is 54 and 7th term is 1458. Find first term and common ratio.",
+        "Which term of GP 5, 15, 45, ... is 3645?"
+      ]
+    },
+    {
+      "chapter": "Coordinate Geometry",
+      "questions": [
+        "Find the distance between points A(3, 4) and B(7, 1).",
+        "Find the midpoint of line segment joining A(−2, 1) and B(4, 7).",
+        "Prove that points A(1, 2), B(4, 6) and C(7, 10) are collinear.",
+        "Find the coordinates of point which divides line joining (2, 3) and (5, 9) in ratio 2:1 internally.",
+        "Find the area of triangle with vertices A(1, 2), B(4, 6) and C(7, 2).",
+        "If A(3, 5), B(7, 8) and C(x, y) form an equilateral triangle with AB as base, find coordinates of C.",
+        "Find equation of line passing through (2, 3) with slope 2.",
+        "Find slope of line joining (−2, 3) and (4, −1).",
+        "Show that points (1, 2), (3, 4), (5, 6) and (7, 8) are collinear.",
+        "Find the value of k if points (k, 2), (2, 4) and (3, 6) are collinear.",
+        "Calculate area of quadrilateral with vertices A(1, 1), B(7, 1), C(5, 5) and D(3, 5).",
+        "Find equation of line with x-intercept 3 and y-intercept 4.",
+        "If the centroid of triangle ABC is (2, 3) and A = (1, 2), B = (3, 4), find C."
+      ]
+    },
+    {
+      "chapter": "Trigonometry",
+      "questions": [
+        "Define trigonometric ratios: sin, cos, tan.",
+        "If sin θ = 3/5, find cos θ and tan θ.",
+        "State the value of sin 30°, cos 45° and tan 60°.",
+        "Prove that sin² θ + cos² θ = 1.",
+        "If tan θ = 4/3, find sin θ and cos θ.",
+        "Convert 72° into grades and radians.",
+        "Convert 80ᵍ into degrees and radians.",
+        "Convert π/3 radians into degrees and grades.",
+        "Find the value of sin 60° cos 30° + cos 60° sin 30°.",
+        "If cos θ = 12/13, find other trigonometric ratios.",
+        "Prove that 1 + tan² θ = sec² θ.",
+        "Prove that 1 + cot² θ = cosec² θ.",
+        "Evaluate: sin 45° cos 45° + tan 45°.",
+        "If θ is acute angle and sin θ = cos θ, find θ.",
+        "Simplify: (1 − sin² θ)/(1 + cot² θ)."
+      ]
+    },
+    {
+      "chapter": "Heights and Distances",
+      "questions": [
+        "A ladder 18 ft long rests against a wall making angle 60° with ground. Find height of wall.",
+        "Define angle of elevation with example.",
+        "Define angle of depression with example.",
+        "From top of 50m tower, angle of depression of object is 30°. Find distance of object from tower.",
+        "The shadow of a tower is 20√3 m when sun's altitude is 30°. Find height of tower.",
+        "A boy 1.8m tall casts shadow of 3m. Find shadow of tree 18m tall at same time.",
+        "From point on ground 40m from foot of tower, angle of elevation of top is 30°. Find tower height.",
+        "A kite is flying at height of 75m from ground, attached to string inclined at 60° to horizontal. Find string length.",
+        "If angle of elevation of sun is 45° and shadow of pole is 10m, find height of pole.",
+        "From top of cliff 100m high, angles of depression of two ships are 30° and 45°. Find distance between ships.",
+        "A man observes angle of elevation of top of building as 30°. Walking 50m towards it, angle becomes 60°. Find building height.",
+        "The angle of elevation of cloud from point 200m above lake is 30° and angle of depression of its reflection is 60°. Find height of cloud.",
+        "If wall height equals distance of ladder foot from wall, find angle ladder makes with ground."
+      ]
+    },
+    {
+      "chapter": "Triangles and Similarity",
+      "questions": [
+        "State and prove Pythagoras theorem.",
+        "If sides of triangle are in ratio 3:4:5, is it a right triangle? Explain.",
+        "State AA similarity criterion.",
+        "State SAS similarity criterion.",
+        "Two triangles are similar with sides 6, 8, 10 and 9, 12, x. Find x.",
+        "If two triangles are similar with ratio of sides 2:3, find ratio of their areas.",
+        "In triangle ABC, DE || BC. If AD = 3cm, DB = 2cm and AE = 3.6cm, find EC.",
+        "State and prove Basic Proportionality Theorem (Thales theorem).",
+        "Prove that if a line divides two sides of triangle proportionally, it is parallel to third side.",
+        "In right triangle ABC, if AD ⊥ BC, prove that AB² = BD × BC.",
+        "State SSS similarity criterion.",
+        "If areas of two similar triangles are 64 cm² and 100 cm², find ratio of their corresponding sides.",
+        "Draw two triangles ABC and explore relation between sum of any two sides and third side."
+      ]
+    },
+    {
+      "chapter": "Circles",
+      "questions": [
+        "A circle has center O and radius 5 cm. Chord PQ is 6 cm. Find perpendicular distance from O to PQ.",
+        "State: perpendicular from center to chord bisects the chord.",
+        "What is relationship between OM and PQ if M is midpoint of chord PQ?",
+        "State: equal chords are equidistant from center.",
+        "If two chords are equal, how should OM and ON be related?",
+        "Define tangent to circle.",
+        "State: tangent is perpendicular to radius at point of contact.",
+        "How many tangents can be drawn from external point to circle?",
+        "If PA and PB are tangents from external point P to circle, prove PA = PB.",
+        "Find length of tangent from point 13 cm from center of circle with radius 5 cm.",
+        "Two circles touch externally. If their radii are 5 cm and 3 cm, find distance between centers.",
+        "Define secant of circle.",
+        "State angle in semicircle theorem.",
+        "If angle in semicircle is inscribed, what is its measure?",
+        "Prove that angle subtended by arc at center is double the angle subtended at any point on circle.",
+        "Angles in same segment are equal. State and prove.",
+        "The opposite angles of cyclic quadrilateral are supplementary. Prove."
+      ]
+    },
+    {
+      "chapter": "Statistics",
+      "questions": [
+        "Marks of students: 15, 30, 45, 60, 75, 90 with frequencies 2, 3, 7, 10, 8, 4. Construct cumulative frequency table.",
+        "From previous data, calculate median mark.",
+        "What is average mark of students who scored more than median?",
+        "Define mean, median and mode.",
+        "Calculate mean from grouped data with class intervals 0-10, 10-20, 20-30 and frequencies 5, 8, 7.",
+        "Find median from grouped data.",
+        "Find mode from grouped data.",
+        "What does 'i' represent in median formula Md = L + [(N/2 − cf)/f] × i?",
+        "Define quartiles Q₁, Q₂, Q₃.",
+        "Calculate standard deviation of: 2, 4, 6, 8, 10.",
+        "Define range and coefficient of variation.",
+        "If mean = 50, standard deviation = 10, find coefficient of variation.",
+        "Construct histogram from frequency distribution.",
+        "Draw frequency polygon from histogram.",
+        "Calculate mean deviation from mean for: 5, 10, 15, 20, 25.",
+        "What should be number of students in class 50-60 to make 30 the average score?",
+        "Define cumulative frequency.",
+        "Convert data into 'less than' cumulative frequency table."
+      ]
+    },
+    {
+      "chapter": "Probability",
+      "questions": [
+        "Define probability with example.",
+        "Two cards are drawn randomly without replacement from 52 cards. Find probability both are face cards.",
+        "Write sample space when die is rolled once.",
+        "Find probability of getting even number when die is rolled.",
+        "If events A and B are independent, write formula for P(A ∩ B).",
+        "Show probability tree diagram for drawing cards with/without replacement.",
+        "Two coins are tossed. Find probability of getting at least one head.",
+        "A bag contains 5 red, 3 blue balls. Find probability of drawing a red ball.",
+        "If probability of an event is 0.7, find probability of its complement.",
+        "Define mutually exclusive events with example.",
+        "State addition law of probability for mutually exclusive events.",
+        "A die is rolled. Find probability of getting prime number.",
+        "Two dice are rolled. Find probability of getting sum 7.",
+        "If P(A) = 0.4, P(B) = 0.5 and P(A ∩ B) = 0.2, find P(A ∪ B).",
+        "Cards are drawn with replacement. How many times more is probability both are face cards than both are aces?",
+        "If 6 students are in a group and die is rolled to select one, what is probability of selecting even numbered student?",
+        "What is probability of not selecting student numbered by multiple of 3?",
+        "Define conditional probability.",
+        "If P(A) = 1/2, P(B) = 1/3 and events are independent, find P(A and B).",
+        "A bag has 4 white and 6 black balls. Two balls drawn without replacement. Find P(both black)."
+      ]
+    }
+  ]
+}

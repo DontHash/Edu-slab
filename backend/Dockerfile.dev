@@ -1,0 +1,38 @@
+# Development Dockerfile with hot-reload
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    postgresql-client \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy dependency files
+COPY pyproject.toml ./
+
+# Install dependencies using UV (including dev dependencies)
+RUN uv pip install --system --no-cache-dir -r pyproject.toml
+
+# Install development tools
+RUN pip install --no-cache-dir \
+    watchdog \
+    ipython \
+    ipdb
+
+# Copy application code
+COPY . .
+
+# Expose port
+EXPOSE 8000
+
+# Run with auto-reload for development
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

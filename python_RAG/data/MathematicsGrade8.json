@@ -1,0 +1,315 @@
+{
+  "grade": 8,
+  "subject": "Mathematics",
+  "chapters": [
+    {
+      "chapter": "Algebra",
+      "questions": [
+        "Find the HCF of the following algebraic expressions: 12a²b and 18ab²",
+        "Find the HCF of the following algebraic expressions: 15x²y and 20xy²",
+        "Find the HCF of the following algebraic expressions: x² - 4 and x² + 4x + 4",
+        "Find the LCM of the following algebraic expressions: 4xy and 6x²y",
+        "Find the LCM of the following algebraic expressions: x² - 1 and x² + 2x + 1",
+        "Simplify: (x² - 9)/(x + 3)",
+        "Simplify: (a² + 2a + 1)/(a + 1)",
+        "Add: 3/(x + 2) + 5/(x + 2)",
+        "Subtract: 5/(x - 3) - 2/(x - 3)",
+        "Multiply: (2/x) × (x/4)",
+        "Divide: (x/3) ÷ (x/6)",
+        "Solve: 2x + 5 = 13",
+        "Solve: (x/4) + 3 = 8",
+        "Solve the simultaneous equations: x + y = 7, x - y = 3",
+        "Solve the simultaneous equations: 2x + y = 10, x - y = 2",
+        "If x + y = 10 and x - y = 4, find the value of x and y",
+        "Factorize: x² + 5x + 6",
+        "Factorize: x² - 7x + 12",
+        "Expand: (x + 3)(x + 5)",
+        "Simplify: 3x + 2y - x + 5y"
+      ]
+    },
+    {
+      "chapter": "Geometry",
+      "questions": [
+        "In a triangle ABC, if ∠A = 60° and ∠B = 80°, find ∠C",
+        "If two angles of a triangle are 45° and 65°, find the third angle",
+        "Find the value of x if the angles of a triangle are x°, 2x°, and 3x°",
+        "If the exterior angle of a triangle is 120° and one of the interior opposite angles is 70°, find the other interior opposite angle",
+        "If two parallel lines are cut by a transversal, and one alternate interior angle is 65°, find the other alternate interior angle",
+        "If two parallel lines are cut by a transversal, and one corresponding angle is 110°, find its corresponding angle",
+        "In a parallelogram ABCD, if ∠A = 110°, find ∠B, ∠C, and ∠D",
+        "Find the area of a triangle with base 10 cm and height 6 cm",
+        "Find the area of a trapezium with parallel sides 12 cm and 8 cm, and height 5 cm",
+        "In a circle with radius 7 cm, find the circumference (use π = 22/7)",
+        "In a circle with diameter 14 cm, find the area (use π = 22/7)",
+        "If the circumference of a circle is 44 cm, find its radius",
+        "Construct a triangle ABC with AB = 6 cm, BC = 7 cm, and AC = 8 cm",
+        "Construct an angle of 60° using compass and ruler",
+        "In triangle ABC, if AB = AC and ∠A = 40°, find ∠B and ∠C"
+      ]
+    },
+    {
+      "chapter": "Mensuration",
+      "questions": [
+        "Find the volume of a cube with side 5 cm",
+        "Find the surface area of a cube with side 4 cm",
+        "Find the volume of a cuboid with length 8 cm, breadth 5 cm, and height 3 cm",
+        "Find the total surface area of a cuboid with dimensions 10 cm × 6 cm × 4 cm",
+        "Find the volume of a cylinder with radius 7 cm and height 10 cm (use π = 22/7)",
+        "Find the curved surface area of a cylinder with radius 5 cm and height 12 cm",
+        "Find the total surface area of a cylinder with radius 7 cm and height 10 cm",
+        "A cylindrical water tank has radius 1.4 m and height 2 m. Find its capacity in liters",
+        "Find the volume of a cone with radius 6 cm and height 7 cm",
+        "Find the curved surface area of a cone with radius 7 cm and slant height 10 cm",
+        "Find the volume of a sphere with radius 6 cm",
+        "Find the surface area of a sphere with radius 7 cm",
+        "Find the volume of a hemisphere with radius 7 cm",
+        "Find the curved surface area of a hemisphere with radius 10.5 cm",
+        "A hemispherical bowl has inner radius 9 cm. Find its capacity",
+        "How many cubic meters of earth must be dug out to make a well 7 m deep and 2 m in radius?",
+        "Find the volume of a solid consisting of a cylinder with a cone on top, where cylinder has radius 7 cm and height 10 cm, and cone has same radius and height 6 cm"
+      ]
+    },
+    {
+      "chapter": "Statistics",
+      "questions": [
+        "Find the mean of: 12, 15, 18, 20, 22, 25",
+        "Find the mean of: 5, 8, 12, 15, 20, 25, 30",
+        "Find the median of: 3, 7, 9, 12, 15, 18, 21",
+        "Find the median of: 5, 10, 8, 12, 15, 18, 6",
+        "Find the mode of: 3, 5, 7, 5, 9, 5, 12",
+        "Find the mode of: 10, 12, 15, 12, 18, 12, 20, 25",
+        "Find the range of: 25, 30, 35, 40, 45, 50",
+        "Calculate the mean, median, and mode of: 20, 25, 30, 25, 35, 40, 25",
+        "Prepare a frequency distribution table for the following data: 5, 3, 7, 5, 8, 5, 9, 3, 7, 5, 8, 3",
+        "Draw a bar graph for the following data showing the number of books read by students in a month: Ram-5, Shyam-7, Hari-4, Sita-8, Gita-6",
+        "Draw a pie chart to represent the following data of students' favorite subjects: Math-90°, Science-120°, English-60°, Social-90°",
+        "Draw a histogram for the following frequency distribution: Class intervals: 0-10, 10-20, 20-30, 30-40, 40-50; Frequencies: 5, 8, 12, 10, 6",
+        "Calculate the mean from the following frequency distribution: Marks: 10, 20, 30, 40, 50; Frequency: 2, 5, 8, 4, 3",
+        "Represent the following data in a bar graph: Months: Jan, Feb, Mar, Apr, May; Rainfall (cm): 5, 8, 12, 15, 10",
+        "Find the mean of the first 10 natural numbers"
+      ]
+    },
+    {
+      "chapter": "Probability",
+      "questions": [
+        "A coin is tossed once. What is the probability of getting a head?",
+        "A die is rolled once. What is the probability of getting a 5?",
+        "A die is rolled once. What is the probability of getting an even number?",
+        "A die is rolled once. What is the probability of getting a prime number?",
+        "A bag contains 5 red balls and 3 blue balls. What is the probability of drawing a red ball?",
+        "A card is drawn from a well-shuffled deck of 52 cards. What is the probability of getting a king?",
+        "A card is drawn from a deck of 52 cards. What is the probability of getting a heart?",
+        "A card is drawn from a deck of 52 cards. What is the probability of getting a red card?",
+        "Two coins are tossed simultaneously. What is the probability of getting two heads?",
+        "Two coins are tossed simultaneously. What is the probability of getting at least one head?",
+        "Two dice are rolled simultaneously. What is the probability of getting a sum of 7?",
+        "A bag contains 3 red, 4 blue, and 5 green balls. What is the probability of drawing a blue ball?",
+        "What is the probability of getting a number divisible by 3 when a die is rolled?",
+        "If a letter is chosen at random from the word MATHEMATICS, what is the probability of choosing M?",
+        "What is the probability of getting a sum of 10 when two dice are rolled?"
+      ]
+    },
+    {
+      "chapter": "Quadrilaterals",
+      "questions": [
+        "In a parallelogram ABCD, if ∠A = 75°, find the measure of ∠B, ∠C, and ∠D",
+        "The adjacent sides of a parallelogram are 8 cm and 6 cm. Find its perimeter",
+        "In a rectangle, if the length is 12 cm and the breadth is 5 cm, find the length of its diagonal",
+        "In a rhombus, if one diagonal is 16 cm and the other is 12 cm, find the area",
+        "In a square with side 10 cm, find the length of its diagonal",
+        "Find the area of a rhombus whose diagonals are 10 cm and 8 cm",
+        "In a trapezium ABCD, AB ∥ CD, AB = 10 cm, CD = 6 cm, and height = 5 cm. Find the area",
+        "The perimeter of a rectangle is 60 cm. If its length is 18 cm, find its breadth",
+        "Show that the sum of angles of a quadrilateral is 360°",
+        "In quadrilateral ABCD, ∠A = 85°, ∠B = 105°, ∠C = 75°. Find ∠D",
+        "The area of a trapezium is 180 cm². If the parallel sides are 12 cm and 18 cm, find the height",
+        "Find the area of a square whose perimeter is 48 cm"
+      ]
+    },
+    {
+      "chapter": "Coordinate Geometry",
+      "questions": [
+        "Plot the following points on a graph: A(2, 3), B(-1, 4), C(-3, -2), D(4, -1)",
+        "Find the distance between points A(3, 4) and B(6, 8)",
+        "Find the distance between points P(0, 0) and Q(5, 12)",
+        "Find the midpoint of the line segment joining A(4, 6) and B(8, 10)",
+        "If M(3, 4) is the midpoint of AB and A is (1, 2), find the coordinates of B",
+        "Find the area of a triangle with vertices A(0, 0), B(6, 0), and C(4, 3)",
+        "Find the slope of the line passing through points A(2, 3) and B(5, 9)",
+        "Find the equation of a line passing through point (2, 3) with slope 4",
+        "Find the x-intercept and y-intercept of the line 2x + 3y = 12",
+        "Find the point of intersection of lines 2x + y = 8 and x - y = 1",
+        "Plot the graph of the equation y = 2x + 1",
+        "Find the distance of point P(3, 4) from the origin",
+        "Find the centroid of a triangle with vertices A(2, 3), B(6, 7), and C(4, 9)"
+      ]
+    },
+    {
+      "chapter": "Commercial Arithmetic",
+      "questions": [
+        "Find the simple interest on Rs 5000 at 8% per annum for 3 years",
+        "Find the simple interest on Rs 12000 at 10% per annum for 2.5 years",
+        "What principal will amount to Rs 8400 in 4 years at 5% per annum simple interest?",
+        "At what rate percent per annum will Rs 6000 amount to Rs 7200 in 2 years?",
+        "In how many years will Rs 8000 amount to Rs 9600 at 10% per annum simple interest?",
+        "Find the compound interest on Rs 10000 at 10% per annum for 2 years compounded annually",
+        "Find the compound interest on Rs 8000 at 5% per annum for 3 years compounded annually",
+        "Find the difference between compound interest and simple interest on Rs 20000 for 2 years at 10% per annum",
+        "The marked price of an article is Rs 2500. If a discount of 20% is given, find the selling price",
+        "A shopkeeper marks his goods 30% above the cost price and allows a discount of 10%. Find his profit percent",
+        "Find the single discount equivalent to two successive discounts of 20% and 10%",
+        "The cost price of an article is Rs 500. If it is sold at a profit of 20%, find the selling price",
+        "An article is sold for Rs 1200 at a loss of 20%. Find the cost price",
+        "A trader bought goods worth Rs 10000 and sold them for Rs 12000. Find the profit percent",
+        "The population of a town is 50000. If it increases at the rate of 5% per annum, find the population after 2 years",
+        "The value of a machine depreciates at the rate of 10% per annum. If its present value is Rs 50000, find its value after 2 years",
+        "A sum of money doubles itself in 8 years at simple interest. Find the rate of interest",
+        "A dealer buys an article for Rs 800 and marks it 50% above the cost price. He then allows a discount of 20%. Find his profit percent"
+      ]
+    },
+    {
+      "chapter": "Arithmetic",
+      "questions": [
+        "Find the sum of all natural numbers from 1 to 100",
+        "Find the sum of all odd numbers from 1 to 50",
+        "Find the sum of all even numbers from 2 to 100",
+        "Find the HCF of 48 and 72 by prime factorization method",
+        "Find the HCF of 84 and 108 by division method",
+        "Find the LCM of 12, 18, and 24",
+        "Find the LCM of 15, 25, and 30",
+        "Find the HCF and LCM of 36 and 48",
+        "The HCF of two numbers is 12 and their LCM is 180. If one number is 36, find the other",
+        "Three bells ring at intervals of 6, 8, and 12 minutes. If they ring together at 8:00 AM, when will they ring together again?",
+        "Find the square of 25",
+        "Find the cube of 12",
+        "Find the square root of 225",
+        "Find the cube root of 1728",
+        "Is 256 a perfect square? If yes, find its square root",
+        "Is 1000 a perfect cube? If yes, find its cube root",
+        "Find the smallest number by which 72 must be multiplied to make it a perfect square",
+        "Find the smallest number by which 392 must be divided to make it a perfect square"
+      ]
+    },
+    {
+      "chapter": "Ratio and Proportion",
+      "questions": [
+        "Find the ratio of 24 to 36 in simplest form",
+        "Find the ratio of Rs 5 to 50 paise",
+        "If a:b = 3:4 and b:c = 2:5, find a:b:c",
+        "Divide Rs 1200 in the ratio 3:5",
+        "Divide 56 in the ratio 3:4:7",
+        "The ratio of boys to girls in a class is 4:5. If there are 20 boys, how many girls are there?",
+        "Two numbers are in the ratio 5:7. If their sum is 96, find the numbers",
+        "If 3:x = 9:27, find the value of x",
+        "If x:y = 2:3 and y:z = 4:5, find x:y:z",
+        "Are the ratios 4:6 and 6:9 equivalent?",
+        "Find the fourth proportional to 3, 6, and 9",
+        "Find the third proportional to 4 and 8",
+        "Find the mean proportional between 9 and 16",
+        "If a:b = 3:4, find (2a + 3b):(3a + 4b)",
+        "The ages of A and B are in the ratio 5:7. After 4 years, their ages will be in the ratio 3:4. Find their present ages"
+      ]
+    },
+    {
+      "chapter": "Percentage",
+      "questions": [
+        "Convert 25% into a fraction in simplest form",
+        "Convert 3/5 into percentage",
+        "Find 20% of 500",
+        "Find 15% of Rs 2400",
+        "What percent of 80 is 20?",
+        "30 is what percent of 150?",
+        "If 25% of a number is 40, find the number",
+        "A student scored 360 marks out of 500. Find the percentage of marks obtained",
+        "In an examination, a student got 65% marks and failed by 20 marks. If the passing percentage is 40%, find the maximum marks",
+        "The price of a shirt increased from Rs 400 to Rs 480. Find the percentage increase",
+        "The price of sugar decreased from Rs 50 per kg to Rs 45 per kg. Find the percentage decrease",
+        "A man's salary is Rs 20000. If it is increased by 15%, find his new salary",
+        "The population of a city is 500000. If it decreases by 8%, find the new population",
+        "In a school, 60% students are boys. If there are 240 boys, find the total number of students",
+        "A number is increased by 20% and then decreased by 20%. Find the net change percent"
+      ]
+    },
+    {
+      "chapter": "Unitary Method",
+      "questions": [
+        "If 5 books cost Rs 250, what is the cost of 8 books?",
+        "If 12 workers can complete a work in 15 days, how many days will 20 workers take?",
+        "If 8 men can dig a trench in 6 days, how many men are needed to dig it in 4 days?",
+        "A car travels 240 km in 4 hours. How far will it travel in 7 hours at the same speed?",
+        "If 15 meters of cloth costs Rs 450, find the cost of 25 meters",
+        "18 pipes can fill a tank in 12 hours. How long will 24 pipes take to fill the same tank?",
+        "If 20 students can complete a project in 10 days, how many students are needed to complete it in 8 days?",
+        "A train covers 300 km in 5 hours. What distance will it cover in 8 hours?",
+        "If 6 pumps can empty a reservoir in 15 hours, how long will 10 pumps take?",
+        "The cost of 12 pens is Rs 180. Find the cost of 20 pens"
+      ]
+    },
+    {
+      "chapter": "Time and Work",
+      "questions": [
+        "A can do a piece of work in 10 days and B can do it in 15 days. How long will they take to finish the work together?",
+        "A can complete a work in 12 days and B in 18 days. If they work together, in how many days will the work be completed?",
+        "A and B together can do a piece of work in 6 days. If A alone can do it in 10 days, in how many days can B do it alone?",
+        "A can do a work in 8 days, B in 12 days, and C in 16 days. How long will they take if all work together?",
+        "20 men can complete a work in 15 days. How many men are required to complete the same work in 10 days?",
+        "If 15 workers can build a wall in 12 days, how many days will 18 workers take?",
+        "A pipe can fill a tank in 6 hours and another pipe can empty it in 8 hours. If both pipes are opened together, in how long will the tank be filled?",
+        "A and B can do a piece of work in 30 days. A alone can do it in 50 days. In how many days can B alone do it?",
+        "If A is twice as efficient as B and together they can complete a work in 12 days, how long will A take alone?",
+        "12 men or 18 women can complete a work in 10 days. How long will 8 men and 12 women take?"
+      ]
+    },
+    {
+      "chapter": "Speed, Distance and Time",
+      "questions": [
+        "A car travels at a speed of 60 km/h. How far will it travel in 3.5 hours?",
+        "A train covers 240 km in 4 hours. Find its speed",
+        "How long will a bus take to cover 450 km at a speed of 75 km/h?",
+        "A cyclist covers 30 km in 2 hours. What is his speed?",
+        "A car travels 180 km in 3 hours. At what speed should it travel to cover the same distance in 2 hours?",
+        "Two trains start from two stations 300 km apart and travel towards each other at speeds of 50 km/h and 40 km/h. After how long will they meet?",
+        "A man walks at 5 km/h and reaches his office 10 minutes late. If he walks at 6 km/h, he reaches 5 minutes early. Find the distance to his office",
+        "A train 150 m long passes a pole in 15 seconds. Find its speed in km/h",
+        "A train 200 m long running at 72 km/h crosses a bridge in 30 seconds. Find the length of the bridge",
+        "Two trains of length 120 m and 180 m are running in opposite directions at speeds of 45 km/h and 54 km/h. In what time will they cross each other?",
+        "A man covers half the distance at 40 km/h and the remaining at 60 km/h. Find his average speed",
+        "A bus travels from A to B at 50 km/h and returns at 40 km/h. Find the average speed for the entire journey"
+      ]
+    },
+    {
+      "chapter": "Taxation",
+      "questions": [
+        "If the marked price of an article is Rs 5000 and VAT is 13%, find the selling price",
+        "An article is sold for Rs 4520 including 13% VAT. Find its marked price",
+        "A shopkeeper sold goods worth Rs 80000 in a month. If he has to pay 13% VAT on it, how much VAT does he pay?",
+        "The price of a TV is Rs 45000 excluding VAT. If VAT is 13%, find the total price",
+        "A customer paid Rs 11300 for a refrigerator including 13% VAT. What was the price before VAT?",
+        "A person's monthly income is Rs 50000. If income tax is 15% on income above Rs 30000, how much tax does he pay?",
+        "Calculate the income tax on an annual income of Rs 800000 if the tax rate is 10% for income above Rs 500000",
+        "A man's taxable income is Rs 600000. If tax is 1% up to Rs 400000 and 10% on the remaining, find the total tax",
+        "The price of a laptop is Rs 60000. If 13% VAT is added, what is the selling price?",
+        "A businessman sold goods worth Rs 500000. After allowing a discount of 10%, he added 13% VAT. What is the final price?"
+      ]
+    },
+    {
+      "chapter": "Set",
+      "questions": [
+        "Write the following set by listing method: A = {prime numbers less than 15}",
+        "Write the following set by set-builder method: B = {2, 4, 6, 8, 10}",
+        "Is the set of odd numbers between 10 and 12 an empty set?",
+        "Find the cardinal number of set A = {letters in the word MATHEMATICS}",
+        "If U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, A = {2, 4, 6, 8, 10}, find A'",
+        "If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, find A ∪ B",
+        "If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, find A ∩ B",
+        "If A = {1, 2, 3, 4, 5} and B = {4, 5, 6, 7}, find A - B",
+        "If n(A) = 25, n(B) = 30, and n(A ∪ B) = 45, find n(A ∩ B)",
+        "Draw a Venn diagram to represent A ∪ B",
+        "If U = {1, 2, 3, 4, 5, 6, 7, 8}, A = {1, 3, 5, 7}, and B = {2, 4, 6, 8}, verify that (A ∪ B)' = A' ∩ B'",
+        "Are the sets A = {1, 2, 3} and B = {a, b, c} equivalent?",
+        "List all subsets of A = {1, 2}",
+        "If A = {factors of 12} and B = {factors of 18}, find A ∩ B"
+      ]
+    }
+  ]
+}

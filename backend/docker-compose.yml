@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: eduassess_db
+    environment:
+      POSTGRES_USER: ${DB_USER:-eduassess}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-eduassess123}
+      POSTGRES_DB: ${DB_NAME:-eduassess}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eduassess"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - eduassess_network
+
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: eduassess_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-eduassess}:${DB_PASSWORD:-eduassess123}@postgres:5432/${DB_NAME:-eduassess}
+      SECRET_KEY: ${SECRET_KEY:-your-secret-key-change-in-production-min-32-characters}
+      BACKEND_CORS_ORIGINS: '["http://localhost:5173","http://localhost:3000"]'
+      DEBUG: ${DEBUG:-True}
+    volumes:
+      - ./:/app
+      - ./data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - eduassess_network
+    command: >
+      sh -c "python -m app.db.init_db &&
+             python -m app.db.seed &&
+             uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+
+  # PgAdmin (Optional - Database Management UI)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: eduassess_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@eduassess.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - eduassess_network
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  eduassess_network:
+    driver: bridge

@@ -1,0 +1,10 @@
+{
+    "name": "EduAssess Backend",
+    "scripts": {
+        "dev": "python main.py",
+        "start": "python start.py",
+        "init-db": "python -m app.db.init_db",
+        "seed-db": "python -m app.db.seed",
+        "test": "pytest tests/ -v"
+    }
+}

@@ -1,0 +1,384 @@
+{
+  "grade": 7,
+  "subject": "Mathematics",
+  "chapters": [
+    {
+      "chapter": "Set",
+      "questions": [
+        "Write the following sets by listing method and also write the numbers of elements of these sets: A = {prime numbers up to 13}",
+        "Tick (√) if the following sets are empty and cross (×) if they are others than empty: The set of natural numbers less than 1",
+        "Separate the finite and infinite set from the following sets: A = {odd numbers greater than 20}",
+        "State which of the following sets are equal: P = {prime numbers from 2 to 9}, Q = {odd numbers from 1 to 8}",
+        "Separate the equivalent set from the following sets: A = {g, o, d}, B = {d, o, t}",
+        "If A = {0, 1, 2, 3}, B = {1, 2, 3}, C = {0}, D = {}, E = {1, 2, 3} and F = {1}, write the number of elements of each set.",
+        "Are the sets A = {4, 5} and B = {c, d} equivalent? Write with reason.",
+        "If U = {natural numbers less than 25} is a universal set then write the following sets by listing method: A = {square numbers less than 25}",
+        "Write an appropriate universal set for the following sets: A = {2, 4, 6, 8, 10, 12, 14} and B = {1, 3, 5, 7, 9}",
+        "If a set F = {Marigold, Rose, Rhododendron}, make the subsets taking only one element from set F and name them.",
+        "Separate the proper subset and the improper subset from the subsets formed.",
+        "Among the sets A = {1, 2, 3, 4}, B = {2, 3, 4} and C = {4, 3, 2, 1}, which is the proper subset of A?",
+        "Make all the possible subsets from the set A = {a, b, c}.",
+        "Write down all possible subsets that can be formed from the set P = {a, b}.",
+        "If set A = {factors of 6} and B = {prime numbers less than 10}, write the set A and set B by listing method and set-builder method.",
+        "If the set L = {natural numbers from 1 to 10 exactly divisible by 2}, M = {multiples of 2 upto 10} and N = {natural numbers from 12 to 16}, which sets are equal and equivalent?",
+        "If the set A = {even numbers greater than 10} and B = {even numbers less than 10}, what are the set A and set B finite or infinite? Why?"
+      ]
+    },
+    {
+      "chapter": "Whole Number",
+      "questions": [
+        "Which is the smallest whole number?",
+        "Is there any greatest whole number?",
+        "Write the successor and predecessor of 99.",
+        "Find the product of the greatest number of three digits and the smallest number of one digit.",
+        "Find the difference of the greatest and the smallest numbers formed by the digits 9, 4, 0, 7, 3.",
+        "Simplify: 25 − [30 − {15 − (12 − 9 − 6)}].",
+        "Simplify: 48 ÷ 6 + 8 × 2 − 5.",
+        "Find the value of: 125 ÷ 25 × 5 + 8 − 2.",
+        "Divide the sum of 568 and 234 by their difference.",
+        "The product of two numbers is 2880. If one number is 48, find the other number.",
+        "Find the square of 19.",
+        "Find the square root of 169 by prime factorization method.",
+        "Find the square root of 2304 by division method.",
+        "Prove that: √25 × √36 = √(25 × 36).",
+        "Find the square root of 625/1024.",
+        "Is 500 a square number? Test by prime factorization method.",
+        "If the area of a squared seminar hall is 729 m², find its length.",
+        "Find the cube of 7.",
+        "Find the cube root of 8.",
+        "What is the volume of a cubic room whose length is 25 m?",
+        "Is 392 a cube number? If not, find out by which least number should 392 be multiplied to get a cube number.",
+        "Is 1728 a cube number or not? Test by using prime factorization method.",
+        "Find the HCF of 21 and 28 by prime factorization method.",
+        "Find the HCF of 144 and 312 by division method.",
+        "How many people at most can 72 copies and 99 pencils be divided equally and how many copies and pencils will each person get?",
+        "Which is the greatest number that can divide 275, 440 and 715 exactly?",
+        "Find the LCM of 28, 42 and 56 by prime factorization method.",
+        "Find the least number which is exactly divisible by 42, 49 and 63.",
+        "Find the least number from which when 10 is subtracted, the difference will be exactly divisible by 15, 22, 45."
+      ]
+    },
+    {
+      "chapter": "Integer",
+      "questions": [
+        "Write any five negative integers.",
+        "Write the absolute value of −15 and +15.",
+        "Represent the integers −4, 0, 3, 5, −2 on a number line.",
+        "Find the sum of −25 and 18.",
+        "Subtract −13 from 8.",
+        "Find the product of −7 and −9.",
+        "Divide −56 by 8.",
+        "Simplify: (−5) × 4 + (−3) × 2.",
+        "Simplify: (−18) ÷ (−3) + (−4) × 5.",
+        "Find the value of: [(−6) + (−4)] × [(−7) − (−2)].",
+        "The sum of two integers is −15. If one integer is 8, find the other integer.",
+        "The product of two integers is −72. If one integer is 9, find the other integer.",
+        "Evaluate: (−2) × (−3) × (−4).",
+        "State the additive inverse of −11.",
+        "Which is greater: −5 or −8?",
+        "Arrange in ascending order: −3, 0, −7, 5, −1.",
+        "Write the opposite integer of (+3).",
+        "Find the sum by using number lines: (+3) + (+4).",
+        "Subtract by using number lines: (−8) − (−3).",
+        "Find the sum from both ways using the commutative law of the integers: (+3) and (+6).",
+        "Find the sum from both ways using the associative law of the integers: (+2), (−3) and (−5).",
+        "What is the sum of (+9) and its opposite integer?",
+        "The sum of two integers is (−115). If one integer is 175, find the next integer.",
+        "Simplify: (−30) − (−40) − (−20) + (+2).",
+        "Multiply by using number line: (−4) × 3.",
+        "Find the product in two different ways, using the associative property: (+3) × (+4) × (+5).",
+        "Simplify by using the distributive property of multiplication: (+6) × [(−8) + (+30)].",
+        "Find the quotient: (+36) ÷ (+6).",
+        "The product of two integers is (+63). If one of them is (+7), find the other integer.",
+        "Simplify: (−6) × (−4) ÷ (+4) + (−5) − (−1).",
+        "In a quiz contest, rules are made to provide (+10) for each correct answer and (−5) for each incorrect answer. If the Blue House scored 60 marks, in which 2 questions were answered incorrectly, how many questions were answered correctly?"
+      ]
+    },
+    {
+      "chapter": "Rational Number",
+      "questions": [
+        "Write the additive inverse of 2/5.",
+        "Write the multiplicative inverse of 3/4.",
+        "Convert the following fraction into decimals and separate terminating and non-terminating recurring decimal numbers: 1/2.",
+        "Convert 0.5̄ into fraction.",
+        "Convert 0.41̄ into fraction.",
+        "Write any two rational numbers lying between 1/2 and 3/4.",
+        "Find any two rational numbers lying between 1/3 and 3/4.",
+        "Are all the natural numbers rational numbers?",
+        "Are all the whole numbers rational numbers?",
+        "Are all the integers rational numbers?",
+        "Is zero (0) a rational number?",
+        "Are all the rational numbers integers?"
+      ]
+    },
+    {
+      "chapter": "Fraction and Decimal",
+      "questions": [
+        "Simplify: 11(1/13) − 1(3/8) + 2(7/8).",
+        "Subtract 6(1/8) − 8 from 30 and add 1(1/4).",
+        "Sandeep's monthly income is Rs 27,000. He has spent 1/5 part of his income on food. If 1/10 part spent on clothing and 2/5 part spent on transportation, how many parts did he spend in total?",
+        "Out of 40 students in a class, 1/5 students like English subject. 2/5 students like mathematics. Find the number of students who like English.",
+        "Ranju's father gave her Rs 60,000. She bought books for one-third of her money. She bought clothes with one-fourth of the rupees. One-fifth of the rupees is spent on her travel. How much did she spend?",
+        "Ritu ate 3/5 parts of an apple and the rest was eaten by his brother, Suman. Write in fraction the part of the apple that Suman ate.",
+        "Prakriti has spent 1/4 parts of the money. She has lost 2/5 parts from the remaining amount. If the lost money is Rs. 900, find out how much money he had at the beginning.",
+        "Simplify: 1.44 ÷ 1.2 + 6.2.",
+        "Simplify: 12.75 − {4.38 − (2.4 × 4.32 ÷ 3.6 − 0.85)}.",
+        "Simplify: (1.2 × 1.2 − 0.4 × 0.4)/(2.4 − 1.6).",
+        "Area of the triangle = 1/2 × base × height. If the base of a triangle is 25.75 cm and the height is 30.15 cm then find the area.",
+        "The length of a rectangular garden is 22.66 cm, and breadth is 15.65 cm. What is the area of the garden?",
+        "The perimeter of a squared table is 24.4 ft. Find the length of the table.",
+        "The area of a rectangular field is 215.66 m². If the field is 67.35 m long, find out how wide it is."
+      ]
+    },
+    {
+      "chapter": "Ratio and Proportion",
+      "questions": [
+        "Write the ratio of 10 cm and 100 cm and convert it to the lowest term.",
+        "Find the ratio of the distance AB : AG from a number line.",
+        "Find the ratio of the shaded part to non-shaded part from a given figure.",
+        "There are 450 students in a school, among them 180 are girls. Find the ratio of girls and total students.",
+        "There are 25 teachers and 500 students in a school. Find the ratio of teachers and students.",
+        "The height of Pramesh is 165 cm and the height of Pramila is 150 cm. Find the ratio of the height of Pramesh and Pramila.",
+        "Rahul obtained 40 marks out of 50 full marks in English, 20 marks out of 30 full marks in Nepali and 13 marks out of 20 full marks in Mathematics. Which result is better in the subjects English and Nepali?",
+        "Find out how much money will Alisa and Dipesh get while dividing Rs 60,000 in the ratio of 5:4.",
+        "Which of the following ratios are equal: 2/3 and 4/5?",
+        "Check whether the numbers 2, 3, 12, 20 are in proportion or not.",
+        "Write extremes and means separately from the proportions: 40 : 200 :: 15 : 75.",
+        "The ratio of the score of Anita is 10 : 12 in Mathematics and Science. If her score of mathematics is 80, then what is her score in science?",
+        "If the price of 6 kg oranges is Rs. 540, then find out the price of 8 kg oranges."
+      ]
+    },
+    {
+      "chapter": "Profit and Loss",
+      "questions": [
+        "What is the profit or loss and their percentage when CP = Rs. 300 and SP = Rs. 350?",
+        "Ajaya bought a television for Rs 30,500 and sold it for Rs 29,000. Find out what his loss percentage is.",
+        "Find out what is the cost price of a sari if it is sold for Rs. 30,500 by gaining 10% profit.",
+        "What will be the selling price of a mobile bought at Rs. 30,000 by gaining 10% profit?",
+        "A fruit seller bought 10 kg oranges at the rate of Rs. 55 per kg. If he sold all the oranges at the rate of Rs. 60 per kg, what would be the profit percentage?",
+        "Sukman bought 50 bulbs at the rate of Rs 40 to each bulb. When he opened the packet of bulbs, 15 bulbs were broken. What would be the profit or loss? Find it in percentage.",
+        "When a book was sold to a bookseller for Rs. 575, the profit was 15%. How much money was paid for the book?",
+        "Rajendra bought a refrigerator for Rs 32,500. He spent Rs. 500 to bring the goods. Find out the profit percentage if he sold the refrigerator for Rs 33,500.",
+        "Aaitman bought the old house for Rs. 95,00,000. He spent Rs. 200,000 for house repairing. If the house was sold for Rs. 1,10,00,000, what would be the profit or loss, find in percentage."
+      ]
+    },
+    {
+      "chapter": "Unitary Method",
+      "questions": [
+        "If the costs of 5 kg sugar is Rs. 450, then what is the cost of 3 kg sugar?",
+        "A motorcycle can travel 320 kilometers with 8 liters of petrol. How many liters of petrol is required to travel 50 kilometers?",
+        "If 15 people take 16 days to dig a field, how many days will it take for 8 people to dig the same field?",
+        "30 men can plant the crops in 17 days. If Amar wants to complete the same work in 10 days, how many workers will be needed?",
+        "If a machine of the industry can fill 6600 bottles of beverages in 3 hours, how many bottles can it fill in 8 hours?",
+        "Rama buys 3 kg lentil and 2 kg sugar for Rs 540. If the cost of 1 kg sugar is Rs. 90, what is the cost of 1 kg lentil?",
+        "If a cyclist can travel the distance of 15 kilometers per hour, how many meters per minute would his speed be?",
+        "In a camp, 50 people have enough food for 54 days. How many days will the food last for 60 people?"
+      ]
+    },
+    {
+      "chapter": "Perimeter, Area and Volume",
+      "questions": [
+        "Find the perimeter of a triangle with sides 12 cm, 5 cm and 13 cm.",
+        "When Ram makes a paper triangle with the length of 40 cm around it, find the length of the third side if the two sides are 14 cm and 16 cm respectively.",
+        "Find out how many times it can be fenced with a 540 m long wire to an equilateral triangular land with 18 meters side.",
+        "Find the unknown length of a triangle if perimeter is 19 cm and two sides are 6 cm and 8 cm.",
+        "Find the total surface area of a cuboid having 4 cm length, 3 cm breadth and 2 cm height.",
+        "If a geometry box has length = 15 cm, breadth = 7 cm and height = 3 cm then find the total surface area of the box.",
+        "Find the breadth of a box having its length of 42 cm, height of 28 cm and total surface area of 7812 cm².",
+        "The length of one edge of a solid paper toy is 3.5 cm. Find the surface area of the toy.",
+        "If the surface area of a cubical solid is 54 m², find the length of one edge of the solid.",
+        "Find the volume of a cuboid with length 6 cm, breadth 5 cm and height 16 cm.",
+        "The length, breadth and height of a cuboid shape sugar pot is 3 m, 2 m and 1 m respectively. Find out how much sugar this sugar pot contains.",
+        "A rectangular tank contains 600 l of water. Find the breadth if the length of the tank is 200 cm and height is 5 cm.",
+        "If the length of one edge of a cubical water tank is 1.5 m, then find out how many liters of water it can hold.",
+        "A cubic tank holds 216,000 liters of water. Find the surface area of its surface.",
+        "If the diameter of a circle is 14 cm, then find the radius and circumference of the circle. (π = 22/7)",
+        "The circumference of a circular ring of gold is 7 cm. Find the diameter of the ring. (π = 22/7)",
+        "The diameter of a circular fish pond is 56 m. Find out how long wires it takes to wrap it around 5 times. (π = 22/7)",
+        "When Ram crosses a distance of 440 meters from a bicycle, the wheel turns 100 times. Find the radius of the wheel. (π = 22/7)"
+      ]
+    },
+    {
+      "chapter": "Indices",
+      "questions": [
+        "Express the following continued multiplication into power: 3 × 3 × 3 × 3 × 3.",
+        "Express the following indices into continued multiplication form: 3³.",
+        "Find the factors of 128 and write in indices form.",
+        "Find the value of: 3 × 2².",
+        "Simplify: p^(b−c) × p^(a−b) × p^(c−a).",
+        "If x = 1, y = 2, z = −1 find the value of: x³.",
+        "If x + y + z = 0 prove that p^(x−y) × p^(x+y) × p^(y+z) × p^(y−z) × p^(z+x) × p^(z−x) = 1."
+      ]
+    },
+    {
+      "chapter": "Algebraic Expression",
+      "questions": [
+        "Simplify: 3x(x + 3) − 2x(2x + 1) + 8x(x − 1).",
+        "Simplify: a(3a² − 2) − 5a²(a + 1) − 3(a³ − 1).",
+        "Multiply: (3x − 2y)(4x + 3y).",
+        "Multiply: (2y − 1)(3 + 2y).",
+        "Multiply: (x − y + z)(x + y).",
+        "Multiply: (3x + 2)(x² − 2x + 1).",
+        "If the length and breadth of a rectangular land are (3x + 2)m and (2x − 7)m respectively, find the area of the land.",
+        "Find the multiple of (3x + 2) and (2x − 1). Find the value of it when x = 20.",
+        "Divide: (4a² + 12a) ÷ (2a + 6).",
+        "Divide: (4x² − 9) ÷ (2x + 3).",
+        "Divide: (2a² − 7a + 6) ÷ (2a − 3).",
+        "Divide: (x² + 4x + 4) ÷ (x + 2).",
+        "Divide: (x³ − 27y³) ÷ (x − 3y).",
+        "Find the unknown sides of a rectangle if breadth = (x − y)m and area = (x² − y²)m².",
+        "The product of two expressions is (2a² + 13a + 24). If one expression is (a + 8), find the other expression.",
+        "Find the square of (x + 3) by using formula.",
+        "Find the square of (3x² + 2).",
+        "Find the square of 98.",
+        "Write x² − 2 + 1/x² in whole square form.",
+        "Simplify: (2c − 5d)² − (5d − 2c)².",
+        "If a + 1/a = 10, find the value of a² + 1/a².",
+        "If m − 1/m = 6, find the value of m² + 1/m².",
+        "If (x + y) = 9, xy = 8, then find the value of x² + y².",
+        "If a² + b² = 17 and ab = 4, then find the value of (a + b)."
+      ]
+    },
+    {
+      "chapter": "Equation, Inequality and Graph",
+      "questions": [
+        "If a land has the length x cm and breadth y cm. If the perimeter of land is 240 cm, find the equation that represent the perimeter.",
+        "A 5 m path is around the rectangular pond. If the perimeter including path is 210 m, find the equation that represents length and breadth.",
+        "If the sum of two consecutive odd numbers is 56, find the numbers.",
+        "There are 75 students in a class. If the number of boys is double of the number of girls, find the number of boys and girls.",
+        "The sum of present age of Subhasa and Supreme is 40 years. If the age of Subhasa is three times the age of Supreme, find their present ages.",
+        "Solve the inequality x + 2 > 5 and show in the number line.",
+        "Solve 3x − 2 ≤ −11 and show in the number line.",
+        "Solve 3 − 2x ≤ 9 and show in the number line.",
+        "Write the inequality according to a given number line.",
+        "From the equation 3x + y = 6, make the table for the values of x and y.",
+        "Draw the line graph from the equation 2x + y = 8.",
+        "Draw the line graph from the equation x + y + 3 = 0."
+      ]
+    },
+    {
+      "chapter": "Lines and Angles",
+      "questions": [
+        "Draw an angle 15° by using scale and compass.",
+        "Draw an angle 45° by using scale and compass.",
+        "Draw an angle 75° by using scale and compass.",
+        "Draw an angle 105° by using scale and compass.",
+        "Draw an angle 135° by using scale and compass.",
+        "Draw an angle 150° by using scale and compass.",
+        "Draw an angle 150° and bisect it. Also measure the angle by protractor.",
+        "Draw an angle 35° using protractor and hence draw the equal angle by using compass.",
+        "From a given figure, write down the angles having adjacent angle relationship with ∠AXC.",
+        "Find the complementary and supplementary angles of 15°.",
+        "Find the complementary and supplementary angles of 45°.",
+        "Find the value of x, y and a from a given figure with angles.",
+        "Prove experimentally that when two straight lines are intersected to each other, the vertically opposite angles are equal.",
+        "Prove experimentally that the sum of adjacent angles on the same side is 180° at any point on a straight line.",
+        "Prove experimentally that the complete angle at a point is 360°."
+      ]
+    },
+    {
+      "chapter": "Plane Figures",
+      "questions": [
+        "Construct a triangle PQR where PQ = 4.8 cm, QR = 5 cm and ∠PQR = 75°.",
+        "Construct a triangle ABC where ∠ABC = 60°, ∠ACB = 45° and BC = 6 cm.",
+        "Construct a triangle DEF where DE = 4.5 cm, EF = 4 cm and DF = 5 cm.",
+        "Construct a triangle LMN where LM = 6 cm, ∠NLM = 60° and ∠LNM = 90°.",
+        "State whether the following statement is true or false: The opposite sides of a parallelogram are equal.",
+        "State whether the following statement is true or false: All the characteristics of rectangles are also in parallelogram.",
+        "Verify that the opposite angles of a parallelogram are equal.",
+        "Verify that the diagonals of a parallelogram bisect to each other.",
+        "Verify that all the angles of a rectangle are 90°.",
+        "Verify that the diagonals of a rectangle are equal.",
+        "Verify that all the angles and sides of a square are equal.",
+        "Verify that the diagonals of a square bisect perpendicularly.",
+        "Test whether a triangle with sides 13 cm, 12 cm and 5 cm is right angled or not.",
+        "Find the unknown side from a right angled triangle with h = 5 cm, b = 4 cm.",
+        "Which of the following triangles with given measurements are right angled: 12 cm, 10 cm and 5 cm?"
+      ]
+    },
+    {
+      "chapter": "Congruent Figures",
+      "questions": [
+        "Which of the following figures are congruent and why?",
+        "Take five-five solid objects and draw congruent figures by using it.",
+        "Do 'namaskar' by joining your hands. Are both the hands congruent to each other?",
+        "Take two different coins of Rs.1 and Rs.2. Are these coins congruent to each other?"
+      ]
+    },
+    {
+      "chapter": "Solid Objects",
+      "questions": [
+        "State whether the following statements are true or false: All the faces of tetrahedron are in equilateral form.",
+        "State whether the following statements are true or false: All the edges of tetrahedron are equal.",
+        "What is tetrahedron?",
+        "Write any two differences between tetrahedron and octahedron.",
+        "Write the formula to find the relation among the faces, edges and vertices of dodecahedron and icosahedron.",
+        "What is the shape of faces in octahedron?",
+        "How many vertices and edges are there in octahedron?",
+        "The number of edges and faces in a tetrahedron are 6 and 4 respectively. Find the number of vertices.",
+        "How many faces are there in an octahedron if it has 6 vertices?",
+        "What is cone? Write any two merits of it.",
+        "What is cylinder? Write any two merits of it.",
+        "Write one similarity and one difference between cone and cylinder.",
+        "What is the shape of base and surface of cylinder?"
+      ]
+    },
+    {
+      "chapter": "Coordinates",
+      "questions": [
+        "Find the coordinates of the vertices of given geometrical figures.",
+        "Find the distance between the vertices of the figures in the chart.",
+        "Plot the following points in graph paper: P(2, 2), Q(−3, 4), R(−2, 0), S(4, −4) and T(−5, −5).",
+        "Plot the following points in graph paper and join each point in order. Write the name of the shape formed: A(4, 0), B(4, 4), C(−2, 4) and D(−2, 0).",
+        "Points A(−2, 3), B(2, 3), C(−2, 4) and D are the vertices of a rectangle ABCD. Plot the points in graph paper and find the length of AB.",
+        "Points J(−4, 4), K(4, 4), L(4, −4) and M are the vertices of a square JKLM. Plot the points in graph paper and find the coordinate of M."
+      ]
+    },
+    {
+      "chapter": "Symmetry and Tessellation",
+      "questions": [
+        "Complete the following figures taking dotted line as an axis of reflection.",
+        "In a given figure axis of reflection and half figure is given. Complete the figure and find the number of axis of line of symmetry.",
+        "Trace each of the following point symmetry. Draw axis of line of symmetry in each. Find the number of axis of line of symmetry.",
+        "Trace a given figure and rotate it taking center at O about 180°.",
+        "Which of the following figures have point symmetry? Identify it.",
+        "Are the images in the given cards point symmetry or not? If yes, how?",
+        "Are the following figures of triangular tessellation or not? Write with reasons.",
+        "Complete the following by making triangular tessellation as shown.",
+        "Make triangular tessellation by joining the given dots and color it."
+      ]
+    },
+    {
+      "chapter": "Transformation",
+      "questions": [
+        "Draw the image of given geometrical figure with reflection line m.",
+        "Write the image of point A with reflection line XX' (X-axis).",
+        "Write the image of line BC with reflection line XX' (X-axis).",
+        "Write the image of triangle RST with reflection line XX' (X-axis).",
+        "Write the image of point F with reflection line YY' (Y-axis).",
+        "Write the image of line PQ with reflection line YY' (Y-axis).",
+        "Using graph paper, find the image of the point (1, 2) under reflection about X-axis.",
+        "Using graph paper, find the image of the point (3, 2) under reflection about Y-axis.",
+        "Find the image of point T'(3, −4) under reflection about X-axis and find T. Also find the length of TT'.",
+        "Find the image of point P(3, −4) under reflection about Y-axis and find P'. Also find the length of PP'.",
+        "Translate a given point and line segment in given magnitude and direction.",
+        "Translate line XY with magnitude and direction of OK.",
+        "Draw the image of given geometrical figures with given magnitude and direction.",
+        "While playing slide a child came 4 m down. Is it translation? Give reason."
+      ]
+    },
+    {
+      "chapter": "Bearing and Scale Drawing",
+      "questions": [
+        "What is the bearing of the place Dorje is standing?",
+        "Find the bearing of A from the point O.",
+        "Write the bearing of Nepalgunj from Pokhara.",
+        "Find the real distance between two places if the distance between two places in map = 9 cm (scale 1cm = 200 m).",
+        "The real length of a ground is 125 m and breadth 75 m. If 1 cm = 10 m, draw the figure of ground.",
+        "1 cm represents 2 feet. Draw a map of a room whose length is 20 ft and breadth is 18 ft.",
+        "The given figure of an electric pole is in 1:100 cm scale. Find the real height of that pole.",
+        "A map is prepared using scale 1 cm = 500 m. If the distance between two places is 9 cm in map, what is the real distance between them?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Database & runtime data
+*.db
+backend/eduassess.db
+backend/assessments/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large / generated AI artifacts (keep source data in python_RAG/data)
+backend/app/services/faiss_index.bin
+faiss_index_out/
+
+# Logs
+*.log
