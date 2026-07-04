@@ -1,18 +1,13 @@
-"""Reset SQLite DB for foundation schema (dev only)."""
-import os
+"""Deprecated — use: python scripts/init_database.py --reset"""
+import subprocess
+import sys
 from pathlib import Path
 
-DB_FILES = ["eduassess.db", "eduassess.db-journal"]
-
-
-def main():
-    backend_dir = Path(__file__).resolve().parents[1]
-    for name in DB_FILES:
-        path = backend_dir / name
-        if path.exists():
-            path.unlink()
-            print(f"Removed {path}")
-
+BACKEND_ROOT = Path(__file__).resolve().parents[1]
 
 if __name__ == "__main__":
-    main()
+    subprocess.run(
+        [sys.executable, str(BACKEND_ROOT / "scripts" / "init_database.py"), "--reset"],
+        cwd=BACKEND_ROOT,
+        check=True,
+    )

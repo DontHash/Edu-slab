@@ -1,0 +1,61 @@
+# Nepal CDC assessment domains (diagnostic platform)
+english:
+  reading:
+    label: Reading Comprehension
+    description: Literal, inferential, and vocabulary-in-context skills
+  grammar_vocabulary:
+    label: Grammar & Vocabulary
+    description: Sentence correction, usage, word forms, error detection
+  writing:
+    label: Writing
+    description: Guided paragraphs, functional writing, organization
+
+mathematics:
+  number_algebra:
+    label: Number & Algebra
+  geometry:
+    label: Geometry & Mensuration
+  data:
+    label: Statistics, Probability & Data
+  problem_solving:
+    label: Problem Solving & Application
+
+science:
+  knowledge:
+    label: Scientific Knowledge
+  understanding:
+    label: Understanding & Explanation
+  application:
+    label: Application & Inquiry
+
+cognitive_levels:
+  knowledge:
+    label: Knowledge / Recall
+    weight: 1
+  comprehension:
+    label: Comprehension
+    weight: 2
+  application:
+    label: Application / Reasoning
+    weight: 3
+  analysis:
+    label: Analysis
+    weight: 4
+
+proficiency_bands:
+  - min_pct: 80
+    band: proficient
+    label: Proficient
+    nepal_descriptor: Meets grade-level expectations
+  - min_pct: 60
+    band: approaching
+    label: Approaching Proficiency
+    nepal_descriptor: Close to grade level; targeted practice needed
+  - min_pct: 40
+    band: basic
+    label: Basic
+    nepal_descriptor: Below grade level in several areas
+  - min_pct: 0
+    band: intensive_support
+    label: Needs Intensive Support
+    nepal_descriptor: Significant gaps; foundational revision required

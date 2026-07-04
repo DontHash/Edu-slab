@@ -7,52 +7,35 @@ from typing import List, Optional
 
 from app.api.routes.auth import get_current_user
 from app.core.config import settings
+from app.core.curriculum import (
+    CURRICULUM_FRAMEWORK,
+    ROADMAP_HOURS_BY_WEAKNESS,
+    ROADMAP_STEP_MINUTES_BY_WEAKNESS,
+    normalize_subject_key,
+)
+from app.core.paths import ASSESSMENTS_DIR
 from app.db.database import get_db
 from app.models.assessment import Assessment
 from app.models.user import User
-from app.services.evaluation_service import get_evaluation_service
-from app.services.rag_service import RAGService
+from app.services.adaptive_assessment_service import get_adaptive_service
+from app.services.evaluation_service import evaluate_assessment_file
+from app.services.question_bank_service import get_question_bank
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 router = APIRouter()
 
-# Initialize RAG service
-RAG_DATA_FOLDER = Path(__file__).parent.parent.parent.parent / "python_RAG" / "data"
-MISTRAL_API_KEY = settings.MISTRAL_API_KEY if hasattr(settings, 'MISTRAL_API_KEY') else None
-
-rag_service = None
-
-def get_rag_service():
-    """Get or initialize RAG service"""
-    global rag_service
-    
-    if rag_service is None:
-        if not MISTRAL_API_KEY:
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail="RAG service not configured. MISTRAL_API_KEY is missing."
-            )
-        
-        try:
-            rag_service = RAGService(api_key=MISTRAL_API_KEY, data_folder=str(RAG_DATA_FOLDER))
-            print("RAG service initialized successfully")
-        except Exception as e:
-            print(f"Error initializing RAG service: {e}")
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail=f"Failed to initialize RAG service: {str(e)}"
-            )
-    
-    return rag_service
+# Nepal CDC curriculum knowledge base (local files — no API key)
+CURRICULUM_DATA = Path(__file__).parent.parent.parent.parent.parent / "python_RAG" / "data"
 
 
 # Request/Response Models
 class QuestionGenerationRequest(BaseModel):
     chapter: Optional[str] = None
     subject: str
-    num_questions: int = 5
+    num_questions: int = 1
+    grade: Optional[int] = None
 
 
 class GeneratedQuestion(BaseModel):
@@ -76,6 +59,9 @@ class AnswerSubmission(BaseModel):
     answer: str
     chapter: Optional[str] = None
     question: Optional[str] = None
+    question_raw: Optional[str] = None
+    expected_answer: Optional[str] = None
+    answer_type: Optional[str] = None
 
 
 class AssessmentSubmission(BaseModel):
@@ -93,14 +79,229 @@ class AssessmentResponse(BaseModel):
     status: str
 
 
+class AdaptiveStartRequest(BaseModel):
+    subject: str
+    grade: Optional[int] = None
+
+
+class AdaptiveAnswerRequest(BaseModel):
+    question_id: str
+    answer: str
+
+
+class AdaptiveQuestionPublic(BaseModel):
+    id: str
+    question: str
+    chapter: str
+    difficulty: str
+    type: str
+    domain: Optional[str] = None
+    section: Optional[str] = None
+    context_text: Optional[str] = None
+    item_type: Optional[str] = None
+    cognitive_level: Optional[str] = None
+
+
+class AdaptiveStartResponse(BaseModel):
+    session_id: str
+    question_number: int
+    total_questions: int
+    difficulty: str
+    grade: int
+    question: AdaptiveQuestionPublic
+    progress_percent: int
+    blueprint_mode: Optional[bool] = None
+
+
+class AdaptiveAnswerResponse(BaseModel):
+    session_id: str
+    completed: bool
+    question_number: int
+    total_questions: int
+    progress_percent: int
+    last_result: Optional[dict] = None
+    question: Optional[AdaptiveQuestionPublic] = None
+    difficulty: Optional[str] = None
+    message: Optional[str] = None
+
+
 class EvaluationResponse(BaseModel):
     assessment_id: str
     chapter_analysis: dict
     question_analysis: dict
     overall_analysis: dict
+    recommended_resources: Optional[list] = None
     evaluation_completed_at: str
     submitted_at: str
     status: str
+    answers: Optional[list] = None
+
+
+def _build_evaluation_response(
+    assessment_id: str,
+    evaluation_data: dict,
+    assessment_data: dict,
+) -> EvaluationResponse:
+    """Ensure study resources are attached (backfill for older evaluations)."""
+    from app.services.learning_resource_service import attach_study_resources
+
+    if not evaluation_data.get("recommended_resources"):
+        subject = assessment_data.get("subject", "")
+        grade = int(assessment_data.get("grade") or 10)
+        attach_study_resources(
+            evaluation_data,
+            subject=subject,
+            grade=grade,
+            answers=assessment_data.get("answers"),
+        )
+
+    return EvaluationResponse(
+        assessment_id=assessment_id,
+        chapter_analysis=evaluation_data.get("chapter_analysis", {}),
+        question_analysis=evaluation_data.get("question_analysis", {}),
+        overall_analysis=evaluation_data.get("overall_analysis", {}),
+        recommended_resources=evaluation_data.get("recommended_resources", []),
+        evaluation_completed_at=evaluation_data.get("evaluated_at", ""),
+        submitted_at=assessment_data.get("submitted_at", ""),
+        status=assessment_data.get("status", ""),
+        answers=assessment_data.get("answers", []),
+    )
+
+
+def _find_latest_subject_evaluation(user_id: int, subject: str) -> tuple[dict | None, dict | None, str | None]:
+    """Return (assessment_data, evaluation_data, assessment_id) for latest evaluated subject."""
+    assessments_dir = ASSESSMENTS_DIR
+    user_dir = assessments_dir / str(user_id)
+    if not user_dir.exists():
+        return None, None, None
+
+    subject_key = normalize_subject_key(subject)
+    latest_assessment = None
+    latest_evaluation = None
+    latest_id = None
+    latest_timestamp = ""
+
+    for assessment_file in user_dir.glob("*.json"):
+        if assessment_file.name.endswith("_evaluation.json"):
+            continue
+        try:
+            with open(assessment_file, encoding="utf-8") as f:
+                assessment_data = json.load(f)
+            if normalize_subject_key(assessment_data.get("subject", "")) != subject_key:
+                continue
+            submitted_at = assessment_data.get("submitted_at", "")
+            if submitted_at <= latest_timestamp:
+                continue
+            evaluation_file = user_dir / f"{assessment_file.stem}_evaluation.json"
+            if not evaluation_file.exists():
+                continue
+            with open(evaluation_file, encoding="utf-8") as ef:
+                evaluation_data = json.load(ef)
+            latest_timestamp = submitted_at
+            latest_assessment = assessment_data
+            latest_evaluation = evaluation_data
+            latest_id = assessment_file.stem
+        except Exception as exc:
+            print(f"Error loading assessment {assessment_file}: {exc}")
+
+    return latest_assessment, latest_evaluation, latest_id
+
+
+def _apply_evaluation_to_user(user: User, subject: str, evaluation_result: dict) -> None:
+    """Persist proficiency score and estimated grade after evaluation."""
+    overall = evaluation_result.get("overall_analysis", {})
+    final_score = int(round(overall.get("final_score_out_of_100", 0)))
+    estimated_grade = int(overall.get("estimated_student_grade_level") or user.current_level or 10)
+    subject_key = (subject or "").lower()
+
+    if subject_key in ("maths", "math"):
+        user.math_level = final_score
+    elif subject_key == "science":
+        user.science_level = final_score
+    elif subject_key == "english":
+        user.english_level = final_score
+        user.writing_english_level = final_score
+
+    user.current_level = estimated_grade
+
+
+def _roadmap_from_evaluation(
+    subject: str,
+    assessment_data: dict,
+    evaluation_data: dict,
+    assessment_id: str,
+) -> dict:
+    """Shape evaluation study plan for the Roadmap UI."""
+    from app.services.learning_resource_service import attach_study_resources
+
+    if not evaluation_data.get("recommended_resources"):
+        grade = int(assessment_data.get("grade") or 10)
+        attach_study_resources(evaluation_data, subject=subject, grade=grade)
+
+    overall = evaluation_data.get("overall_analysis", {})
+    study_plan = overall.get("study_plan", {})
+    weak_topics = study_plan.get("weak_topics", [])
+
+    chapters = []
+    for topic in weak_topics:
+        weakness = topic.get("weakness_level", "moderate")
+        step_mins = ROADMAP_STEP_MINUTES_BY_WEAKNESS.get(weakness, 20)
+        hours = topic.get("estimated_time_hours") or ROADMAP_HOURS_BY_WEAKNESS.get(weakness, 2.0)
+        chapters.append({
+            "chapter_name": topic.get("chapter", "Topic"),
+            "weakness_level": weakness,
+            "accuracy_percentage": topic.get("accuracy_percentage", 0),
+            "priority": {1: 5, 2: 4, 3: 3}.get(topic.get("priority", 3), 3),
+            "estimated_time_hours": hours,
+            "roadmap_steps": [
+                {
+                    "step_number": i + 1,
+                    "objective": step,
+                    "estimated_time_minutes": step_mins,
+                }
+                for i, step in enumerate(topic.get("study_steps") or [])
+            ],
+            "resources": [
+                {
+                    "title": r.get("title", "Tutorial"),
+                    "url": r.get("url", ""),
+                    "type": r.get("type", "tutorial"),
+                    "description": r.get("description", ""),
+                    "level": r.get("provider_label", r.get("provider", "")),
+                    "estimated_time_minutes": r.get("estimated_time_minutes", 15),
+                }
+                for r in (topic.get("recommended_resources") or [])
+            ],
+        })
+
+    all_resources = study_plan.get("all_resources") or evaluation_data.get("recommended_resources", [])
+
+    return {
+        "has_data": True,
+        "subject": subject,
+        "assessment_id": assessment_id,
+        "assessed_at": assessment_data.get("submitted_at", ""),
+        "overall_score": overall.get("final_score_out_of_100", 0),
+        "estimated_grade_level": overall.get("estimated_student_grade_level"),
+        "proficiency_band": overall.get("proficiency_band"),
+        "proficiency_label": overall.get("proficiency_label"),
+        "domain_analysis": overall.get("domain_analysis", {}),
+        "evaluation_method": overall.get("evaluation_method"),
+        "learning_gaps": overall.get("learning_gap_summary", []),
+        "study_plan_message": study_plan.get("message", ""),
+        "all_resources": all_resources,
+        "content": {
+            "chapters": chapters,
+            "global_recommendations": {
+                "weekly_study_hours": max(4, int(sum(c["estimated_time_hours"] for c in chapters) * 0.75)),
+                "minimum_duration_weeks": max(3, len(chapters)),
+                "notes": study_plan.get("message") or (
+                    f"Based on your latest {subject} diagnostic — "
+                    "use the free tutorials below for each weak topic."
+                ),
+            },
+        },
+    }
 
 
 @router.post("/generate-questions", response_model=QuestionGenerationResponse)
@@ -109,34 +310,41 @@ async def generate_questions(
     current_user: User = Depends(get_current_user)
 ):
     """
-    Generate questions by subject (5 questions from each chapter)
+    Load standardized questions from the Nepal CDC curriculum knowledge base (local JSON).
+    No cloud API required.
     """
     try:
-        service = get_rag_service()
-        
-        # If chapter is provided, generate for that chapter only (backward compatibility)
-        if request.chapter:
-            questions = service.generate_questions_from_chapter(
-                chapter_name=request.chapter,
-                subject=request.subject,
-                num_questions=request.num_questions
+        bank = get_question_bank()
+        grade = request.grade or current_user.current_level or 10
+        grade = max(6, min(10, int(grade)))
+
+        questions = bank.pick_questions(
+            subject=request.subject,
+            grade=grade,
+            chapter=request.chapter,
+            questions_per_chapter=request.num_questions or 1,
+        )
+
+        if not questions:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=(
+                    f"No curriculum questions found for subject '{request.subject}' "
+                    f"grade {grade}. Check python_RAG/data files."
+                ),
             )
-            chapter_name = request.chapter
-        else:
-            # Generate questions from all chapters in the subject
-            questions = service.generate_questions_by_subject(
-                subject=request.subject,
-                questions_per_chapter=1
-            )
-            chapter_name = "All Chapters"
-        
+
+        chapter_name = request.chapter or "All Chapters (Nepal CDC)"
+
         return QuestionGenerationResponse(
             questions=[GeneratedQuestion(**q) for q in questions],
             chapter=chapter_name,
-            subject=request.subject or questions[0].get("subject", "general") if questions else "general",
-            total_generated=len(questions)
+            subject=request.subject,
+            total_generated=len(questions),
         )
-        
+
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -144,74 +352,258 @@ async def generate_questions(
         )
 
 
+@router.get("/evaluation-status")
+async def evaluation_status(current_user: User = Depends(get_current_user)):
+    """Check which evaluation engine is active (Ollama AI vs fallbacks)."""
+    from app.services.ollama_client import OllamaClient
+
+    client = OllamaClient()
+    ollama_up = client.is_available()
+    models = client.list_models() if ollama_up else []
+
+    return {
+        "primary_provider": settings.EVALUATION_PROVIDER,
+        "ollama": {
+            "available": ollama_up,
+            "base_url": settings.OLLAMA_BASE_URL,
+            "model": settings.OLLAMA_MODEL,
+            "models_installed": models,
+            "model_ready": client.is_model_ready(),
+            "readiness": client.readiness_message(),
+        },
+        "mistral_enabled": settings.USE_MISTRAL_EVALUATION,
+        "framework": CURRICULUM_FRAMEWORK,
+        "message": (
+            "Professional AI evaluation ready (Ollama)."
+            if client.is_model_ready()
+            else client.readiness_message()
+        ),
+    }
+
+
+@router.get("/curriculum")
+async def get_curriculum(
+    grade: Optional[int] = None,
+    current_user: User = Depends(get_current_user),
+):
+    """Nepal CDC curriculum metadata and available chapters for a grade."""
+    bank = get_question_bank()
+    g = grade or current_user.current_level or 10
+    g = max(6, min(10, int(g)))
+    return bank.get_curriculum_info(g)
+
+
+@router.get("/curriculum-metadata/{grade}")
+async def get_curriculum_metadata_route(
+    grade: int,
+    current_user: User = Depends(get_current_user),
+):
+    """CDC-aligned domains, learning outcomes, and spec grids for a grade."""
+    from app.services.curriculum_metadata_service import get_curriculum_metadata
+
+    g = max(6, min(10, int(grade)))
+    meta = get_curriculum_metadata()
+    return {
+        "framework": CURRICULUM_FRAMEWORK,
+        **meta.curriculum_summary(g),
+    }
+
+
+@router.get("/question-templates/{subject}")
+async def list_question_templates(
+    subject: str,
+    grade: Optional[int] = None,
+    current_user: User = Depends(get_current_user),
+):
+    """List generative question templates for English/Math (parameter-slot blueprints)."""
+    from app.services.dynamic_question_service import get_dynamic_question_service
+
+    g = grade or current_user.current_level or 10
+    g = max(6, min(10, int(g)))
+    svc = get_dynamic_question_service()
+    return {
+        "subject": subject,
+        "grade": g,
+        "templates": svc.list_templates(subject, g),
+        "dynamic_enabled": True,
+    }
+
+
+@router.get("/question-templates/{subject}/preview")
+async def preview_generated_questions(
+    subject: str,
+    grade: Optional[int] = None,
+    count: int = 5,
+    current_user: User = Depends(get_current_user),
+):
+    """Preview dynamically generated questions from templates (for authoring / QA)."""
+    from app.services.dynamic_question_service import get_dynamic_question_service
+
+    g = grade or current_user.current_level or 10
+    g = max(6, min(10, int(g)))
+    count = max(1, min(20, count))
+    svc = get_dynamic_question_service()
+    samples = svc.generate_pool(subject, g, variants_per_template=1)[:count]
+    return {
+        "subject": subject,
+        "grade": g,
+        "count": len(samples),
+        "samples": [
+            {
+                "stem": s.get("stem"),
+                "expected_answer": s.get("expected_answer"),
+                "template_id": s.get("template_id"),
+                "template_kind": s.get("template_kind"),
+                "generated_params": s.get("generated_params"),
+                "domain": s.get("domain"),
+            }
+            for s in samples
+        ],
+    }
+
+
 @router.get("/available-chapters")
 async def get_available_chapters(
     subject: Optional[str] = None,
-    current_user: User = Depends(get_current_user)
+    grade: Optional[int] = None,
+    current_user: User = Depends(get_current_user),
 ):
-    """
-    Get list of available subjects and example chapters
-    Since we're using AI to generate questions, we return common educational chapters
-    """
-    
-    # Common chapters by subject for Class 10
-    all_chapters = {
-        "maths": [
-            "Real Numbers",
-            "Polynomials",
-            "Linear Equations",
-            "Quadratic Equations",
-            "Arithmetic Progressions",
-            "Triangles",
-            "Coordinate Geometry",
-            "Trigonometry",
-            "Circles",
-            "Statistics",
-            "Probability"
-        ],
-        "science": [
-            "Chemical Reactions",
-            "Acids Bases and Salts",
-            "Metals and Non-metals",
-            "Carbon Compounds",
-            "Periodic Classification",
-            "Life Processes",
-            "Control and Coordination",
-            "Reproduction",
-            "Heredity and Evolution",
-            "Light Reflection and Refraction",
-            "Human Eye",
-            "Electricity",
-            "Magnetic Effects of Current"
-        ],
-        "english": [
-            "Reading Comprehension",
-            "Grammar",
-            "Writing Skills",
-            "Literature",
-            "Poetry Analysis",
-            "Essay Writing",
-            "Letter Writing"
-        ]
-    }
-    
+    """Chapters from the local Nepal CDC knowledge base."""
+    bank = get_question_bank()
+    g = grade or current_user.current_level or 10
+    g = max(6, min(10, int(g)))
+
     if subject:
-        subject_lower = subject.lower()
-        if subject_lower in all_chapters:
-            return {
-                "subject": subject_lower,
-                "chapters": [{"name": ch, "available": True} for ch in all_chapters[subject_lower]]
-            }
-        else:
-            return {"subject": subject_lower, "chapters": []}
-    
-    # Return all subjects and their chapters
-    return {
-        "subjects": {
-            subj: [{"name": ch, "available": True} for ch in chapters]
-            for subj, chapters in all_chapters.items()
+        subject_key = subject.lower()
+        chapters = bank.load_chapters(subject_key, g)
+        return {
+            "framework": "Nepal CDC National Curriculum",
+            "grade": g,
+            "subject": subject_key,
+            "chapters": [{"name": c["chapter"], "available": True} for c in chapters],
         }
-    }
+
+    return bank.get_curriculum_info(g)
+
+
+@router.post("/adaptive/start", response_model=AdaptiveStartResponse)
+async def start_adaptive_assessment(
+    request: AdaptiveStartRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Start a 10-question adaptive session — one contextual question at a time."""
+    try:
+        svc = get_adaptive_service()
+        grade = request.grade or current_user.current_level or 10
+        grade = max(6, min(10, int(grade)))
+        result = svc.start_session(current_user.id, request.subject, grade)
+        return AdaptiveStartResponse(**result)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to start adaptive assessment: {str(e)}",
+        )
+
+
+@router.post("/adaptive/{session_id}/answer", response_model=AdaptiveAnswerResponse)
+async def submit_adaptive_answer(
+    session_id: str,
+    body: AdaptiveAnswerRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Submit one answer; difficulty adjusts before the next question."""
+    try:
+        svc = get_adaptive_service()
+        result = svc.submit_answer(
+            current_user.id, session_id, body.question_id, body.answer
+        )
+        return AdaptiveAnswerResponse(**result)
+    except FileNotFoundError:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Session not found")
+    except PermissionError:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Access denied")
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to submit answer: {str(e)}",
+        )
+
+
+@router.post("/adaptive/{session_id}/finish", response_model=AssessmentResponse)
+async def finish_adaptive_assessment(
+    session_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Finalize adaptive session and run full AI evaluation."""
+    import uuid
+    from datetime import datetime
+
+    try:
+        svc = get_adaptive_service()
+        finalized = svc.finalize_session(current_user.id, session_id)
+        assessment_file = Path(finalized["assessment_file"])
+
+        assessment_data = json.loads(assessment_file.read_text(encoding="utf-8"))
+        assessment_id = finalized["assessment_id"]
+        user_dir = assessment_file.parent
+
+        try:
+            evaluation_result = evaluate_assessment_file(assessment_file)
+            evaluation_result["evaluated_at"] = datetime.utcnow().isoformat()
+
+            evaluation_file = user_dir / f"{assessment_id}_evaluation.json"
+            with open(evaluation_file, "w", encoding="utf-8") as f:
+                json.dump(evaluation_result, f, indent=2)
+
+            _apply_evaluation_to_user(
+                current_user,
+                assessment_data.get("subject", ""),
+                evaluation_result,
+            )
+
+            db.commit()
+            db.refresh(current_user)
+
+            try:
+                from app.services.topic_performance_service import sync_topic_performances
+                sync_topic_performances(db, current_user.id)
+            except Exception as sync_err:
+                print(f"[ERROR] Failed to sync topic performance: {sync_err}")
+
+            assessment_data["status"] = "evaluated"
+            with open(assessment_file, "w", encoding="utf-8") as f:
+                json.dump(assessment_data, f, indent=2)
+
+        except Exception as eval_error:
+            print(f"Adaptive evaluation error: {eval_error}")
+            assessment_data["status"] = "evaluation_failed"
+            assessment_data["evaluation_error"] = str(eval_error)
+            with open(assessment_file, "w", encoding="utf-8") as f:
+                json.dump(assessment_data, f, indent=2)
+
+        return AssessmentResponse(
+            assessment_id=assessment_id,
+            chapter=assessment_data.get("chapter", "Adaptive Diagnostic"),
+            subject=assessment_data.get("subject", ""),
+            total_questions=finalized["total_questions"],
+            submitted_at=assessment_data.get("submitted_at", ""),
+            status=assessment_data.get("status", "evaluating"),
+        )
+
+    except FileNotFoundError:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Session not found")
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to finalize adaptive assessment: {str(e)}",
+        )
 
 
 @router.post("/submit-assessment", response_model=AssessmentResponse)
@@ -236,12 +628,17 @@ async def submit_assessment(
             "user_email": current_user.email,
             "chapter": submission.chapter,
             "subject": submission.subject,
+            "grade": current_user.current_level or 10,
+            "curriculum": CURRICULUM_FRAMEWORK,
             "answers": [
                 {
                     "question_id": ans.question_id,
                     "answer": ans.answer,
                     "chapter": ans.chapter,
-                    "question": ans.question
+                    "question": ans.question,
+                    "question_raw": ans.question_raw,
+                    "expected_answer": ans.expected_answer,
+                    "answer_type": ans.answer_type,
                 }
                 for ans in submission.answers
             ],
@@ -250,7 +647,7 @@ async def submit_assessment(
         }
         
         # Create file-based storage
-        assessments_dir = Path(__file__).parent.parent.parent.parent / "assessments"
+        assessments_dir = ASSESSMENTS_DIR
         assessments_dir.mkdir(exist_ok=True)
         
         assessment_id = assessment_data["assessment_id"]
@@ -265,8 +662,7 @@ async def submit_assessment(
         
         # Automatically trigger evaluation
         try:
-            evaluation_service = get_evaluation_service()
-            evaluation_result = evaluation_service.evaluate_assessment(assessment_file)
+            evaluation_result = evaluate_assessment_file(assessment_file)
             
             # Add timestamp
             evaluation_result["evaluated_at"] = datetime.utcnow().isoformat()
@@ -276,40 +672,12 @@ async def submit_assessment(
             with open(evaluation_file, "w", encoding="utf-8") as f:
                 json.dump(evaluation_result, f, indent=2)
             
-            # Update user's subject levels and fit_to_teach_level in database
-            overall_analysis = evaluation_result.get("overall_analysis", {})
-            final_score = overall_analysis.get("final_score_out_of_100", 0)
-            # Convert to integer to match schema
-            final_score = int(round(final_score))
-            
-            subject = assessment_data.get("subject", "").lower()
-            
-            # Update subject-specific level
-            if subject == "maths" or subject == "math":
-                current_user.math_level = int(final_score)
-            elif subject == "science":
-                current_user.science_level = int(final_score)
-            elif subject == "english":
-                current_user.english_level = int(final_score)
-            
-            # Calculate fit_to_teach_level based on BEST score across all subjects
-            best_score = max(
-                current_user.math_level or 0,
-                current_user.science_level or 0,
-                current_user.english_level or 0
+            _apply_evaluation_to_user(
+                current_user,
+                assessment_data.get("subject", ""),
+                evaluation_result,
             )
-            
-            if best_score >= 85:
-                fit_to_teach = max(1, (current_user.current_level or 10) - 2)
-            elif best_score >= 70:
-                fit_to_teach = max(1, (current_user.current_level or 10) - 3)
-            elif best_score >= 50:
-                fit_to_teach = max(1, (current_user.current_level or 10) - 4)
-            else:
-                fit_to_teach = None
-            
-            current_user.fit_to_teach_level = fit_to_teach
-            
+
             # Commit changes to database
             db.commit()
             db.refresh(current_user)
@@ -331,8 +699,8 @@ async def submit_assessment(
             
         except Exception as eval_error:
             print(f"Evaluation error (non-blocking): {eval_error}")
-            # Don't fail the submission if evaluation fails
             assessment_data["status"] = "evaluation_failed"
+            assessment_data["evaluation_error"] = str(eval_error)
             with open(assessment_file, "w", encoding="utf-8") as f:
                 json.dump(assessment_data, f, indent=2)
         
@@ -360,7 +728,7 @@ async def get_user_assessments(
     Get all assessments submitted by the current user
     """
     try:
-        assessments_dir = Path(__file__).parent.parent.parent.parent / "assessments"
+        assessments_dir = ASSESSMENTS_DIR
         user_dir = assessments_dir / str(current_user.id)
         
         if not user_dir.exists():
@@ -397,7 +765,7 @@ async def get_assessment_details(
     Get details of a specific assessment
     """
     try:
-        assessments_dir = Path(__file__).parent.parent.parent.parent / "assessments"
+        assessments_dir = ASSESSMENTS_DIR
         user_dir = assessments_dir / str(current_user.id)
         assessment_file = user_dir / f"{assessment_id}.json"
         
@@ -431,7 +799,7 @@ async def get_evaluation(
     Get evaluation results for a specific assessment
     """
     try:
-        assessments_dir = Path(__file__).parent.parent.parent.parent / "assessments"
+        assessments_dir = ASSESSMENTS_DIR
         user_dir = assessments_dir / str(current_user.id)
         evaluation_file = user_dir / f"{assessment_id}_evaluation.json"
         assessment_file = user_dir / f"{assessment_id}.json"
@@ -450,15 +818,7 @@ async def get_evaluation(
         with open(assessment_file, "r", encoding="utf-8") as f:
             assessment_data = json.load(f)
         
-        return EvaluationResponse(
-            assessment_id=assessment_id,
-            chapter_analysis=evaluation_data.get("chapter_analysis", {}),
-            question_analysis=evaluation_data.get("question_analysis", {}),
-            overall_analysis=evaluation_data.get("overall_analysis", {}),
-            evaluation_completed_at=evaluation_data.get("evaluated_at", ""),
-            submitted_at=assessment_data.get("submitted_at", ""),
-            status=assessment_data.get("status", "")
-        )
+        return _build_evaluation_response(assessment_id, evaluation_data, assessment_data)
         
     except HTTPException:
         raise
@@ -479,7 +839,7 @@ async def evaluate_assessment(
     Evaluate a submitted assessment using AI and update user levels
     """
     try:
-        assessments_dir = Path(__file__).parent.parent.parent.parent / "assessments"
+        assessments_dir = ASSESSMENTS_DIR
         user_dir = assessments_dir / str(current_user.id)
         assessment_file = user_dir / f"{assessment_id}.json"
         
@@ -492,21 +852,17 @@ async def evaluate_assessment(
         # Check if evaluation already exists
         evaluation_file = user_dir / f"{assessment_id}_evaluation.json"
         if evaluation_file.exists():
-            # Return existing evaluation
             with open(evaluation_file, "r", encoding="utf-8") as f:
                 evaluation_data = json.load(f)
-            
-            return EvaluationResponse(
-                assessment_id=assessment_id,
-                chapter_analysis=evaluation_data.get("chapter_analysis", {}),
-                question_analysis=evaluation_data.get("question_analysis", {}),
-                overall_analysis=evaluation_data.get("overall_analysis", {}),
-                evaluation_completed_at=evaluation_data.get("evaluated_at", "")
-            )
-        
-        # Perform evaluation
-        evaluation_service = get_evaluation_service()
-        evaluation_result = evaluation_service.evaluate_assessment(assessment_file)
+            with open(assessment_file, "r", encoding="utf-8") as f:
+                assessment_data = json.load(f)
+
+            return _build_evaluation_response(assessment_id, evaluation_data, assessment_data)
+
+        evaluation_result = evaluate_assessment_file(assessment_file)
+
+        with open(assessment_file, "r", encoding="utf-8") as f:
+            assessment_data = json.load(f)
         
         # Add timestamp
         from datetime import datetime
@@ -516,51 +872,12 @@ async def evaluate_assessment(
         with open(evaluation_file, "w", encoding="utf-8") as f:
             json.dump(evaluation_result, f, indent=2)
         
-        # Update user's subject levels and fit_to_teach_level in database
-        overall_analysis = evaluation_result.get("overall_analysis", {})
-        final_score = overall_analysis.get("final_score_out_of_100", 0)
-        estimated_grade = overall_analysis.get("estimated_student_grade_level", current_user.current_level or 10)
-        
-        # Load assessment to get subject
-        with open(assessment_file, "r", encoding="utf-8") as f:
-            assessment_data = json.load(f)
-        
-        subject = assessment_data.get("subject", "").lower()
-        
-        # Convert to integer to match schema
-        final_score = int(round(final_score))
-        
-        # Update subject-specific level
-        if subject == "maths" or subject == "math":
-            current_user.math_level = final_score
-        elif subject == "science":
-            current_user.science_level = final_score
-        elif subject == "english":
-            current_user.english_level = final_score
-        
-        # Calculate fit_to_teach_level based on BEST score across all subjects
-        # If student scores 85%+, they can teach 2 grades below current
-        # If 70-84%, they can teach 3 grades below
-        # If 50-69%, they can teach 4 grades below
-        # Below 50%, no teaching recommendation
-        best_score = max(
-            current_user.math_level or 0,
-            current_user.science_level or 0,
-            current_user.english_level or 0
+        _apply_evaluation_to_user(
+            current_user,
+            assessment_data.get("subject", ""),
+            evaluation_result,
         )
-        
-        if best_score >= 85:
-            fit_to_teach = max(1, (current_user.current_level or 10) - 2)
-        elif best_score >= 70:
-            fit_to_teach = max(1, (current_user.current_level or 10) - 3)
-        elif best_score >= 50:
-            fit_to_teach = max(1, (current_user.current_level or 10) - 4)
-        else:
-            fit_to_teach = None
-        
-        current_user.fit_to_teach_level = fit_to_teach
-        
-        # Commit changes to database
+
         db.commit()
         db.refresh(current_user)
 
@@ -576,22 +893,22 @@ async def evaluate_assessment(
             print(f"[ERROR] Failed to sync topic performance: {e}")
             print(traceback.format_exc())
         
-        return EvaluationResponse(
-            assessment_id=assessment_id,
-            chapter_analysis=evaluation_result.get("chapter_analysis", {}),
-            question_analysis=evaluation_result.get("question_analysis", {}),
-            overall_analysis=evaluation_result.get("overall_analysis", {}),
-            evaluation_completed_at=evaluation_result.get("evaluated_at", "")
-        )
+        return _build_evaluation_response(assessment_id, evaluation_result, assessment_data)
         
     except HTTPException:
         raise
     except Exception as e:
         import traceback
         print(f"Evaluation error: {traceback.format_exc()}")
+        detail = str(e)
+        if "Ollama" in detail or "ollama" in detail.lower():
+            detail += (
+                " Install: https://ollama.com — then run "
+                f"`ollama pull {settings.OLLAMA_MODEL}` and `ollama serve`."
+            )
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to evaluate assessment: {str(e)}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Failed to evaluate assessment: {detail}"
         )
 
 
@@ -604,7 +921,7 @@ async def get_recent_activities(
     Get recent assessment activities for the current user
     """
     try:
-        assessments_dir = Path(__file__).parent.parent.parent.parent / "assessments"
+        assessments_dir = ASSESSMENTS_DIR
         user_dir = assessments_dir / str(current_user.id)
         
         if not user_dir.exists():
@@ -670,7 +987,7 @@ async def get_subject_progress(
     Get detailed progress analysis for a specific subject including strengths and weaknesses
     """
     try:
-        assessments_dir = Path(__file__).parent.parent.parent.parent / "assessments"
+        assessments_dir = ASSESSMENTS_DIR
         user_dir = assessments_dir / str(current_user.id)
         
         if not user_dir.exists():
@@ -683,6 +1000,7 @@ async def get_subject_progress(
         # Find the most recent assessment for this subject
         latest_assessment = None
         latest_evaluation = None
+        latest_assessment_id = None
         latest_timestamp = ""
         
         assessment_files = [f for f in user_dir.glob("*.json") if not f.name.endswith("_evaluation.json")]
@@ -698,15 +1016,15 @@ async def get_subject_progress(
                     print(f"Warning: Assessment {assessment_file} belongs to {assessment_user_email}, not {current_user.email}")
                     continue  # Skip assessments from other users
                 
-                if assessment_data.get("subject", "").lower() == subject.lower():
+                if normalize_subject_key(assessment_data.get("subject", "")) == normalize_subject_key(subject):
                     submitted_at = assessment_data.get("submitted_at", "")
                     if submitted_at > latest_timestamp:
                         latest_timestamp = submitted_at
                         latest_assessment = assessment_data
+                        latest_assessment_id = assessment_file.stem
                         
                         # Load corresponding evaluation
-                        assessment_id = assessment_file.stem
-                        evaluation_file = user_dir / f"{assessment_id}_evaluation.json"
+                        evaluation_file = user_dir / f"{latest_assessment_id}_evaluation.json"
                         if evaluation_file.exists():
                             with open(evaluation_file, "r", encoding="utf-8") as ef:
                                 latest_evaluation = json.load(ef)
@@ -720,6 +1038,16 @@ async def get_subject_progress(
                 "message": "No evaluated assessments found for this subject"
             }
         
+        # Attach study resources for progress / roadmap consumers
+        from app.services.learning_resource_service import attach_study_resources
+        if not latest_evaluation.get("recommended_resources"):
+            grade = int(latest_assessment.get("grade") or 10)
+            attach_study_resources(
+                latest_evaluation,
+                subject=latest_assessment.get("subject", subject),
+                grade=grade,
+            )
+
         # Extract chapter analysis
         chapter_analysis = latest_evaluation.get("chapter_analysis", {})
         overall_analysis = latest_evaluation.get("overall_analysis", {})
@@ -763,13 +1091,49 @@ async def get_subject_progress(
             "critical_weaknesses": critical_weaknesses,
             "learning_gaps": overall_analysis.get("learning_gap_summary", []),
             "strongest_chapters": overall_analysis.get("strongest_chapters", []),
-            "weakest_chapters": overall_analysis.get("weakest_chapters", [])
+            "weakest_chapters": overall_analysis.get("weakest_chapters", []),
+            "study_plan": overall_analysis.get("study_plan", {}),
+            "recommended_resources": latest_evaluation.get("recommended_resources", []),
+            "assessment_id": latest_assessment_id,
         }
         
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to load subject progress: {str(e)}"
+        )
+
+
+@router.get("/learning-roadmap/{subject}")
+async def get_learning_roadmap(
+    subject: str,
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Personalized learning roadmap from the latest evaluated assessment.
+    Includes study steps and curated Khan Academy / YouTube links per weak topic.
+    """
+    try:
+        assessment_data, evaluation_data, assessment_id = _find_latest_subject_evaluation(
+            current_user.id, subject
+        )
+        if not assessment_data or not evaluation_data or not assessment_id:
+            return {
+                "has_data": False,
+                "subject": subject,
+                "message": (
+                    f"No evaluated {subject} assessment found. "
+                    "Complete an adaptive diagnostic first."
+                ),
+            }
+
+        return _roadmap_from_evaluation(
+            subject, assessment_data, evaluation_data, assessment_id
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to load learning roadmap: {str(e)}",
         )
 
 

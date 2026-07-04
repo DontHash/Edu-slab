@@ -1,14 +1,401 @@
-# Curated free resources — v1 stub (expand per topic in later phases)
-# LLM must select from this list only; never invent URLs.
+# Curated resources — topic-matched, verified before serving.
+# LLM must NEVER invent URLs; only entries here are allowed.
+# YouTube IDs checked via oEmbed; broken links removed.
 
 mathematics:
-  Geometry:
-    prerequisites:
-      - title: "Basic Angles"
+  _default:
+    resources:
+      - title: "Pre-algebra foundations"
         provider: khan_academy
-        url: "https://www.khanacademy.org/math/basic-geo/basic-geo-angle"
-    resources: []
+        url: "https://www.khanacademy.org/math/pre-algebra"
+        type: course
+        description: "Arithmetic, ratios, and early algebra for Grades 6–8."
+        estimated_time_minutes: 30
+      - title: "Solving linear equations"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=Z-ZkmpQBIFo"
+        type: video
+        description: "Clear walkthrough of ax + b = c style equations."
+        estimated_time_minutes: 12
 
-science: {}
-writing_english: {}
+  "Set Theory":
+    resources:
+      - title: "Set operations — union and intersection"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/statistics-probability/probability-library/basic-set-operations/v/intersection-and-union-of-sets"
+        type: video
+        description: "Union, intersection, and Venn diagram basics."
+        estimated_time_minutes: 15
+
+  "Compound Interest":
+    resources:
+      - title: "Compound interest formula"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/pre-algebra/pre-algebra-rates-ratios/pre-algebra-rates/v/compound-interest"
+        type: video
+        description: "Yearly compounding with Rs. word problems."
+        estimated_time_minutes: 12
+
+  "Money Exchange and Tax":
+    resources:
+      - title: "Percent word problems"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates/pre-algebra-rates/v/solving-percent-problems"
+        type: video
+        description: "Discount, tax, and percentage calculations."
+        estimated_time_minutes: 12
+      - title: "What are percentages?"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=JeVSmq1Nrpw"
+        type: video
+        description: "Percent basics before exchange-rate problems."
+        estimated_time_minutes: 10
+
+  "Linear Equations":
+    resources:
+      - title: "Linear equations — one variable"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/algebra-home/alg-basic-eq-ineq/alg-linear-equations-word-problems"
+        type: course
+        description: "Solving and forming linear equations."
+        estimated_time_minutes: 25
+      - title: "How to solve equations quickly"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=Z-ZkmpQBIFo"
+        type: video
+        description: "Step-by-step ax + b = c method."
+        estimated_time_minutes: 12
+
+  "Quadratic Equations":
+    resources:
+      - title: "Quadratic equations"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/algebra-home/alg-quadratics"
+        type: course
+        description: "Factoring, formula, and roots."
+        estimated_time_minutes: 30
+
+  "Trigonometry":
+    resources:
+      - title: "Trigonometry"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/trigonometry"
+        type: course
+        description: "Sin, cos, tan and right triangles."
+        estimated_time_minutes: 30
+
+  "Heights and Distances":
+    resources:
+      - title: "Trig word problems — angle of elevation"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/trigonometry/trig-with-general-triangles/solving-for-a-side-in-a-right-triangle/v/example-trig-problems"
+        type: video
+        description: "Angle of elevation and depression."
+        estimated_time_minutes: 15
+
+  "Mensuration":
+    resources:
+      - title: "Area and perimeter"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/geometry-home/geometry-area-perimeter"
+        type: course
+        description: "Plane figures — area formulas."
+        estimated_time_minutes: 25
+      - title: "Surface area and volume"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/geometry-home/geometry-volume-surface-area"
+        type: course
+        description: "3D shapes — volume and surface area."
+        estimated_time_minutes: 25
+
+  "Statistics":
+    resources:
+      - title: "Mean, median, and mode"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/statistics-probability/summarize-quantitative-data/mean-median-basics/v/mean-median-and-mode"
+        type: video
+        description: "Central tendency with examples."
+        estimated_time_minutes: 12
+      - title: "Statistics intro — mean, median, mode"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=h8EYEJ32oQ8"
+        type: video
+        description: "Khan Academy — data and statistics."
+        estimated_time_minutes: 12
+
+  "Probability":
+    resources:
+      - title: "Simple probability"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/v/simple-probability"
+        type: video
+        description: "Sample space and P(event)."
+        estimated_time_minutes: 12
+      - title: "Probability explained"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=uzkc-qNVoOk"
+        type: video
+        description: "Independent and dependent events."
+        estimated_time_minutes: 15
+
+  "Coordinate Geometry":
+    resources:
+      - title: "Coordinate plane"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/geometry-home/geometry-coordinate-plane"
+        type: course
+        description: "Plotting points, distance, and midpoint."
+        estimated_time_minutes: 20
+      - title: "Distance formula"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=nyZuite17Pc"
+        type: video
+        description: "Distance between two coordinate points."
+        estimated_time_minutes: 10
+
+  "Circles":
+    resources:
+      - title: "Circle geometry"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/geometry-home/geometry-circles"
+        type: course
+        description: "Arcs, chords, tangents, and theorems."
+        estimated_time_minutes: 25
+
+  "Shares and Dividends":
+    resources:
+      - title: "Percentages and profit"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates/pre-algebra-rates/v/solving-percent-problems"
+        type: video
+        description: "Percentage calculations for dividends."
+        estimated_time_minutes: 12
+
+  "Polygons":
+    resources:
+      - title: "Angles in polygons"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/geometry-home/geometry-polygons"
+        type: course
+        description: "Interior and exterior angles."
+        estimated_time_minutes: 20
+
+  "Algebraic Expressions":
+    resources:
+      - title: "Algebraic expressions"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/algebra-home/alg-basic-eq-ineq"
+        type: course
+        description: "Simplifying and evaluating expressions."
+        estimated_time_minutes: 25
+
+  "Ratio, Proportion and Variation":
+    resources:
+      - title: "Ratios and proportions"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates"
+        type: course
+        description: "Direct and inverse proportion."
+        estimated_time_minutes: 25
+
+  "Geometric Sequences":
+    resources:
+      - title: "Geometric sequences"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/algebra-home/alg-sequence-series"
+        type: course
+        description: "Common ratio and nth term."
+        estimated_time_minutes: 20
+
+  "Triangles and Similarity":
+    resources:
+      - title: "Similar triangles"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/math/geometry-home/geometry-similarity"
+        type: course
+        description: "AA, SAS, SSS similarity criteria."
+        estimated_time_minutes: 22
+
+science:
+  _default:
+    resources:
+      - title: "Biology — introduction"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/biology"
+        type: course
+        description: "Life science foundations for Grades 8–10."
+        estimated_time_minutes: 30
+
+  "Living Beings":
+    resources:
+      - title: "Introduction to biology"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/biology/intro-to-biology/science-of-biology/a/intro-to-biology"
+        type: article
+        description: "Characteristics of living organisms."
+        estimated_time_minutes: 12
+
+  "Cell - The Unit of Life":
+    resources:
+      - title: "Introduction to cells"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/biology/structure-of-a-cell/introduction-to-cells"
+        type: course
+        description: "Plant and animal cell structure."
+        estimated_time_minutes: 20
+      - title: "Cell structure"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=URUJD5NEXC8"
+        type: video
+        description: "Nucleus, organelles, and cell functions."
+        estimated_time_minutes: 14
+
+  "Reproduction in Living Beings":
+    resources:
+      - title: "Sexual and asexual reproduction"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/biology/reproduction-and-development"
+        type: course
+        description: "Reproduction in plants and animals."
+        estimated_time_minutes: 18
+
+  "Motion and Force":
+    resources:
+      - title: "Forces and Newton's laws"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/physics/forces-newtons-laws"
+        type: course
+        description: "Force, acceleration, and F = ma."
+        estimated_time_minutes: 25
+      - title: "Newton's laws of motion"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=kKKM8Y-u7ds"
+        type: video
+        description: "Crash Course Physics — Newton's three laws."
+        estimated_time_minutes: 12
+
+  "Electricity and Magnetism":
+    resources:
+      - title: "Electric circuits and Ohm's law"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/physics/circuits-topic"
+        type: course
+        description: "Current, voltage, resistance."
+        estimated_time_minutes: 25
+      - title: "How electricity works"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=mc979OhitAg"
+        type: video
+        description: "Current, potential difference, and circuits."
+        estimated_time_minutes: 15
+
+  "Heat":
+    resources:
+      - title: "Thermodynamics — heat and temperature"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/physics/thermodynamics"
+        type: course
+        description: "Heat transfer and specific heat capacity."
+        estimated_time_minutes: 20
+
+  "Chemical Reaction":
+    resources:
+      - title: "Balancing chemical equations"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiometry/tx-balancing-chemical-equations/v/balancing-chemical-equations"
+        type: video
+        description: "Step-by-step equation balancing."
+        estimated_time_minutes: 14
+
+  "Metal and Non-metals":
+    resources:
+      - title: "Periodic table — metals and non-metals"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/chemistry/periodic-table"
+        type: course
+        description: "Properties and reactivity trends."
+        estimated_time_minutes: 20
+      - title: "The periodic table"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=0RRVV4Diomg"
+        type: video
+        description: "Crash Course Chemistry — periodic table."
+        estimated_time_minutes: 12
+
+  "Heredity":
+    resources:
+      - title: "Heredity and genetics"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/biology/heredity"
+        type: course
+        description: "Genes, alleles, and inheritance."
+        estimated_time_minutes: 25
+
+  "Classification of Elements":
+    resources:
+      - title: "The periodic table"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/science/chemistry/periodic-table-topic"
+        type: course
+        description: "Groups, periods, and trends."
+        estimated_time_minutes: 20
+
+writing_english:
+  _default:
+    resources:
+      - title: "Grammar course"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/humanities/grammar"
+        type: course
+        description: "Parts of speech, sentences, and punctuation."
+        estimated_time_minutes: 30
+
+  "Grammar":
+    resources:
+      - title: "Parts of speech"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/humanities/grammar/parts-of-speech-the-modifier"
+        type: course
+        description: "Nouns, verbs, adjectives, and adverbs."
+        estimated_time_minutes: 25
+      - title: "Subject-verb agreement"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/humanities/grammar/subject-verb-agreement-and-pronoun-antecedent-agreement"
+        type: course
+        description: "Fix common agreement errors in school English."
+        estimated_time_minutes: 20
+
+  "Essay Writing":
+    resources:
+      - title: "Essay writing"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/humanities/grammar/writing"
+        type: course
+        description: "Thesis, body paragraphs, and conclusions."
+        estimated_time_minutes: 25
+      - title: "5 tips to improve your writing"
+        provider: youtube
+        url: "https://www.youtube.com/watch?v=GgkRoYPLhts"
+        type: video
+        description: "Paragraph structure and clarity."
+        estimated_time_minutes: 12
+
+  "Comprehension":
+    resources:
+      - title: "Reading comprehension strategies"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/humanities/grammar/reading-vocabulary"
+        type: course
+        description: "Main idea, inference, and vocabulary in context."
+        estimated_time_minutes: 20
+
+  "Vocabulary":
+    resources:
+      - title: "Word roots and affixes"
+        provider: khan_academy
+        url: "https://www.khanacademy.org/humanities/grammar/reading-vocabulary"
+        type: course
+        description: "Context clues and word building."
+        estimated_time_minutes: 20
+
 speaking_english: {}

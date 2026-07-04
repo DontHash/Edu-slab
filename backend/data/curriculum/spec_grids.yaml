@@ -1,0 +1,133 @@
+# Diagnostic test blueprints — structure aligned to CDC/NEB Grade 8 assessment framework
+# Percentages are targets for item selection (diagnostic length, not full exam marks)
+
+english:
+  grade_8:
+    total_items: 10
+    sections:
+      - id: A
+        title: Reading Comprehension
+        domain: reading
+        target_count: 4
+        weight_pct: 40
+        item_types: [reading_comprehension]
+        requires_context: true
+      - id: B
+        title: Grammar & Vocabulary
+        domain: grammar_vocabulary
+        target_count: 4
+        weight_pct: 30
+        item_types: [grammar_mcq, grammar_correction, vocabulary]
+        requires_context: false
+      - id: C
+        title: Writing
+        domain: writing
+        target_count: 2
+        weight_pct: 30
+        item_types: [guided_writing, functional_writing]
+        requires_context: false
+        rubric_scored: true
+
+  grade_10:
+    total_items: 10
+    sections:
+      - id: A
+        title: Reading Comprehension
+        domain: reading
+        target_count: 4
+        weight_pct: 40
+        item_types: [reading_comprehension]
+        requires_context: true
+      - id: B
+        title: Grammar & Vocabulary
+        domain: grammar_vocabulary
+        target_count: 3
+        weight_pct: 30
+        item_types: [grammar_correction, vocabulary]
+        requires_context: false
+      - id: C
+        title: Writing
+        domain: writing
+        target_count: 3
+        weight_pct: 30
+        item_types: [guided_writing, essay_outline]
+        requires_context: false
+        rubric_scored: true
+
+mathematics:
+  grade_8:
+    total_items: 10
+    sections:
+      - id: A
+        title: Number & Algebra
+        domain: number_algebra
+        target_count: 4
+        weight_pct: 40
+      - id: B
+        title: Geometry
+        domain: geometry
+        target_count: 3
+        weight_pct: 30
+      - id: C
+        title: Data & Application
+        domain: data
+        target_count: 3
+        weight_pct: 30
+
+  grade_10:
+    total_items: 10
+    sections:
+      - id: A
+        title: Number & Algebra
+        domain: number_algebra
+        target_count: 4
+        weight_pct: 40
+      - id: B
+        title: Geometry & Trigonometry
+        domain: geometry
+        target_count: 3
+        weight_pct: 30
+      - id: C
+        title: Statistics & Application
+        domain: data
+        target_count: 3
+        weight_pct: 30
+
+science:
+  grade_8:
+    total_items: 10
+    sections:
+      - id: A
+        title: Life Science
+        domain: knowledge
+        target_count: 4
+        weight_pct: 40
+      - id: B
+        title: Physical Science
+        domain: understanding
+        target_count: 3
+        weight_pct: 30
+      - id: C
+        title: Application
+        domain: application
+        target_count: 3
+        weight_pct: 30
+
+  grade_10:
+    total_items: 10
+    sections:
+      - id: A
+        title: Life Science
+        domain: knowledge
+        target_count: 4
+        weight_pct: 40
+      - id: B
+        title: Physical Science
+        domain: understanding
+        target_count: 3
+        weight_pct: 30
+      - id: C
+        title: Application
+        domain: application
+        target_count: 3
+        weight_pct: 30

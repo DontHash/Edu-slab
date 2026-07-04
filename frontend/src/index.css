@@ -3,19 +3,186 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 220 18% 8%;
+    --surface: 220 14% 11%;
+    --surface-raised: 220 12% 14%;
+    --border: 220 10% 20%;
+    --foreground: 210 20% 95%;
+    --muted: 220 10% 50%;
+    --primary: 142 68% 48%;
+    --primary-dark: 142 72% 36%;
+    --primary-glow: 142 68% 48% / 0.15;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-weight: 400;
+    @apply bg-background text-foreground font-sans font-normal antialiased;
     letter-spacing: -0.01em;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+
+  h1,
+  h2 {
+    @apply font-display font-bold tracking-display;
   }
-  
-  button {
-    font-family: 'Inter', sans-serif;
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-semibold tracking-tight;
   }
+}
+
+@layer components {
+  .latex-preview .katex {
+    font-size: 1.05em;
+    color: hsl(var(--foreground));
+  }
+
+  .latex-preview .katex-display {
+    margin: 0.5rem 0;
+    overflow-x: auto;
+  }
+
+  .ds-gradient-scrim {
+    background: linear-gradient(
+      to bottom,
+      rgba(15, 17, 24, 0.3) 0%,
+      rgba(15, 17, 24, 0.5) 40%,
+      rgba(15, 17, 24, 0.92) 80%,
+      rgba(15, 17, 24, 1) 100%
+    );
+  }
+
+  .ds-ambient {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(142 68% 48% / 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, hsl(220 40% 30% / 0.12), transparent),
+      hsl(var(--background));
+  }
+
+  .ds-panel {
+    @apply rounded-xl border border-border bg-surface shadow-panel transition-all duration-300;
+  }
+
+  .ds-panel-raised {
+    @apply rounded-xl border border-border bg-surface-raised shadow-panel transition-all duration-300;
+  }
+
+  .ds-panel-interactive {
+    @apply ds-panel-raised hover:border-primary/30 hover:shadow-glow-sm cursor-pointer;
+  }
+
+  .ds-stat {
+    @apply rounded-lg border border-border bg-surface px-4 py-3 text-center transition-all duration-200 hover:border-primary/20;
+  }
+
+  .ds-stat-value {
+    @apply font-mono text-2xl font-medium text-foreground;
+  }
+
+  .ds-stat-label {
+    @apply font-mono text-[10px] uppercase tracking-widest text-muted mt-1;
+  }
+
+  .ds-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-semibold text-sm transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .ds-btn-primary {
+    @apply ds-btn bg-primary text-background px-5 py-2.5 hover:bg-primary-dark hover:shadow-glow active:scale-[0.98];
+  }
+
+  .ds-btn-ghost {
+    @apply ds-btn text-muted px-4 py-2 hover:text-foreground hover:bg-surface-raised;
+  }
+
+  .ds-btn-outline {
+    @apply ds-btn border border-border bg-transparent text-foreground px-5 py-2.5 hover:border-primary/40 hover:bg-primary/5;
+  }
+
+  .ds-input {
+    @apply w-full rounded-lg border border-border bg-surface-raised px-4 py-2.5 text-foreground placeholder:text-muted/70 transition-all duration-200 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/15;
+  }
+
+  .ds-badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider;
+  }
+
+  .ds-badge-primary {
+    @apply ds-badge bg-primary/15 text-primary border border-primary/25;
+  }
+
+  .ds-badge-muted {
+    @apply ds-badge bg-surface-raised text-muted border border-border;
+  }
+
+  .ds-badge-warn {
+    @apply ds-badge bg-warning/15 text-warning border border-warning/25;
+  }
+
+  .ds-badge-danger {
+    @apply ds-badge bg-danger/15 text-danger border border-danger/25;
+  }
+
+  .ds-nav-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted transition-all duration-200 hover:bg-surface-raised hover:text-foreground;
+  }
+
+  .ds-nav-link-active {
+    @apply ds-nav-link bg-primary/10 text-primary border border-primary/20 shadow-glow-sm;
+  }
+
+  .ds-progress-track {
+    @apply h-1.5 w-full overflow-hidden rounded-full bg-surface-raised;
+  }
+
+  .ds-progress-fill {
+    @apply h-full rounded-full bg-primary transition-all duration-500 ease-out;
+    box-shadow: 0 0 8px hsl(var(--primary-glow));
+  }
+
+  .ds-page-header {
+    @apply mb-8 animate-slide-up;
+  }
+
+  .ds-page-title {
+    @apply text-3xl font-extrabold tracking-display text-foreground md:text-4xl;
+  }
+
+  .ds-page-subtitle {
+    @apply mt-2 max-w-2xl text-sm font-light text-muted md:text-base;
+  }
+
+  .ds-divider {
+    @apply border-t border-border;
+  }
+
+  .ds-resource-link {
+    @apply block rounded-lg border border-border bg-surface p-4 transition-all duration-200 hover:border-primary/35 hover:bg-surface-raised hover:shadow-glow-sm;
+  }
+
+  .ds-mono-label {
+    @apply font-mono text-[10px] uppercase tracking-widest text-muted;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.1s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.2s; }
 }

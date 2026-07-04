@@ -1,0 +1,84 @@
+# Generative mathematics templates — coefficient / variable / degree slots
+
+templates:
+  - template_id: ma_linear_g8
+    kind: linear_equation
+    grade: 8
+    domain: number_algebra
+    item_type: numeric
+    learning_outcome_id: MA_G8_LO_ALG_1
+    marks: 2
+    difficulty: 1
+    slots:
+      variable: { values: [x, y, n] }
+
+  - template_id: ma_linear_two_step_g8
+    kind: linear_two_step
+    grade: 8
+    domain: number_algebra
+    item_type: numeric
+    learning_outcome_id: MA_G8_LO_ALG_1
+    marks: 3
+    difficulty: 2
+    slots:
+      variable: { values: [x, y, t] }
+
+  - template_id: ma_factorize_g8
+    kind: factorize
+    grade: 8
+    domain: number_algebra
+    item_type: numeric
+    learning_outcome_id: MA_G8_LO_ALG_2
+    marks: 2
+    difficulty: 2
+    slots:
+      variable: { values: [x, a] }
+
+  - template_id: ma_mean_g8
+    kind: arithmetic_mean
+    grade: 8
+    domain: data
+    item_type: numeric
+    learning_outcome_id: MA_G8_LO_DATA_1
+    marks: 2
+    difficulty: 1
+
+  - template_id: ma_linear_g10
+    kind: linear_equation
+    grade: 10
+    domain: number_algebra
+    item_type: numeric
+    learning_outcome_id: MA_G10_LO_ALG_1
+    marks: 2
+    difficulty: 2
+    slots:
+      variable: { values: [x, y, n, t] }
+
+  - template_id: ma_quadratic_g10
+    kind: quadratic_equation
+    grade: 10
+    domain: number_algebra
+    item_type: numeric
+    learning_outcome_id: MA_G10_LO_ALG_1
+    marks: 3
+    difficulty: 3
+    slots:
+      variable: { values: [x, y] }
+
+  - template_id: ma_factorize_g10
+    kind: factorize
+    grade: 10
+    domain: number_algebra
+    item_type: numeric
+    learning_outcome_id: MA_G10_LO_ALG_1
+    marks: 2
+    difficulty: 2
+
+  - template_id: ma_percentage_g10
+    kind: percentage_word
+    grade: 10
+    domain: data
+    item_type: numeric
+    learning_outcome_id: MA_G10_LO_DATA_1
+    marks: 3
+    difficulty: 2

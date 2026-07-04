@@ -1,0 +1,119 @@
+{
+  "grade": 8,
+  "subject": "Science",
+  "framework": "Nepal CDC / CBSE-NCERT Class 8 Science diagnostic",
+  "source_note": "Original items modelled on NCERT Class 8 chapters: Crop Production, Force, Sound, Cell Structure",
+  "sections": [
+    {
+      "section": "A",
+      "title": "Life Science",
+      "domain": "knowledge",
+      "questions": [
+        {
+          "stem": "Name the green pigment in leaves that traps sunlight for photosynthesis.",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G8_LO_K_1",
+          "expected_answer": "chlorophyll",
+          "answer_type": "text",
+          "marks": 1
+        },
+        {
+          "stem": "Which organelle is called the powerhouse of the cell?",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G8_LO_K_1",
+          "expected_answer": "mitochondria",
+          "answer_type": "text",
+          "marks": 1
+        },
+        {
+          "stem": "State one function of the cell wall in plant cells.",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G8_LO_K_1",
+          "expected_answer": "provides support and protection to the cell",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "What gas is released during photosynthesis?",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G8_LO_U_1",
+          "expected_answer": "oxygen",
+          "answer_type": "text",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "Physical Science",
+      "domain": "understanding",
+      "questions": [
+        {
+          "stem": "State Newton's first law of motion in one sentence.",
+          "item_type": "explanation",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "SC_G8_LO_K_2",
+          "expected_answer": "an object remains at rest or in uniform motion unless acted upon by an unbalanced force",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "What is the SI unit of force?",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G8_LO_K_2",
+          "expected_answer": "newton",
+          "answer_type": "text",
+          "marks": 1
+        },
+        {
+          "stem": "How does increasing the amplitude of a sound wave affect the loudness heard by the ear?",
+          "item_type": "explanation",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "SC_G8_LO_U_2",
+          "expected_answer": "loudness increases when amplitude increases",
+          "answer_type": "text",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "Application",
+      "domain": "application",
+      "questions": [
+        {
+          "stem": "A force of 20 N acts on a mass of 4 kg. Calculate the acceleration produced. (Use F = ma)",
+          "item_type": "application",
+          "cognitive_level": "application",
+          "learning_outcome_id": "SC_G8_LO_A_1",
+          "expected_answer": "5",
+          "answer_type": "numeric",
+          "marks": 3
+        },
+        {
+          "stem": "Convert 2.5 km to metres.",
+          "item_type": "application",
+          "cognitive_level": "application",
+          "learning_outcome_id": "SC_G8_LO_A_1",
+          "expected_answer": "2500",
+          "answer_type": "numeric",
+          "marks": 2
+        },
+        {
+          "stem": "Write the word equation for photosynthesis.",
+          "item_type": "explanation",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "SC_G8_LO_U_1",
+          "expected_answer": "carbon dioxide + water + sunlight → glucose + oxygen",
+          "answer_type": "text",
+          "marks": 3
+        }
+      ]
+    }
+  ]
+}

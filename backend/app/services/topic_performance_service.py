@@ -4,9 +4,8 @@ Replaces the peer-matching performance sync path.
 """
 import json
 from collections import defaultdict
-from pathlib import Path
-from typing import Dict
 
+from app.core.paths import ASSESSMENTS_DIR
 from app.core.skills import LEGACY_SUBJECT_TO_SKILL
 from app.models.diagnostic import TopicPerformance
 from sqlalchemy.orm import Session
@@ -18,7 +17,7 @@ def _map_subject_to_skill_area(subject: str) -> str:
 
 
 def extract_topic_data_from_evaluations(user_id: int) -> Dict[str, Dict[str, dict]]:
-    assessments_dir = Path("assessments") / str(user_id)
+    assessments_dir = ASSESSMENTS_DIR / str(user_id)
     if not assessments_dir.exists():
         return {}
 
@@ -59,6 +58,9 @@ def extract_topic_data_from_evaluations(user_id: int) -> Dict[str, Dict[str, dic
                     "weakness_level": topic_data.get("weakness_level", "moderate"),
                     "total_questions": topic_data.get("total_questions", 0),
                     "correct": topic_data.get("correct", 0),
+                    "strengths": topic_data.get("strengths") or [],
+                    "weaknesses": topic_data.get("weaknesses") or [],
+                    "reasoning": topic_data.get("reasoning"),
                 }
         except (json.JSONDecodeError, KeyError, OSError):
             continue
@@ -87,6 +89,11 @@ def sync_topic_performances(db: Session, user_id: int) -> int:
                 existing.score = data["score"]
                 existing.accuracy_percentage = data["accuracy_percentage"]
                 existing.weakness_level = data["weakness_level"]
+                existing.strengths = data.get("strengths") or []
+                existing.weaknesses = data.get("weaknesses") or []
+                existing.reasoning = data.get("reasoning")
+                from datetime import datetime, timezone
+                existing.assessed_at = datetime.now(timezone.utc)
             else:
                 db.add(
                     TopicPerformance(
@@ -96,6 +103,9 @@ def sync_topic_performances(db: Session, user_id: int) -> int:
                         score=data["score"],
                         accuracy_percentage=data["accuracy_percentage"],
                         weakness_level=data["weakness_level"],
+                        strengths=data.get("strengths") or [],
+                        weaknesses=data.get("weaknesses") or [],
+                        reasoning=data.get("reasoning"),
                     )
                 )
             count += 1

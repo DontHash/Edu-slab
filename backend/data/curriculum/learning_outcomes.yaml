@@ -1,0 +1,116 @@
+# Grade-wise learning outcomes — aligned to CDC English curriculum structure (Grades 6–8)
+# Source reference: CDC Basic Level English Curriculum, Grades 6-8 (UNESCO NEQMAP)
+
+english:
+  grade_8:
+    reading:
+      - id: EN_G8_LO_READ_1
+        text: Listen to and comprehend spoken materials in personal and academic contexts
+        skill: reading
+      - id: EN_G8_LO_READ_2
+        text: Read and identify main ideas and supporting details in short texts
+        skill: reading
+      - id: EN_G8_LO_READ_3
+        text: Make inferences and predictions from a reading passage
+        skill: reading
+      - id: EN_G8_LO_READ_4
+        text: Infer word meaning from context in a passage
+        skill: reading
+    writing:
+      - id: EN_G8_LO_WRITE_1
+        text: Write coherent paragraphs on familiar topics with logical organization
+        skill: writing
+      - id: EN_G8_LO_WRITE_2
+        text: Write functional texts such as messages, notices, or short emails
+        skill: writing
+    grammar_vocabulary:
+      - id: EN_G8_LO_GV_1
+        text: Use correct verb forms, tense, and subject-verb agreement
+        skill: grammar_vocabulary
+      - id: EN_G8_LO_GV_2
+        text: Use vocabulary appropriately in context
+        skill: grammar_vocabulary
+
+  grade_10:
+    reading:
+      - id: EN_G10_LO_READ_1
+        text: Comprehend extended texts and evaluate writer's purpose
+        skill: reading
+    writing:
+      - id: EN_G10_LO_WRITE_1
+        text: Write structured essays with thesis, body, and conclusion
+        skill: writing
+    grammar_vocabulary:
+      - id: EN_G10_LO_GV_1
+        text: Apply advanced grammar including conditionals and reported speech
+        skill: grammar_vocabulary
+
+mathematics:
+  grade_8:
+    number_algebra:
+      - id: MA_G8_LO_ALG_1
+        text: Solve linear equations in one variable (NCERT/CBSE Class 8 Ch. 2)
+        skill: number_algebra
+      - id: MA_G8_LO_ALG_2
+        text: Factorize algebraic expressions (CBSE-style identities)
+        skill: number_algebra
+    geometry:
+      - id: MA_G8_LO_GEO_1
+        text: Apply angle properties of triangles and quadrilaterals
+        skill: geometry
+      - id: MA_G8_LO_GEO_2
+        text: Find area of triangles and parallelograms
+        skill: geometry
+    data:
+      - id: MA_G8_LO_DATA_1
+        text: Calculate mean and interpret simple data
+        skill: data
+
+  grade_10:
+    number_algebra:
+      - id: MA_G10_LO_ALG_1
+        text: Solve quadratic equations and apply algebraic identities
+        skill: number_algebra
+    geometry:
+      - id: MA_G10_LO_GEO_1
+        text: Apply similarity and trigonometric ratios
+        skill: geometry
+    data:
+      - id: MA_G10_LO_DATA_1
+        text: Solve problems on probability and statistics
+        skill: data
+
+science:
+  grade_8:
+    knowledge:
+      - id: SC_G8_LO_K_1
+        text: State functions of cell organelles (NCERT Class 8 Science Ch. 8)
+        skill: knowledge
+      - id: SC_G8_LO_K_2
+        text: Recall laws of force and motion basics
+        skill: knowledge
+    understanding:
+      - id: SC_G8_LO_U_1
+        text: Explain photosynthesis and respiration in plants
+        skill: understanding
+      - id: SC_G8_LO_U_2
+        text: Explain sound propagation and amplitude
+        skill: understanding
+    application:
+      - id: SC_G8_LO_A_1
+        text: Apply F = ma and unit conversions in problems
+        skill: application
+
+  grade_10:
+    knowledge:
+      - id: SC_G10_LO_K_1
+        text: Describe human reproductive system and heredity basics
+        skill: knowledge
+    understanding:
+      - id: SC_G10_LO_U_1
+        text: Explain chemical reactions and balancing equations
+        skill: understanding
+    application:
+      - id: SC_G10_LO_A_1
+        text: Solve numerical problems on electricity (Ohm's law)
+        skill: application

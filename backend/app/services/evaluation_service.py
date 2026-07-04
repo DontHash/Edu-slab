@@ -185,12 +185,67 @@ The output should have this structure:
         return evaluation_result
 
 
-# Singleton instance
+# Singleton instance (legacy — prefer evaluate_assessment_file)
 _evaluation_service = None
 
-def get_evaluation_service() -> EvaluationService:
-    """Get or create evaluation service singleton"""
+
+def evaluate_assessment_file(assessment_file_path: Path) -> Dict[str, Any]:
+    """
+    Professional AI evaluation (Ollama) by default.
+    Rule-based fallback only if EVALUATION_ALLOW_RULE_FALLBACK=true.
+    """
+    import json
+
+    from app.services.ai_evaluation_service import AIEvaluationService
+    from app.services.rule_evaluation_service import RuleEvaluationService
+
+    provider = (settings.EVALUATION_PROVIDER or "ollama").lower().strip()
+    errors: list[str] = []
+    result: Dict[str, Any] | None = None
+
+    if provider in ("ollama", "auto") and settings.USE_OLLAMA_EVALUATION:
+        try:
+            result = AIEvaluationService().evaluate_assessment(assessment_file_path)
+        except Exception as exc:
+            errors.append(f"Ollama: {exc}")
+            print(f"Ollama evaluation failed, checking fallbacks: {exc}")
+
+    if result is None and provider in ("mistral", "auto") and settings.USE_MISTRAL_EVALUATION:
+        api_key = (settings.MISTRAL_API_KEY or "").strip()
+        if api_key:
+            try:
+                result = EvaluationService(api_key=api_key).evaluate_assessment(assessment_file_path)
+            except Exception as exc:
+                errors.append(f"Mistral: {exc}")
+
+    if result is None and (provider == "rule" or settings.EVALUATION_ALLOW_RULE_FALLBACK):
+        print("WARNING: Using rule-based fallback evaluator.")
+        result = RuleEvaluationService().evaluate_assessment(assessment_file_path)
+
+    if result is None:
+        hint = (
+            f" Start Ollama: ollama serve && ollama pull {settings.OLLAMA_MODEL}"
+        )
+        raise RuntimeError("; ".join(errors) + hint)
+
+    try:
+        with open(assessment_file_path, encoding="utf-8") as f:
+            assessment_data = json.load(f)
+        assessment_data["status"] = "evaluated"
+        assessment_data.pop("evaluation_error", None)
+        with open(assessment_file_path, "w", encoding="utf-8") as f:
+            json.dump(assessment_data, f, indent=2, ensure_ascii=False)
+    except OSError as exc:
+        print(f"Could not update assessment status: {exc}")
+
+    return result
+
+
+def get_evaluation_service():
+    """Return the default local rule-based evaluator."""
     global _evaluation_service
     if _evaluation_service is None:
-        _evaluation_service = EvaluationService()
+        from app.services.rule_evaluation_service import RuleEvaluationService
+
+        _evaluation_service = RuleEvaluationService()
     return _evaluation_service

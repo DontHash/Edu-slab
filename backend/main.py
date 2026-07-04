@@ -1,12 +1,17 @@
 """
 EduAssess Backend - Main Application Entry Point
-Adaptive Learning Assessment Platform API
+Diagnostic Assessment Platform API
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.db.database import engine, Base
 from app.api.api import api_router
+import app.models  # noqa: F401 — register models before create_all
+
+# Ensure data directory exists for SQLite
+from pathlib import Path
+Path("data").mkdir(parents=True, exist_ok=True)
 
 # Create database tables
 Base.metadata.create_all(bind=engine)

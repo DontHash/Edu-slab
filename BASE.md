@@ -18,7 +18,8 @@ Defined in:
 | Layer | Status |
 |-------|--------|
 | Auth + student dashboard | Working (peer UI removed) |
-| Legacy RAG assessment (`/assessment`) | Working — transitional |
+| Legacy RAG assessment (`/assessment`) | Working — loads questions from **Nepal CDC local bank** (no API key) |
+| Evaluation after submit | **Professional AI via Ollama** (Nepal CDC protocol); rule-based only if Ollama is down |
 | Topic sync after evaluation | `TopicPerformance` model + service |
 | Diagnostic API (`/api/v1/diagnostic/*`) | Blueprint + session stubs |
 | Peer matching API | **Disabled** (router removed) |
@@ -57,15 +58,20 @@ npm run dev
 
 Copy `.env.example` → `backend/.env`. Do not commit secrets.
 
-## Database note
+## Database
 
-New tables (`assessment_sessions`, `topic_performances`) are created on startup.  
-If you have an old `eduassess.db`, delete it once to pick up new user columns, or run:
+**Active database:** `backend/data/diagnostic_platform.db` (SQLite)
+
+The old `eduassess.db` is no longer used. Initialize a fresh database:
 
 ```bash
 cd backend
-python scripts/reset_foundation_db.py
+python scripts/init_database.py --reset
 ```
+
+This creates only the tables needed for the assessment platform (no peer-matching tables).
+
+Tables: `users`, `schools`, `assessments`, `questions`, `student_responses`, `progress`, `resources`, `learning_materials`, `assessment_sessions`, `topic_performances`
 
 ## Next phases (see ASSESSMENT_PLATFORM_PLAN.md)
 

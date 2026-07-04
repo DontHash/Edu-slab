@@ -1,0 +1,59 @@
+# Generative English grammar templates (SVO + transform slots)
+# Inspired by CBSE/CBSE grammar drills — swap subject, verb, object, transformation type
+
+templates:
+  - template_id: en_svo_transform_g8
+    kind: grammar_transform
+    grade: 8
+    domain: grammar_vocabulary
+    item_type: grammar_correction
+    learning_outcome_id: EN_G8_LO_GV_1
+    marks: 2
+    difficulty: 2
+    variants:
+      - future
+      - negative_past
+      - passive
+      - indirect_speech
+      - present_perfect
+    slots:
+      subject: { pool: names_male }
+      verb: { pool: verbs_transitive_past }
+      object: { pool: names_male }
+
+  - template_id: en_svo_transform_g10
+    kind: grammar_transform
+    grade: 10
+    domain: grammar_vocabulary
+    item_type: grammar_correction
+    learning_outcome_id: EN_G10_LO_GV_1
+    marks: 2
+    difficulty: 3
+    variants:
+      - future
+      - negative_future
+      - passive
+      - indirect_speech
+      - past_continuous
+    slots:
+      subject: { pool: names_male }
+      verb: { pool: verbs_transitive_past }
+      object: { pool: names_female }
+
+  - template_id: en_grammar_error_g8
+    kind: grammar_error
+    grade: 8
+    domain: grammar_vocabulary
+    item_type: grammar_correction
+    learning_outcome_id: EN_G8_LO_GV_1
+    marks: 2
+    difficulty: 2
+
+  - template_id: en_grammar_error_g10
+    kind: grammar_error
+    grade: 10
+    domain: grammar_vocabulary
+    item_type: grammar_correction
+    learning_outcome_id: EN_G10_LO_GV_1
+    marks: 2
+    difficulty: 2
