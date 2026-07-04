@@ -1,0 +1,144 @@
+{
+  "grade": 10,
+  "subject": "English",
+  "framework": "Nepal CDC / CBSE Class 10 English Language diagnostic",
+  "source_note": "Unseen passage + grammar + writing (CBSE Section A/B/C pattern)",
+  "sections": [
+    {
+      "section": "A",
+      "title": "Reading Comprehension",
+      "domain": "reading",
+      "passages": [
+        {
+          "context_id": "EN_G10_PASSAGE_CLIMATE",
+          "context_source": "Original excerpt — Himalayan climate (CBSE-style unseen passage)",
+          "context_text": "The Himalayas act as a climate barrier for the Indian subcontinent and Nepal. In winter, cold winds from Central Asia are blocked, keeping the Terai warmer than regions at similar latitudes elsewhere. During the monsoon, moist air from the Bay of Bengal rises over the mountains, causing heavy rainfall on the southern slopes. Farmers in hill districts depend on this rain for rice and maize, but erratic patterns in recent years have led to drought in some valleys and landslides in others. Scientists warn that melting glaciers will first increase river flow, then reduce it within decades. Communities that adapt early — by saving water and planting drought-resistant crops — may suffer less than those that wait for government action alone.",
+          "learning_outcome_id": "EN_G10_LO_READ_1",
+          "questions": [
+            {
+              "stem": "How do the Himalayas affect winter temperatures in the Terai?",
+              "cognitive_level": "comprehension",
+              "expected_answer": "They block cold winds, keeping the Terai warmer",
+              "answer_type": "comprehension",
+              "marks": 2
+            },
+            {
+              "stem": "What causes heavy rainfall on the southern slopes during the monsoon?",
+              "cognitive_level": "comprehension",
+              "expected_answer": "Moist air from the Bay of Bengal rises over the mountains",
+              "answer_type": "comprehension",
+              "marks": 2
+            },
+            {
+              "stem": "What can we infer about communities that delay adaptation to climate change?",
+              "cognitive_level": "application",
+              "expected_answer": "They may suffer more than communities that act early",
+              "answer_type": "comprehension",
+              "marks": 2
+            }
+          ]
+        },
+        {
+          "context_id": "EN_G10_PASSAGE_EDUCATION",
+          "context_source": "Original excerpt — rural education in Nepal",
+          "context_text": "In a remote village of Dolakha, students walk two hours each way to reach the nearest secondary school. Until last year, many girls dropped out after Grade 8 because the path became unsafe during monsoon landslides. A local youth club worked with the school management committee to adjust the timetable so that classes started earlier and ended before afternoon storms. They also organised a community fund to repair the trail. Attendance among girls rose by thirty percent in one academic year. The head teacher noted that small, practical changes often work better than waiting for large infrastructure projects.",
+          "learning_outcome_id": "EN_G10_LO_READ_1",
+          "questions": [
+            {
+              "stem": "Why did many girls previously drop out after Grade 8?",
+              "cognitive_level": "comprehension",
+              "expected_answer": "The path to school became unsafe during monsoon landslides",
+              "answer_type": "comprehension",
+              "marks": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "Grammar & Vocabulary",
+      "domain": "grammar_vocabulary",
+      "questions": [
+        {
+          "stem": "Correct the sentence: 'If I was you, I would accept the scholarship.'",
+          "item_type": "grammar_correction",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G10_LO_GV_1",
+          "expected_answer": "If I were you, I would accept the scholarship.",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Change to reported speech: Rahul said, 'I will visit Pokhara next week.'",
+          "item_type": "grammar_correction",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G10_LO_GV_1",
+          "expected_answer": "Rahul said that he would visit Pokhara the following week",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Use the word 'sustainable' correctly in a sentence about tourism in Nepal.",
+          "item_type": "vocabulary",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G10_LO_GV_1",
+          "answer_type": "text",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "Writing",
+      "domain": "writing",
+      "questions": [
+        {
+          "stem": "Write an outline for a five-paragraph essay on 'Youth and Nation Building in Nepal'. List thesis and one line per body paragraph.",
+          "item_type": "essay_outline",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G10_LO_WRITE_1",
+          "answer_type": "rubric",
+          "marks": 5,
+          "rubric": {
+            "task_completion": "Clear thesis and three body ideas plus conclusion plan",
+            "organization": "Logical five-part structure",
+            "vocabulary": "Formal essay vocabulary",
+            "grammar": "Accurate outline sentences",
+            "mechanics": "Clear labels and punctuation"
+          }
+        },
+        {
+          "stem": "Write a paragraph (80–100 words) arguing whether social media helps or harms student learning.",
+          "item_type": "guided_writing",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G10_LO_WRITE_1",
+          "answer_type": "rubric",
+          "marks": 5,
+          "rubric": {
+            "task_completion": "Clear position with supporting reasons",
+            "organization": "Coherent paragraph structure",
+            "vocabulary": "Appropriate Grade 10 vocabulary",
+            "grammar": "Varied sentences with few errors",
+            "mechanics": "Spelling and punctuation"
+          }
+        },
+        {
+          "stem": "Write a formal letter to your municipality requesting better street lighting near your school.",
+          "item_type": "functional_writing",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G10_LO_WRITE_1",
+          "answer_type": "rubric",
+          "marks": 5,
+          "rubric": {
+            "task_completion": "Sender, receiver, date, subject, request, closing",
+            "organization": "Formal letter format",
+            "vocabulary": "Polite formal English",
+            "grammar": "Accurate formal sentences",
+            "mechanics": "Layout and punctuation"
+          }
+        }
+      ]
+    }
+  ]
+}

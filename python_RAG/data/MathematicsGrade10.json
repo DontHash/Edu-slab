@@ -7,7 +7,7 @@
       "questions": [
         "Define Cartesian product of any two non-empty sets with example.",
         "If A = {1, 2, 3} and B = {3, 4}, find A × B.",
-        "If n(A) = 5 and n(B) = 3, find n(A × B).",
+        {"text": "If n(A) = 5 and n(B) = 3, find n(A × B).", "expected_answer": "15", "answer_type": "numeric"},
         "In a survey of 300 people, 150 like iPhones and 200 like Android. 25 don't like any. Find how many like both.",
         "In a class, 45% passed Science only, 25% passed English only, 5% failed both. If 200 passed English, find total students.",
         "In a survey, 60% families don't have electricity, 55% don't have water supply, 36 have neither. Find total families.",

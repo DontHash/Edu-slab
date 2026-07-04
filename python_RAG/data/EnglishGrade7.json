@@ -1,0 +1,36 @@
+{
+  "grade": 7,
+  "subject": "English",
+  "chapters": [
+    {
+      "chapter": "Grammar",
+      "questions": [
+        "What is the difference between active and passive voice? Give one example of each.",
+        "Correct: 'She don't know the answer.'",
+        "What are conjunctions? Use 'although' in a sentence.",
+        "Change to reported speech: Ram said, 'I am tired.'",
+        "What is an adjective? Identify adjectives in: 'The tall green tree swayed gently.'"
+      ]
+    },
+    {
+      "chapter": "Comprehension",
+      "questions": [
+        "What is inference in reading?",
+        "How do headings and subheadings help a reader?",
+        "What is the author's purpose when writing to persuade?",
+        "How do you identify cause and effect in a passage?",
+        "What strategies help you remember what you read?"
+      ]
+    },
+    {
+      "chapter": "Essay Writing",
+      "questions": [
+        "What is a thesis statement?",
+        "Write a topic sentence about the importance of trees.",
+        "How is a narrative essay different from a descriptive essay?",
+        "Write an introductory sentence for an essay on 'My Village'.",
+        "What should a good conclusion do?"
+      ]
+    }
+  ]
+}

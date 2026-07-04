@@ -1,0 +1,125 @@
+{
+  "grade": 8,
+  "subject": "Mathematics",
+  "framework": "Nepal CDC / CBSE-NCERT Class 8 equivalent diagnostic",
+  "source_note": "Original items modelled on NCERT Exemplar & CBSE competency patterns (linear equations, quadrilaterals, data handling)",
+  "sections": [
+    {
+      "section": "A",
+      "title": "Number & Algebra",
+      "domain": "number_algebra",
+      "questions": [
+        {
+          "stem": "Solve for x: 3x + 7 = 22",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G8_LO_ALG_1",
+          "expected_answer": "5",
+          "answer_type": "numeric",
+          "marks": 2,
+          "generative_template": {
+            "template_id": "ma_linear_seed",
+            "kind": "linear_equation",
+            "difficulty": 1,
+            "slots": { "variable": { "values": ["x", "y", "n", "t"] } }
+          }
+        },
+        {
+          "stem": "Solve: 2(x - 4) = 10",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G8_LO_ALG_1",
+          "expected_answer": "9",
+          "answer_type": "numeric",
+          "marks": 2
+        },
+        {
+          "stem": "Factorize: x² + 7x + 12",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G8_LO_ALG_2",
+          "expected_answer": "(x + 3)(x + 4)",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "A shopkeeper in Kathmandu sells notebooks at Rs. 45 each. If Ramesh buys x notebooks and pays Rs. 360, find x.",
+          "item_type": "word_problem",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G8_LO_ALG_1",
+          "expected_answer": "8",
+          "answer_type": "numeric",
+          "marks": 3
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "Geometry",
+      "domain": "geometry",
+      "questions": [
+        {
+          "stem": "The angles of a triangle are in the ratio 2 : 3 : 4. Find the three angles.",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G8_LO_GEO_1",
+          "expected_answer": "40, 60, 80",
+          "answer_type": "text",
+          "marks": 3
+        },
+        {
+          "stem": "Find the area of a triangle with base 12 cm and height 8 cm.",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G8_LO_GEO_2",
+          "expected_answer": "48",
+          "answer_type": "numeric",
+          "marks": 2
+        },
+        {
+          "stem": "In a parallelogram, one angle is 70°. Find the measure of each of the other three angles.",
+          "item_type": "numeric",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "MA_G8_LO_GEO_1",
+          "expected_answer": "110, 70, 110",
+          "answer_type": "text",
+          "marks": 3
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "Data & Application",
+      "domain": "data",
+      "questions": [
+        {
+          "stem": "Find the mean of the data: 5, 8, 10, 12, 15.",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G8_LO_DATA_1",
+          "expected_answer": "10",
+          "answer_type": "numeric",
+          "marks": 2
+        },
+        {
+          "stem": "A die is thrown once. What is the probability of getting an even number?",
+          "item_type": "numeric",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "MA_G8_LO_DATA_1",
+          "expected_answer": "1/2",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Reduce to lowest terms: 18/24",
+          "item_type": "numeric",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "MA_G8_LO_ALG_2",
+          "expected_answer": "3/4",
+          "answer_type": "text",
+          "marks": 1
+        }
+      ]
+    }
+  ]
+}

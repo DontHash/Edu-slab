@@ -1,0 +1,36 @@
+{
+  "grade": 6,
+  "subject": "English",
+  "chapters": [
+    {
+      "chapter": "Grammar",
+      "questions": [
+        "What is a noun? Give two examples.",
+        "Change to past tense: 'She walks to school every day.'",
+        "Which is correct: 'He don't like tea' or 'He doesn't like tea'? Why?",
+        "Write the plural form of: child, mouse, box.",
+        "Identify the verb in: 'The birds sing in the morning.'"
+      ]
+    },
+    {
+      "chapter": "Comprehension",
+      "questions": [
+        "What is the main idea of a paragraph?",
+        "How do you find the meaning of an unknown word using context?",
+        "Why is it important to read the title before reading a passage?",
+        "What is the difference between a fact and an opinion?",
+        "How would you summarise a short story in three sentences?"
+      ]
+    },
+    {
+      "chapter": "Writing",
+      "questions": [
+        "Write a sentence about your favourite festival in Nepal.",
+        "What are the three parts of a simple paragraph?",
+        "Write a friendly letter opening to your friend.",
+        "Use 'because' in a sentence explaining why you like reading.",
+        "Describe your classroom in 4–5 sentences."
+      ]
+    }
+  ]
+}

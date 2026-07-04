@@ -1,0 +1,119 @@
+{
+  "grade": 10,
+  "subject": "Mathematics",
+  "framework": "Nepal CDC / CBSE-NCERT Class 10 diagnostic",
+  "source_note": "Original items modelled on NCERT Class 10: quadratic equations, similarity/trigonometry, statistics",
+  "sections": [
+    {
+      "section": "A",
+      "title": "Number & Algebra",
+      "domain": "number_algebra",
+      "questions": [
+        {
+          "stem": "Solve for x: x² - 5x + 6 = 0",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_ALG_1",
+          "expected_answer": "2, 3",
+          "answer_type": "numeric",
+          "marks": 3
+        },
+        {
+          "stem": "Find the discriminant of 2x² + 3x - 5 = 0.",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_ALG_1",
+          "expected_answer": "49",
+          "answer_type": "numeric",
+          "marks": 2
+        },
+        {
+          "stem": "If the 5th term of an AP is 18 and the common difference is 3, find the first term.",
+          "item_type": "word_problem",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_ALG_1",
+          "expected_answer": "6",
+          "answer_type": "numeric",
+          "marks": 3
+        },
+        {
+          "stem": "Simplify: (3 + √5)(3 - √5)",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_ALG_1",
+          "expected_answer": "4",
+          "answer_type": "numeric",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "Geometry & Trigonometry",
+      "domain": "geometry",
+      "questions": [
+        {
+          "stem": "In a right triangle, if sin θ = 3/5, find cos θ.",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_GEO_1",
+          "expected_answer": "4/5",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Two triangles are similar. If sides of the first are 3 cm, 4 cm, 5 cm and the shortest side of the second is 6 cm, find the longest side of the second triangle.",
+          "item_type": "word_problem",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_GEO_1",
+          "expected_answer": "10",
+          "answer_type": "numeric",
+          "marks": 3
+        },
+        {
+          "stem": "Find the length of an arc of a circle with radius 7 cm and central angle 90°. (Use π = 22/7)",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_GEO_1",
+          "expected_answer": "11",
+          "answer_type": "numeric",
+          "marks": 3
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "Statistics & Application",
+      "domain": "data",
+      "questions": [
+        {
+          "stem": "Find the median of: 12, 15, 18, 20, 25.",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_DATA_1",
+          "expected_answer": "18",
+          "answer_type": "numeric",
+          "marks": 2
+        },
+        {
+          "stem": "A bag has 3 red and 7 blue balls. One ball is drawn at random. Find the probability of drawing a red ball.",
+          "item_type": "numeric",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_DATA_1",
+          "expected_answer": "3/10",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Convert Rs. 120,000 to US dollars if $1 = Rs. 120.",
+          "item_type": "word_problem",
+          "cognitive_level": "application",
+          "learning_outcome_id": "MA_G10_LO_DATA_1",
+          "expected_answer": "1000",
+          "answer_type": "numeric",
+          "marks": 3
+        }
+      ]
+    }
+  ]
+}

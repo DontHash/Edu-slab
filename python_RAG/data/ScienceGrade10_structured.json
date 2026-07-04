@@ -1,0 +1,119 @@
+{
+  "grade": 10,
+  "subject": "Science",
+  "framework": "Nepal CDC / CBSE-NCERT Class 10 Science diagnostic",
+  "source_note": "Original items modelled on NCERT Class 10: heredity, chemical reactions, electricity",
+  "sections": [
+    {
+      "section": "A",
+      "title": "Life Science",
+      "domain": "knowledge",
+      "questions": [
+        {
+          "stem": "What is the basic unit of heredity that controls traits in living organisms?",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G10_LO_K_1",
+          "expected_answer": "gene",
+          "answer_type": "text",
+          "marks": 1
+        },
+        {
+          "stem": "Name the molecule that carries genetic information in most organisms.",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G10_LO_K_1",
+          "expected_answer": "DNA",
+          "answer_type": "text",
+          "marks": 1
+        },
+        {
+          "stem": "State one difference between dominant and recessive traits.",
+          "item_type": "recall",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "SC_G10_LO_K_1",
+          "expected_answer": "dominant trait appears when one allele is present; recessive appears only when both alleles are recessive",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Which kingdom includes organisms with a nucleus in their cells?",
+          "item_type": "recall",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "SC_G10_LO_K_1",
+          "expected_answer": "eukaryota / protista fungi plantae animalia",
+          "answer_type": "text",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "Physical Science",
+      "domain": "understanding",
+      "questions": [
+        {
+          "stem": "Balance the chemical equation: H₂ + O₂ → H₂O",
+          "item_type": "explanation",
+          "cognitive_level": "application",
+          "learning_outcome_id": "SC_G10_LO_U_1",
+          "expected_answer": "2H₂ + O₂ → 2H₂O",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "What type of reaction is rusting of iron?",
+          "item_type": "recall",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "SC_G10_LO_U_1",
+          "expected_answer": "oxidation",
+          "answer_type": "text",
+          "marks": 1
+        },
+        {
+          "stem": "State Ohm's law in words.",
+          "item_type": "explanation",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "SC_G10_LO_A_1",
+          "expected_answer": "current through a conductor is directly proportional to potential difference if temperature remains constant",
+          "answer_type": "text",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "Application",
+      "domain": "application",
+      "questions": [
+        {
+          "stem": "A resistor of 10 Ω is connected to a 20 V battery. Calculate the current. (Use I = V/R)",
+          "item_type": "application",
+          "cognitive_level": "application",
+          "learning_outcome_id": "SC_G10_LO_A_1",
+          "expected_answer": "2",
+          "answer_type": "numeric",
+          "marks": 3
+        },
+        {
+          "stem": "Calculate the power dissipated in a 5 Ω resistor when 2 A current flows through it. (P = I²R)",
+          "item_type": "application",
+          "cognitive_level": "application",
+          "learning_outcome_id": "SC_G10_LO_A_1",
+          "expected_answer": "20",
+          "answer_type": "numeric",
+          "marks": 3
+        },
+        {
+          "stem": "Convert 2 kW to watts.",
+          "item_type": "application",
+          "cognitive_level": "application",
+          "learning_outcome_id": "SC_G10_LO_A_1",
+          "expected_answer": "2000",
+          "answer_type": "numeric",
+          "marks": 2
+        }
+      ]
+    }
+  ]
+}

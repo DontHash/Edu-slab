@@ -1,0 +1,36 @@
+{
+  "grade": 8,
+  "subject": "English",
+  "chapters": [
+    {
+      "chapter": "Grammar",
+      "questions": [
+        "What is the difference between 'its' and 'it's'? Use each in a sentence.",
+        "Transform to passive: 'The teacher praised the students.'",
+        "What are modal verbs? Use 'should' and 'must' in separate sentences.",
+        "Correct the punctuation: 'where are you going said mother'",
+        "What is a complex sentence? Write one example."
+      ]
+    },
+    {
+      "chapter": "Comprehension",
+      "questions": [
+        "How do you identify bias in a news article?",
+        "What is the difference between literal and figurative language?",
+        "How would you compare two characters in a story?",
+        "What is the theme of a literary text?",
+        "How do context clues help with unfamiliar vocabulary?"
+      ]
+    },
+    {
+      "chapter": "Essay Writing",
+      "questions": [
+        "Outline a five-paragraph essay on 'Education in Nepal'.",
+        "Write a thesis statement for an essay on climate change.",
+        "What makes a strong body paragraph?",
+        "Write a concluding paragraph for an essay on friendship.",
+        "How do you support an argument with reasons and examples?"
+      ]
+    }
+  ]
+}

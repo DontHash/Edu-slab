@@ -1,0 +1,36 @@
+{
+  "grade": 9,
+  "subject": "English",
+  "chapters": [
+    {
+      "chapter": "Grammar",
+      "questions": [
+        "What is the difference between 'affect' and 'effect'? Use each correctly.",
+        "Rewrite using the past perfect: 'After she (finish) her homework, she watched TV.'",
+        "What is a relative clause? Write a sentence with 'who' or 'which'.",
+        "Correct: 'Each of the boys have done their work.'",
+        "What is parallelism? Fix: 'She likes reading, to swim, and jogging.'"
+      ]
+    },
+    {
+      "chapter": "Comprehension",
+      "questions": [
+        "How do you analyse the tone of a writer?",
+        "What is symbolism? Give an example from a story you know.",
+        "How would you evaluate the reliability of an online source?",
+        "What is the difference between summary and analysis?",
+        "How do you identify the counter-argument in a persuasive text?"
+      ]
+    },
+    {
+      "chapter": "Essay Writing",
+      "questions": [
+        "Write an argumentative paragraph on whether homework should be reduced.",
+        "What is a hook in an essay introduction? Give an example.",
+        "How do you cite a reason and evidence in a formal essay?",
+        "Write a paragraph comparing city life and village life in Nepal.",
+        "What should you avoid when writing a formal essay?"
+      ]
+    }
+  ]
+}

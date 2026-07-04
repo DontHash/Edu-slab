@@ -1,41 +1,54 @@
 /**
- * RAG Question Service
- * Handles API calls for RAG-based question generation and assessment submission
+ * Assessment question service — Nepal CDC curriculum bank (local, no cloud API)
  */
 import api from "./api";
 
 const ragQuestionService = {
-  /**
-   * Generate questions for a chapter using RAG
-   */
-  async generateQuestions(
-    chapter,
-    subject = null,
-    numQuestions = 5,
-    difficulty = "medium"
-  ) {
+  async generateQuestions(chapter, subject = null, numQuestions = 1, grade = null) {
     const response = await api.post("/rag/generate-questions", {
       chapter,
       subject,
       num_questions: numQuestions,
-      difficulty,
+      grade,
     });
     return response.data;
   },
 
-  /**
-   * Get available chapters organized by subject
-   */
-  async getAvailableChapters(subject = null) {
+  async getCurriculum(grade = null) {
+    const response = await api.get("/rag/curriculum", {
+      params: grade ? { grade } : {},
+    });
+    return response.data;
+  },
+
+  async getAvailableChapters(subject = null, grade = null) {
     const response = await api.get("/rag/available-chapters", {
-      params: { subject },
+      params: { subject, grade },
     });
     return response.data;
   },
 
-  /**
-   * Submit answers for an assessment
-   */
+  async startAdaptiveSession(subject, grade = null) {
+    const response = await api.post("/rag/adaptive/start", {
+      subject,
+      grade,
+    });
+    return response.data;
+  },
+
+  async submitAdaptiveAnswer(sessionId, questionId, answer) {
+    const response = await api.post(`/rag/adaptive/${sessionId}/answer`, {
+      question_id: questionId,
+      answer,
+    });
+    return response.data;
+  },
+
+  async finishAdaptiveSession(sessionId) {
+    const response = await api.post(`/rag/adaptive/${sessionId}/finish`);
+    return response.data;
+  },
+
   async submitAssessment(chapter, subject, answers) {
     const response = await api.post("/rag/submit-assessment", {
       chapter,
@@ -45,33 +58,26 @@ const ragQuestionService = {
     return response.data;
   },
 
-  /**
-   * Get all assessments for the current user
-   */
   async getUserAssessments() {
     const response = await api.get("/rag/user-assessments");
     return response.data;
   },
 
-  /**
-   * Get details of a specific assessment
-   */
   async getAssessmentDetails(assessmentId) {
     const response = await api.get(`/rag/assessment/${assessmentId}`);
     return response.data;
   },
 
-  /**
-   * Get evaluation results for an assessment
-   */
+  async getEvaluationStatus() {
+    const response = await api.get("/rag/evaluation-status");
+    return response.data;
+  },
+
   async getEvaluation(assessmentId) {
     const response = await api.get(`/rag/evaluate-assessment/${assessmentId}`);
     return response.data;
   },
 
-  /**
-   * Get recent activities (assessments taken)
-   */
   async getRecentActivities(limit = 10) {
     const response = await api.get("/rag/recent-activities", {
       params: { limit },
@@ -79,17 +85,16 @@ const ragQuestionService = {
     return response.data;
   },
 
-  /**
-   * Get subject-specific progress analysis
-   */
   async getSubjectProgress(subject) {
     const response = await api.get(`/rag/subject-progress/${subject}`);
     return response.data;
   },
 
-  /**
-   * Get progress for all subjects
-   */
+  async getLearningRoadmap(subject) {
+    const response = await api.get(`/rag/learning-roadmap/${subject}`);
+    return response.data;
+  },
+
   async getAllSubjectsProgress() {
     const response = await api.get("/rag/all-subjects-progress");
     return response.data;

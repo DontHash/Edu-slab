@@ -1,0 +1,189 @@
+{
+  "grade": 8,
+  "subject": "English",
+  "framework": "Nepal CDC National Curriculum (Grades 6–10)",
+  "source_note": "Structured diagnostic bank aligned to Grade 8 English spec grid (Reading 40%, Grammar 30%, Writing 30%)",
+  "sections": [
+    {
+      "section": "A",
+      "title": "Reading Comprehension",
+      "domain": "reading",
+      "passages": [
+        {
+          "context_id": "EN_G8_PASSAGE_SCHOOL",
+          "context_source": "CDC-aligned original excerpt — school life in Nepal",
+          "context_text": "Last monsoon, our school in Pokhara organised a reading week. Students from Grades 6 to 10 brought books from home and shared them in the library corner. Ramesh, a quiet boy from Grade 8, volunteered to read aloud a short story about a honey bee. At first, he spoke too quickly and many classmates could not follow him. His English teacher, Miss Anjana, asked him to pause after each paragraph and explain one new word. By Friday, Ramesh read more slowly and answered three inferential questions correctly. The principal said the event showed that regular practice and patient listening can improve reading confidence.",
+          "learning_outcome_id": "EN_G8_LO_READ_2",
+          "questions": [
+            {
+              "stem": "Where did the reading week take place?",
+              "cognitive_level": "knowledge",
+              "expected_answer": "At a school in Pokhara",
+              "answer_type": "comprehension",
+              "marks": 1
+            },
+            {
+              "stem": "Why did Miss Anjana ask Ramesh to pause after each paragraph?",
+              "cognitive_level": "comprehension",
+              "expected_answer": "To help classmates follow and explain new words",
+              "answer_type": "comprehension",
+              "marks": 2
+            },
+            {
+              "stem": "What can we infer about Ramesh at the beginning of the week?",
+              "cognitive_level": "application",
+              "expected_answer": "He was nervous or read too fast for others to understand",
+              "answer_type": "comprehension",
+              "marks": 2
+            }
+          ]
+        },
+        {
+          "context_id": "EN_G8_PASSAGE_ENV",
+          "context_source": "CDC-aligned original excerpt — environment in Nepal",
+          "context_text": "Plastic waste is a growing problem in Kathmandu Valley. Every day, markets use thousands of thin plastic bags that block drains and pollute the Bagmati River. Last year, a youth group in Lalitpur collected two hundred kilograms of plastic from a single neighbourhood in one weekend. They separated bottles for recycling and burned nothing. The municipality praised their work but said laws alone cannot solve the problem. Citizens must reduce single-use plastic and carry reusable bags. Small daily choices, the group argued, protect rivers that millions of Nepalis depend on for farming and drinking water.",
+          "learning_outcome_id": "EN_G8_LO_READ_3",
+          "questions": [
+            {
+              "stem": "What problem does the passage describe in Kathmandu Valley?",
+              "cognitive_level": "knowledge",
+              "expected_answer": "Plastic waste / pollution from plastic bags",
+              "answer_type": "comprehension",
+              "marks": 1
+            },
+            {
+              "stem": "What did the youth group in Lalitpur do?",
+              "cognitive_level": "comprehension",
+              "expected_answer": "Collected plastic waste for recycling without burning",
+              "answer_type": "comprehension",
+              "marks": 2
+            },
+            {
+              "stem": "What is the writer's main message about solving plastic pollution?",
+              "cognitive_level": "application",
+              "expected_answer": "Citizens must change daily habits, not rely only on laws",
+              "answer_type": "comprehension",
+              "marks": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "Grammar & Vocabulary",
+      "domain": "grammar_vocabulary",
+      "questions": [
+        {
+          "stem": "Correct the sentence: 'She don't like to play cricket on rainy days.'",
+          "item_type": "grammar_correction",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G8_LO_GV_1",
+          "expected_answer": "She doesn't like to play cricket on rainy days.",
+          "answer_type": "text",
+          "marks": 1
+        },
+        {
+          "stem": "Choose the correct form: 'Neither the students nor the teacher (was/were) present.' Explain.",
+          "item_type": "grammar_mcq",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "EN_G8_LO_GV_1",
+          "expected_answer": "was — verb agrees with the nearer subject 'teacher'",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Rewrite in past perfect tense: 'After he (finish) his homework, he watched TV.'",
+          "item_type": "grammar_correction",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G8_LO_GV_1",
+          "expected_answer": "After he had finished his homework, he watched TV.",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Change into future tense: Ram invited Shyam.",
+          "item_type": "grammar_correction",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G8_LO_GV_1",
+          "expected_answer": "Ram will invite Shyam.",
+          "answer_type": "text",
+          "marks": 2,
+          "generative_template": {
+            "template_id": "en_svo_seed_invite",
+            "kind": "grammar_transform",
+            "seed": { "subject": "Ram", "verb": "invited", "object": "Shyam" },
+            "variants": ["future", "passive", "indirect_speech", "negative_past", "present_perfect"],
+            "slots": {
+              "subject": { "pool": "names_male" },
+              "verb": { "pool": "verbs_transitive_past" },
+              "object": { "pool": "names_male" }
+            }
+          }
+        },
+        {
+          "stem": "Use the word 'resilient' correctly in a sentence about Nepali communities.",
+          "item_type": "vocabulary",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G8_LO_GV_2",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "Identify the error: 'Each of the boys have submitted their homework.'",
+          "item_type": "grammar_correction",
+          "cognitive_level": "comprehension",
+          "learning_outcome_id": "EN_G8_LO_GV_1",
+          "expected_answer": "has / his — subject-verb agreement with 'each'",
+          "answer_type": "text",
+          "marks": 2
+        },
+        {
+          "stem": "What is the antonym of 'generous'? Use both words in one sentence.",
+          "item_type": "vocabulary",
+          "cognitive_level": "knowledge",
+          "learning_outcome_id": "EN_G8_LO_GV_2",
+          "answer_type": "text",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "Writing",
+      "domain": "writing",
+      "questions": [
+        {
+          "stem": "Write a short paragraph (60–80 words) on why reading books is important for students in Nepal.",
+          "item_type": "guided_writing",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G8_LO_WRITE_1",
+          "answer_type": "rubric",
+          "marks": 5,
+          "rubric": {
+            "task_completion": "Addresses the topic with relevant ideas",
+            "organization": "Clear paragraph with logical flow",
+            "vocabulary": "Appropriate word choice for Grade 8",
+            "grammar": "Correct sentences with few errors",
+            "mechanics": "Spelling and punctuation"
+          }
+        },
+        {
+          "stem": "Write a short notice for your school notice board inviting students to join an English speaking club every Friday.",
+          "item_type": "functional_writing",
+          "cognitive_level": "application",
+          "learning_outcome_id": "EN_G8_LO_WRITE_2",
+          "answer_type": "rubric",
+          "marks": 5,
+          "rubric": {
+            "task_completion": "Includes purpose, time, place, and audience",
+            "organization": "Notice format with heading and details",
+            "vocabulary": "Formal school English",
+            "grammar": "Accurate short sentences",
+            "mechanics": "Capitalisation and punctuation"
+          }
+        }
+      ]
+    }
+  ]
+}
