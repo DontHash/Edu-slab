@@ -1,13 +1,18 @@
 """
-Database initialization script
+Database initialization — delegates to scripts/init_database.py
 """
-from app.db.database import engine, Base
-from app.models import User, School, Assessment, Question, StudentResponse, Progress
+from pathlib import Path
+import sys
 
-def init_db():
-    """Initialize database with tables"""
-    Base.metadata.create_all(bind=engine)
-    print("Database tables created successfully!")
+BACKEND_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BACKEND_ROOT))
+
+from scripts.init_database import init_database  # noqa: E402
+
+
+def init_db(reset: bool = False):
+    init_database(reset=reset)
+
 
 if __name__ == "__main__":
-    init_db()
+    init_database(reset=True)
