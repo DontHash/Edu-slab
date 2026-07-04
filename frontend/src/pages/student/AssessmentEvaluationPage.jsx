@@ -1,37 +1,64 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import StructuredAnswerDisplay from "../../components/assessment/StructuredAnswerDisplay";
 import api from "../../services/api";
+import ragQuestionService from "../../services/ragQuestion.service";
+
+const scoreColor = (pct) => {
+  if (pct >= 85) return "text-primary";
+  if (pct >= 70) return "text-warning";
+  if (pct >= 50) return "text-orange-400";
+  return "text-danger";
+};
+
+const weaknessClass = (level) => {
+  if (level === "none") return "ds-badge-primary";
+  if (level === "severe") return "ds-badge-danger";
+  if (level === "moderate") return "ds-badge-warn";
+  return "ds-badge-muted";
+};
+
+const ResourceCard = ({ resource }) => (
+  <a href={resource.url} target="_blank" rel="noopener noreferrer" className="ds-resource-link">
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="ds-badge-primary">{resource.provider_label || resource.provider}</span>
+      {resource.url_verified && (
+        <span className="font-mono text-[10px] text-primary">verified link</span>
+      )}
+    </div>
+    <p className="mt-2 text-sm font-semibold text-foreground">{resource.title}</p>
+    {resource.description && <p className="mt-1 text-xs text-muted">{resource.description}</p>}
+    {resource.topic_match && (
+      <p className="mt-1 font-mono text-[10px] text-muted">Matched: {resource.topic_match}</p>
+    )}
+    {resource.chapter && <p className="mt-1 font-mono text-[10px] text-muted">{resource.chapter}</p>}
+    <p className="mt-2 text-xs font-semibold text-primary">Open tutorial →</p>
+  </a>
+);
 
 const AssessmentEvaluationPage = () => {
   const { assessmentId } = useParams();
   const navigate = useNavigate();
-
   const [evaluation, setEvaluation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [evaluating, setEvaluating] = useState(false);
+  const [evalEngine, setEvalEngine] = useState(null);
 
   useEffect(() => {
     loadEvaluation();
+    ragQuestionService.getEvaluationStatus().then(setEvalEngine).catch(() => {});
   }, [assessmentId]);
 
   const loadEvaluation = async () => {
     try {
       setLoading(true);
       setError(null);
-
-      // Try to get existing evaluation
-      const response = await api.get(
-        `/rag/evaluate-assessment/${assessmentId}`
-      );
+      const response = await api.get(`/rag/evaluate-assessment/${assessmentId}`);
       setEvaluation(response.data);
     } catch (err) {
-      if (err.response?.status === 404) {
-        // No evaluation exists yet - auto-trigger it
-        handleEvaluate();
-      } else {
-        setError("Failed to load evaluation");
-      }
+      if (err.response?.status === 404) handleEvaluate();
+      else setError("Failed to load evaluation");
     } finally {
       setLoading(false);
     }
@@ -41,295 +68,265 @@ const AssessmentEvaluationPage = () => {
     try {
       setEvaluating(true);
       setError(null);
-
-      const response = await api.post(
-        `/rag/evaluate-assessment/${assessmentId}`
-      );
+      const response = await api.post(`/rag/evaluate-assessment/${assessmentId}`);
       setEvaluation(response.data);
-
-      // Show success message with updated levels
-      alert("Assessment evaluated successfully! View your topic report and learning roadmap.");
     } catch (err) {
-      setError(
-        "Failed to evaluate assessment: " +
-          (err.response?.data?.detail || err.message)
-      );
+      setError("Failed to evaluate: " + (err.response?.data?.detail || err.message));
     } finally {
       setEvaluating(false);
     }
   };
 
-  const getWeaknessColor = (level) => {
-    switch (level) {
-      case "none":
-        return "text-green-800";
-      case "mild":
-        return "text-yellow-800";
-      case "moderate":
-        return "text-orange-800";
-      case "severe":
-        return "text-red-800";
-      default:
-        return "text-gray-800";
-    }
-  };
-
-  const getScoreColor = (percentage) => {
-    if (percentage >= 85) return "#6B8E23";
-    if (percentage >= 70) return "#F59E0B";
-    if (percentage >= 50) return "#FB923C";
-    return "#DC2626";
-  };
+  const shell = (children) => (
+    <div className="ds-ambient min-h-screen">
+      <div className="pointer-events-none fixed inset-x-0 top-0 h-64 ds-gradient-scrim" />
+      <div className="relative mx-auto max-w-6xl px-4 py-8 sm:px-6">{children}</div>
+    </div>
+  );
 
   if (loading) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="text-center">
-          <div
-            className="inline-block animate-spin rounded-full h-12 w-12 border-b-2"
-            style={{ borderColor: "#323232" }}
-          ></div>
-          <p className="mt-4 text-gray-600">Loading evaluation...</p>
-        </div>
+    return shell(
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4">
+        <div className="h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <p className="font-mono text-xs uppercase tracking-widest text-muted">Loading report…</p>
       </div>
     );
   }
 
   if (!evaluation) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div
-          className="rounded-lg shadow-md p-6 text-center"
-          style={{ backgroundColor: "#F5EDE5" }}
-        >
-          <h2 className="text-2xl font-bold mb-4" style={{ color: "#323232" }}>
-            Assessment Not Evaluated Yet
-          </h2>
-          <p className="text-gray-600 mb-6">
-            Click the button below to evaluate this assessment using AI.
-          </p>
-          <button
-            onClick={handleEvaluate}
-            disabled={evaluating}
-            className="px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ backgroundColor: "#323232", color: "#DDD0C8" }}
-          >
-            {evaluating ? "Evaluating..." : "Evaluate Assessment"}
-          </button>
-          {error && (
-            <div
-              className="mt-4 p-4 rounded-lg"
-              style={{ backgroundColor: "#FFEEF0", color: "#DC2626" }}
-            >
-              {error}
-            </div>
-          )}
-        </div>
+    return shell(
+      <div className="mx-auto max-w-lg ds-panel-raised p-8 text-center animate-slide-up">
+        <h2 className="text-2xl font-bold text-foreground">Report pending</h2>
+        <p className="mt-2 text-sm text-muted">Run AI evaluation to generate your diagnostic report.</p>
+        <button onClick={handleEvaluate} disabled={evaluating} className="ds-btn-primary mt-6 disabled:opacity-40">
+          {evaluating ? "Evaluating…" : "Evaluate now"}
+        </button>
+        {error && <p className="mt-4 text-sm text-danger">{error}</p>}
       </div>
     );
   }
 
-  const { chapter_analysis, overall_analysis } = evaluation;
+  const { chapter_analysis, domain_analysis, overall_analysis, learning_outcome_analysis, recommended_resources, question_analysis, answers } = evaluation;
+  const loAnalysis = learning_outcome_analysis || overall_analysis?.learning_outcome_analysis || {};
+  const studyPlan = overall_analysis?.study_plan;
+  const weakTopics = studyPlan?.weak_topics || [];
+  const unresolved = overall_analysis?.unresolved_questions || 0;
+  const answerById = Object.fromEntries((answers || []).map((a) => [a.question_id, a]));
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* Header */}
-      <div className="mb-6">
-        <button
-          onClick={() => navigate("/dashboard")}
-          className="font-medium transition-colors"
-          style={{ color: "#323232" }}
-        >
-          ← Back to Dashboard
+  return shell(
+    <div className="animate-fade-in space-y-8">
+      <header className="ds-page-header">
+        <button onClick={() => navigate("/dashboard")} className="ds-btn-ghost mb-4 -ml-2 text-sm">
+          ← Dashboard
         </button>
-        <h1 className="text-3xl font-bold" style={{ color: "#323232" }}>
-          Assessment Evaluation
-        </h1>
-      </div>
+        <p className="ds-mono-label mb-2 text-primary">Diagnostic report</p>
+        <h1 className="ds-page-title">Topic assessment</h1>
+        {overall_analysis?.evaluation_method && (
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-muted">
+            {overall_analysis.evaluation_method.replace(/_/g, " ")}
+          </p>
+        )}
+        {evalEngine && !evalEngine.ollama?.model_ready && (
+          <p className="mt-2 text-sm text-warning">
+            AI grader offline — {evalEngine.message}
+          </p>
+        )}
+      </header>
 
-      {/* Overall Score Card */}
-      <div
-        className="rounded-lg shadow-lg p-8 mb-6 text-white"
-        style={{ background: "linear-gradient(to right, #323232, #5A5A5A)" }}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {unresolved > 0 && (
+        <div className="rounded-lg border border-warning/40 bg-warning/10 p-4 text-sm text-warning">
+          {unresolved} answer(s) could not be fully verified. Scores may be conservative.
+          Re-run evaluation when Ollama is online for a complete report.
+        </div>
+      )}
+
+      {/* Score hero */}
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-surface-raised p-8 shadow-glow">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
+        <div className="relative grid gap-6 md:grid-cols-3">
           <div>
-            <p className="text-gray-300 text-sm mb-1">Final Score</p>
-            <p className="text-5xl font-bold">
+            <p className="ds-stat-label">Final score</p>
+            <p className="mt-1 font-mono text-5xl font-medium text-primary">
               {overall_analysis?.final_score_out_of_100 || 0}
             </p>
-            <p className="text-gray-300 mt-1">out of 100</p>
+            <p className="text-xs text-muted">out of 100</p>
           </div>
           <div>
-            <p className="text-gray-300 text-sm mb-1">Estimated Grade Level</p>
-            <p className="text-5xl font-bold">
-              Grade {overall_analysis?.estimated_student_grade_level || "-"}
+            <p className="ds-stat-label">Estimated grade</p>
+            <p className="mt-1 font-mono text-5xl font-medium text-foreground">
+              {overall_analysis?.estimated_student_grade_level || "—"}
             </p>
+            {overall_analysis?.proficiency_label && (
+              <p className="mt-1 text-xs text-muted">{overall_analysis.proficiency_label}</p>
+            )}
           </div>
           <div>
-            <p className="text-gray-300 text-sm mb-1">Strongest Chapters</p>
-            {overall_analysis?.strongest_chapters?.map((chapter, idx) => (
-              <p key={idx} className="text-lg font-semibold">
-                ✓ {chapter}
-              </p>
+            <p className="ds-stat-label mb-2">Strongest</p>
+            {(overall_analysis?.strongest_chapters || []).map((ch, i) => (
+              <p key={i} className="text-sm text-primary">✓ {ch}</p>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Learning Gaps */}
-      {overall_analysis?.learning_gap_summary &&
-        overall_analysis.learning_gap_summary.length > 0 && (
-          <div
-            className="border-l-4 p-6 mb-6 rounded-lg"
-            style={{ backgroundColor: "#FFF8E1", borderLeftColor: "#F59E0B" }}
-          >
-            <h2 className="text-xl font-bold mb-3" style={{ color: "#B45309" }}>
-              Learning Gaps Identified
-            </h2>
-            <div className="space-y-2">
-              {overall_analysis.learning_gap_summary.map((gap, idx) => (
-                <p key={idx} className="text-gray-800">
-                  • {gap}
+      {(domain_analysis && Object.keys(domain_analysis).length > 0) ||
+      (overall_analysis?.domain_analysis && Object.keys(overall_analysis.domain_analysis).length > 0) ? (
+        <div className="ds-panel p-6">
+          <p className="ds-mono-label mb-4 text-primary">Domain breakdown</p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {Object.entries(domain_analysis || overall_analysis.domain_analysis).map(([domain, data]) => (
+              <div key={domain} className="rounded-lg border border-border bg-surface-raised p-4">
+                <p className="font-medium capitalize text-foreground">{domain.replace(/_/g, " ")}</p>
+                <p className="mt-1 font-mono text-2xl text-primary">{data.accuracy_percentage}%</p>
+                <p className="text-xs text-muted">
+                  {data.correct} correct · {data.partial} partial · {data.incorrect} incorrect
                 </p>
-              ))}
-            </div>
-          </div>
-        )}
-
-      {/* Weakest Chapters Alert */}
-      {overall_analysis?.weakest_chapters &&
-        overall_analysis.weakest_chapters.length > 0 && (
-          <div
-            className="border-l-4 p-6 mb-6 rounded-lg"
-            style={{ backgroundColor: "#FFEEF0", borderLeftColor: "#DC2626" }}
-          >
-            <h2 className="text-xl font-bold mb-3" style={{ color: "#991B1B" }}>
-              Areas Needing Improvement
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {overall_analysis.weakest_chapters.map((chapter, idx) => (
-                <span
-                  key={idx}
-                  className="px-3 py-1 rounded-full text-sm font-medium"
-                  style={{ backgroundColor: "#FFC9CC", color: "#991B1B" }}
-                >
-                  {chapter}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-      {/* Chapter-wise Analysis */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
-          Chapter-wise Performance
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[36rem] overflow-y-auto pr-2">
-          {Object.entries(chapter_analysis || {}).map(([chapter, data]) => (
-            <div
-              key={chapter}
-              className="border rounded-lg p-4 hover:shadow-md transition-shadow"
-            >
-              <h3 className="font-semibold text-gray-800 mb-2">{chapter}</h3>
-
-              {/* Progress bar */}
-              <div
-                className="w-full rounded-full h-2 mb-2"
-                style={{ backgroundColor: "#E8DDD3" }}
-              >
-                <div
-                  className="h-2 rounded-full"
-                  style={{
-                    width: `${data.accuracy_percentage}%`,
-                    backgroundColor:
-                      data.accuracy_percentage >= 85
-                        ? "#6B8E23"
-                        : data.accuracy_percentage >= 70
-                        ? "#F59E0B"
-                        : data.accuracy_percentage >= 50
-                        ? "#FB923C"
-                        : "#DC2626",
-                  }}
-                ></div>
               </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
-              <div className="flex justify-between items-center mb-2">
-                <span
-                  className="text-2xl font-bold"
-                  style={{ color: getScoreColor(data.accuracy_percentage) }}
+      {Object.keys(loAnalysis).length > 0 && (
+        <div className="ds-panel p-6">
+          <p className="ds-mono-label mb-4 text-primary">Learning outcomes</p>
+          <div className="space-y-2">
+            {Object.entries(loAnalysis)
+              .sort((a, b) => a[1].accuracy_percentage - b[1].accuracy_percentage)
+              .map(([loId, data]) => (
+                <div
+                  key={loId}
+                  className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-surface-raised px-4 py-3"
                 >
+                  <span className="font-mono text-xs text-muted">{loId}</span>
+                  <div className="flex items-center gap-3">
+                    <span className={weaknessClass(data.weakness_level)}>{data.weakness_level}</span>
+                    <span className="font-mono text-sm text-primary">{data.accuracy_percentage}%</span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
+
+      {overall_analysis?.learning_gap_summary?.length > 0 && (
+        <div className="ds-panel p-6">
+          <p className="ds-mono-label mb-3 text-warning">Learning gaps</p>
+          <ul className="space-y-2 text-sm text-muted">
+            {overall_analysis.learning_gap_summary.map((gap, i) => (
+              <li key={i} className="flex gap-2"><span className="text-warning">→</span>{gap}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {weakTopics.length > 0 && (
+        <div className="space-y-4">
+          <h2 className="text-xl font-bold text-foreground">Your study plan</h2>
+          {weakTopics.map((topic, idx) => (
+            <div key={idx} className="ds-panel-raised p-6 animate-slide-up">
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <h3 className="font-semibold text-foreground">{topic.chapter}</h3>
+                <span className={weaknessClass(topic.weakness_level)}>{topic.weakness_level}</span>
+                <span className="font-mono text-xs text-muted">{topic.accuracy_percentage}%</span>
+              </div>
+              {topic.study_steps?.length > 0 && (
+                <ol className="mb-4 list-decimal space-y-1 pl-5 text-sm text-muted">
+                  {topic.study_steps.map((s, i) => <li key={i}>{s}</li>)}
+                </ol>
+              )}
+              {topic.recommended_resources?.length > 0 && (
+                <div className="grid gap-3 md:grid-cols-2">
+                  {topic.recommended_resources.map((r, i) => (
+                    <ResourceCard key={i} resource={r} />
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {(recommended_resources?.length > 0 || studyPlan?.all_resources?.length > 0) && (
+        <div className="ds-panel p-6">
+          <h2 className="mb-4 text-xl font-bold text-foreground">Free learning resources</h2>
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {(recommended_resources || studyPlan?.all_resources || []).map((r, i) => (
+              <ResourceCard key={i} resource={r} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="ds-panel p-6">
+        <h2 className="mb-6 text-xl font-bold text-foreground">Question-by-question</h2>
+        <div className="space-y-4">
+          {Object.entries(question_analysis || {}).map(([qid, data]) => {
+            const ans = answerById[qid];
+            const verdictClass =
+              data.correctness === "correct"
+                ? "border-primary/30"
+                : data.correctness === "partial"
+                ? "border-warning/30"
+                : "border-danger/30";
+            return (
+              <div key={qid} className={`rounded-xl border bg-surface p-4 ${verdictClass}`}>
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                  <span className="ds-badge-muted">{ans?.chapter || "Topic"}</span>
+                  <span className={weaknessClass(data.correctness === "correct" ? "none" : "moderate")}>
+                    {data.correctness}
+                  </span>
+                  <span className="font-mono text-xs text-muted">score {data.score}</span>
+                  {data.grading_method && (
+                    <span className="font-mono text-[10px] text-muted">{data.grading_method}</span>
+                  )}
+                </div>
+                <p className="text-sm text-foreground">{ans?.question_raw || ans?.question || "Question"}</p>
+                <div className="mt-2">
+                  <StructuredAnswerDisplay answer={ans?.answer} />
+                </div>
+                {data.medium_reason && (
+                  <p className="mt-2 text-xs text-warning">{data.medium_reason}</p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="ds-panel p-6">
+        <h2 className="mb-6 text-xl font-bold text-foreground">Chapter breakdown</h2>
+        <div className="grid max-h-[36rem] grid-cols-1 gap-4 overflow-y-auto pr-1 md:grid-cols-2 lg:grid-cols-3">
+          {Object.entries(chapter_analysis || {}).map(([chapter, data]) => (
+            <div key={chapter} className="rounded-xl border border-border bg-surface p-4 transition-all hover:border-primary/25">
+              <h3 className="font-semibold text-foreground">{chapter}</h3>
+              <div className="ds-progress-track my-3">
+                <div className="ds-progress-fill" style={{ width: `${data.accuracy_percentage}%` }} />
+              </div>
+              <div className="flex items-center justify-between">
+                <span className={`font-mono text-2xl ${scoreColor(data.accuracy_percentage)}`}>
                   {data.accuracy_percentage}%
                 </span>
-                <span
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${getWeaknessColor(
-                    data.weakness_level
-                  )}`}
-                  style={{
-                    backgroundColor:
-                      data.weakness_level === "none"
-                        ? "#F0F9E8"
-                        : data.weakness_level === "mild"
-                        ? "#FFF8E1"
-                        : data.weakness_level === "moderate"
-                        ? "#FFF3E0"
-                        : "#FFEEF0",
-                  }}
-                >
-                  {data.weakness_level}
-                </span>
+                <span className={weaknessClass(data.weakness_level)}>{data.weakness_level}</span>
               </div>
-
-              <div className="text-sm text-gray-600 space-y-1">
-                <div className="flex justify-between">
-                  <span>Correct:</span>
-                  <span className="font-medium" style={{ color: "#6B8E23" }}>
-                    {data.correct}/{data.total_questions}
-                  </span>
-                </div>
-                {data.partial > 0 && (
-                  <div className="flex justify-between">
-                    <span>Partial:</span>
-                    <span className="font-medium" style={{ color: "#F59E0B" }}>
-                      {data.partial}
-                    </span>
-                  </div>
-                )}
-                {data.incorrect > 0 && (
-                  <div className="flex justify-between">
-                    <span>Incorrect:</span>
-                    <span className="font-medium" style={{ color: "#DC2626" }}>
-                      {data.incorrect}
-                    </span>
-                  </div>
-                )}
-                <div className="flex justify-between pt-1 border-t">
-                  <span>Score:</span>
-                  <span className="font-bold">
-                    {data.chapter_score_out_of_10}/10
-                  </span>
-                </div>
+              <div className="mt-3 space-y-1 font-mono text-[10px] text-muted">
+                <div className="flex justify-between"><span>Correct</span><span className="text-primary">{data.correct}/{data.total_questions}</span></div>
+                <div className="flex justify-between"><span>Score</span><span>{data.chapter_score_out_of_10}/10</span></div>
               </div>
+              {data.recommended_resources?.slice(0, 1).map((r, i) => (
+                <a key={i} href={r.url} target="_blank" rel="noopener noreferrer" className="mt-3 block text-xs font-semibold text-primary hover:underline">
+                  {r.title} →
+                </a>
+              ))}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="mt-6 flex gap-4">
-        <button
-          onClick={() => navigate("/assessment")}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          Take Another Assessment
-        </button>
-        <button
-          onClick={() => window.print()}
-          className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
-        >
-          Print Report
-        </button>
+      <div className="flex flex-wrap gap-3">
+        <Link to="/assessment" className="ds-btn-primary">New assessment</Link>
+        <Link to="/resources" className="ds-btn-outline">Learning roadmap</Link>
+        <button onClick={() => window.print()} className="ds-btn-ghost">Print</button>
       </div>
     </div>
   );

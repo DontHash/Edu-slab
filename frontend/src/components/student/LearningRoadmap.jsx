@@ -1,444 +1,220 @@
 import { useEffect, useState } from "react";
-import learningMaterialsService from "../../services/learningMaterials.service";
+import { Link } from "react-router-dom";
+import ragQuestionService from "../../services/ragQuestion.service";
 import Badge from "../common/Badge";
-import Button from "../common/Button";
 import Card from "../common/Card";
 
 const LearningRoadmap = ({ subject }) => {
-  const [materials, setMaterials] = useState(null);
+  const [roadmap, setRoadmap] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [generating, setGenerating] = useState(false);
-  const [expandedChapter, setExpandedChapter] = useState(null);
+  const [expandedChapter, setExpandedChapter] = useState(0);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchMaterials();
+    fetchRoadmap();
   }, [subject]);
 
-  const fetchMaterials = async () => {
+  const fetchRoadmap = async () => {
     if (!subject) return;
-
     try {
       setLoading(true);
       setError(null);
-      const data = await learningMaterialsService.getMyMaterials(subject);
-
-      if (data && data.length > 0) {
-        setMaterials(data[0]); // Get most recent
-      } else {
-        setMaterials(null);
+      const data = await ragQuestionService.getLearningRoadmap(subject);
+      if (data?.has_data) setRoadmap(data);
+      else {
+        setRoadmap(null);
+        setError(data?.message || null);
       }
     } catch (err) {
-      console.error("Error fetching materials:", err);
-      setMaterials(null);
+      setRoadmap(null);
+      setError(err.response?.data?.detail || "Could not load roadmap.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleGenerate = async () => {
-    try {
-      setGenerating(true);
-      setError(null);
-      const data = await learningMaterialsService.generateMaterials(
-        subject,
-        false
-      );
-      setMaterials(data);
-    } catch (err) {
-      setError(
-        err.response?.data?.detail ||
-          "Failed to generate learning plan. Complete assessments first."
-      );
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  const handleRegenerate = async () => {
-    try {
-      setGenerating(true);
-      setError(null);
-      const data = await learningMaterialsService.generateMaterials(
-        subject,
-        true
-      );
-      setMaterials(data);
-    } catch (err) {
-      setError(err.response?.data?.detail || "Failed to regenerate plan");
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  const getWeaknessColor = (level) => {
-    switch (level) {
-      case "severe":
-        return "#7C2D12";
-      case "moderate":
-        return "#78350F";
-      case "mild":
-        return "#065F46";
-      default:
-        return "#5A5A5A";
-    }
-  };
-
-  const getWeaknessLabel = (level) => {
-    switch (level) {
-      case "severe":
-        return "Critical";
-      case "moderate":
-        return "Needs Focus";
-      case "mild":
-        return "Minor Gap";
-      default:
-        return "Good";
-    }
+  const weaknessBadge = (level) => {
+    if (level === "severe") return "danger";
+    if (level === "moderate") return "warning";
+    return "info";
   };
 
   if (loading) {
     return (
-      <div
-        className="text-center py-8 rounded-2xl"
-        style={{ backgroundColor: "#F5EDE5", border: "1px solid #C9BDB3" }}
-      >
-        <div
-          className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto"
-          style={{ borderColor: "#323232" }}
-        ></div>
-        <p className="mt-4" style={{ color: "#5A5A5A" }}>
-          Loading learning plan...
-        </p>
+      <div className="flex min-h-[30vh] items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
       </div>
     );
   }
 
-  if (!materials) {
+  if (!roadmap) {
     return (
-      <Card
-        title={
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-              />
-            </svg>
-            <span>Your Personalized Learning Plan</span>
-          </div>
-        }
-      >
-        <div className="text-center py-8">
-          <p className="text-gray-600 mb-4">
-            No learning plan available yet for {subject}.
+      <Card title="Personalized roadmap">
+        <div className="py-8 text-center">
+          <p className="text-muted mb-4">
+            {error || "Complete a diagnostic assessment to unlock your study plan."}
           </p>
-          <p className="text-sm text-gray-500 mb-6">
-            Complete assessments to receive AI-generated study recommendations.
-          </p>
-          <Button onClick={handleGenerate} disabled={generating}>
-            {generating ? "Generating..." : "Generate Learning Plan"}
-          </Button>
-          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+          <Link to="/assessment" className="ds-btn-primary inline-flex">
+            Take assessment
+          </Link>
         </div>
       </Card>
     );
   }
 
-  const content = materials.content;
-  const chapters = content.chapters || [];
-  const recommendations = content.global_recommendations || {};
+  const chapters = roadmap.content?.chapters || [];
+  const recommendations = roadmap.content?.global_recommendations || {};
+  const allResources = roadmap.all_resources || [];
 
   return (
-    <div className="space-y-6">
-      {/* Header Card */}
+    <div className="space-y-6 animate-fade-in">
       <Card
         title={
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-              />
-            </svg>
-            <span>{subject} Learning Plan</span>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span>{subject} roadmap</span>
+            <div className="flex items-center gap-2">
+              {roadmap.evaluation_method && (
+                <Badge variant="info">{roadmap.evaluation_method.replace(/_/g, " ")}</Badge>
+              )}
+              {roadmap.assessment_id && (
+              <Link
+                to={`/assessment-evaluation/${roadmap.assessment_id}`}
+                className="text-sm font-semibold text-primary hover:text-primary-dark"
+              >
+                Full report →
+              </Link>
+              )}
+            </div>
           </div>
         }
       >
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div
-              className="text-center p-3 rounded-lg"
-              style={{
-                backgroundColor: "#F5EDE5",
-                border: "1px solid #C9BDB3",
-              }}
-            >
-              <div className="text-2xl font-bold" style={{ color: "#8B7355" }}>
-                {recommendations.weekly_study_hours || 6}h
-              </div>
-              <div className="text-xs" style={{ color: "#5A5A5A" }}>
-                Per Week
-              </div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          {[
+            { label: "Latest score", value: roadmap.overall_score ?? "—" },
+            { label: "Proficiency", value: roadmap.proficiency_label || "—" },
+            { label: "Topics", value: chapters.length },
+            { label: "Critical", value: chapters.filter((c) => c.weakness_level === "severe").length },
+          ].map((stat) => (
+            <div key={stat.label} className="ds-stat">
+              <p className="ds-stat-value">{stat.value}</p>
+              <p className="ds-stat-label">{stat.label}</p>
             </div>
-            <div
-              className="text-center p-3 rounded-lg"
-              style={{
-                backgroundColor: "#F5EDE5",
-                border: "1px solid #C9BDB3",
-              }}
-            >
-              <div className="text-2xl font-bold" style={{ color: "#8B7355" }}>
-                {recommendations.minimum_duration_weeks || 6}
-              </div>
-              <div className="text-xs" style={{ color: "#5A5A5A" }}>
-                Weeks
-              </div>
-            </div>
-            <div
-              className="text-center p-3 rounded-lg"
-              style={{
-                backgroundColor: "#F5EDE5",
-                border: "1px solid #C9BDB3",
-              }}
-            >
-              <div className="text-2xl font-bold" style={{ color: "#8B7355" }}>
-                {chapters.length}
-              </div>
-              <div className="text-xs" style={{ color: "#5A5A5A" }}>
-                Chapters
-              </div>
-            </div>
-            <div
-              className="text-center p-3 rounded-lg"
-              style={{
-                backgroundColor: "#F5EDE5",
-                border: "1px solid #C9BDB3",
-              }}
-            >
-              <div className="text-2xl font-bold" style={{ color: "#7C2D12" }}>
-                {chapters.filter((c) => c.weakness_level === "severe").length}
-              </div>
-              <div className="text-xs" style={{ color: "#5A5A5A" }}>
-                Critical
-              </div>
-            </div>
-          </div>
-
-          {recommendations.notes && (
-            <div
-              className="p-3 rounded border-l-4"
-              style={{ backgroundColor: "#F5EDE5", borderColor: "#8B7355" }}
-            >
-              <p className="text-sm" style={{ color: "#323232" }}>
-                {recommendations.notes}
-              </p>
-            </div>
-          )}
-
-          <div className="flex gap-2">
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={handleRegenerate}
-              disabled={generating}
-            >
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-                <span>
-                  {generating ? "Regenerating..." : "Regenerate Plan"}
-                </span>
-              </div>
-            </Button>
-          </div>
+          ))}
         </div>
+
+        {(recommendations.notes || roadmap.study_plan_message) && (
+          <p className="mt-4 rounded-lg border border-primary/20 bg-primary/5 p-4 text-sm text-foreground">
+            {recommendations.notes || roadmap.study_plan_message}
+          </p>
+        )}
+
+        {roadmap.domain_analysis && Object.keys(roadmap.domain_analysis).length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">
+            {Object.entries(roadmap.domain_analysis).map(([domain, data]) => (
+              <Badge key={domain} variant={data.accuracy_percentage >= 70 ? "success" : "warning"}>
+                {domain.replace(/_/g, " ")} {data.accuracy_percentage}%
+              </Badge>
+            ))}
+          </div>
+        )}
+
+        {roadmap.learning_gaps?.length > 0 && (
+          <ul className="mt-4 space-y-2 border-t border-border pt-4 text-sm text-muted">
+            {roadmap.learning_gaps.map((gap, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-primary">→</span>
+                {gap}
+              </li>
+            ))}
+          </ul>
+        )}
       </Card>
 
-      {/* Chapter Cards */}
-      <div className="space-y-4">
-        {chapters
-          .sort((a, b) => (b.priority || 3) - (a.priority || 3))
-          .map((chapter, index) => (
-            <Card key={index} hoverable>
-              <div
-                className="cursor-pointer"
-                onClick={() =>
-                  setExpandedChapter(expandedChapter === index ? null : index)
-                }
-              >
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {chapter.chapter_name}
-                    </h3>
-                    <div className="flex gap-2 items-center">
-                      <Badge
-                        variant="warning"
-                        size="sm"
-                        style={{
-                          backgroundColor: `${getWeaknessColor(
-                            chapter.weakness_level
-                          )}20`,
-                          color: getWeaknessColor(chapter.weakness_level),
-                        }}
-                      >
-                        {getWeaknessLabel(chapter.weakness_level)}
-                      </Badge>
-                      <span className="text-xs text-gray-500">
-                        Priority: {chapter.priority || 3}/5
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        ~{chapter.estimated_time_hours || 4}h
-                      </span>
+      {chapters.map((chapter, index) => (
+        <Card key={index} hoverable>
+          <div
+            className="cursor-pointer"
+            onClick={() => setExpandedChapter(expandedChapter === index ? null : index)}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">{chapter.chapter_name}</h3>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <Badge variant={weaknessBadge(chapter.weakness_level)} size="sm">
+                    {chapter.weakness_level}
+                  </Badge>
+                  <span className="font-mono text-xs text-muted">{chapter.accuracy_percentage}%</span>
+                </div>
+              </div>
+              <span className="text-muted">{expandedChapter === index ? "▼" : "▶"}</span>
+            </div>
+
+            {expandedChapter === index && (
+              <div className="mt-5 space-y-5 border-t border-border pt-5 animate-fade-in">
+                {chapter.roadmap_steps?.length > 0 && (
+                  <div>
+                    <p className="ds-mono-label mb-3">Next steps</p>
+                    <div className="space-y-2">
+                      {chapter.roadmap_steps.map((step, i) => (
+                        <div key={i} className="flex gap-3 rounded-lg bg-surface-raised p-3">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 font-mono text-xs text-primary">
+                            {step.step_number}
+                          </span>
+                          <div>
+                            <p className="text-sm text-foreground">{step.objective}</p>
+                            <p className="font-mono text-[10px] text-muted">~{step.estimated_time_minutes || 20} min</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  <span className="text-gray-400">
-                    {expandedChapter === index ? "▼" : "▶"}
-                  </span>
-                </div>
+                )}
 
-                {/* Expanded Content */}
-                {expandedChapter === index && (
-                  <div className="mt-4 space-y-4 border-t pt-4">
-                    {/* Prerequisites */}
-                    {chapter.prerequisites &&
-                      chapter.prerequisites.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-sm text-gray-700 mb-2">
-                            Prerequisites
-                          </h4>
-                          <div className="space-y-2">
-                            {chapter.prerequisites.map((prereq, i) => (
-                              <div
-                                key={i}
-                                className="p-2 bg-gray-50 rounded text-sm"
-                              >
-                                <div className="font-medium">
-                                  {prereq.concept}
-                                </div>
-                                <div className="text-xs text-gray-600">
-                                  {prereq.why}
-                                </div>
-                              </div>
-                            ))}
+                {chapter.resources?.length > 0 && (
+                  <div>
+                    <p className="ds-mono-label mb-3">Free tutorials</p>
+                    <div className="grid gap-3 md:grid-cols-2">
+                      {chapter.resources.map((resource, i) => (
+                        <a
+                          key={i}
+                          href={resource.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ds-resource-link"
+                        >
+                          <div className="mb-2 flex items-center justify-between gap-2">
+                            <span className="ds-badge-primary">{resource.level || resource.type}</span>
+                            <Badge variant="info" size="sm">{resource.type}</Badge>
                           </div>
-                        </div>
-                      )}
-
-                    {/* Roadmap Steps */}
-                    {chapter.roadmap_steps &&
-                      chapter.roadmap_steps.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-sm text-gray-700 mb-2">
-                            Study Roadmap
-                          </h4>
-                          <div className="space-y-2">
-                            {chapter.roadmap_steps.map((step, i) => (
-                              <div
-                                key={i}
-                                className="flex items-start gap-3 p-2 hover:bg-gray-50 rounded"
-                              >
-                                <div
-                                  className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-                                  style={{
-                                    backgroundColor: "#DDD0C8",
-                                    color: "#323232",
-                                  }}
-                                >
-                                  {step.step_number}
-                                </div>
-                                <div className="flex-1">
-                                  <div className="text-sm">
-                                    {step.objective}
-                                  </div>
-                                  <div className="text-xs text-gray-500">
-                                    ~{step.estimated_time_minutes || 30} min
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                    {/* Resources */}
-                    {chapter.resources && chapter.resources.length > 0 && (
-                      <div>
-                        <h4 className="font-semibold text-sm text-gray-700 mb-2">
-                          Recommended Resources
-                        </h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {chapter.resources.map((resource, i) => (
-                            <a
-                              key={i}
-                              href={resource.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-3 border rounded-lg hover:shadow-sm transition-all"
-                              style={{ borderColor: "#C9BDB3" }}
-                              onMouseEnter={(e) =>
-                                (e.currentTarget.style.borderColor = "#8B7355")
-                              }
-                              onMouseLeave={(e) =>
-                                (e.currentTarget.style.borderColor = "#C9BDB3")
-                              }
-                            >
-                              <div className="flex items-start justify-between mb-1">
-                                <div className="font-medium text-sm">
-                                  {resource.title}
-                                </div>
-                                <Badge variant="info" size="sm">
-                                  {resource.type}
-                                </Badge>
-                              </div>
-                              <p className="text-xs text-gray-600 mb-2">
-                                {resource.description}
-                              </p>
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-gray-500">
-                                  {resource.level}
-                                </span>
-                                <span className="text-gray-500">
-                                  {resource.estimated_time_minutes || 15} min
-                                </span>
-                              </div>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                          <p className="font-semibold text-sm text-foreground">{resource.title}</p>
+                          <p className="mt-1 text-xs text-muted">{resource.description}</p>
+                          <p className="mt-2 text-xs font-semibold text-primary">Open →</p>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
-            </Card>
-          ))}
-      </div>
+            )}
+          </div>
+        </Card>
+      ))}
+
+      {allResources.length > 0 && (
+        <Card title="All resources">
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {allResources.map((resource, i) => (
+              <a key={i} href={resource.url} target="_blank" rel="noopener noreferrer" className="ds-resource-link">
+                <span className="ds-badge-muted">{resource.provider_label || resource.provider}</span>
+                <p className="mt-2 text-sm font-semibold text-foreground">{resource.title}</p>
+                {resource.chapter && (
+                  <p className="mt-1 font-mono text-[10px] text-muted">{resource.chapter}</p>
+                )}
+              </a>
+            ))}
+          </div>
+        </Card>
+      )}
     </div>
   );
 };

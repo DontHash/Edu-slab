@@ -1,410 +1,352 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../components/layout/DashboardLayout";
+import StructuredAnswerEditor from "../../components/assessment/StructuredAnswerEditor";
 import ragQuestionService from "../../services/ragQuestion.service";
 import useAuthStore from "../../store/authStore";
+import {
+  createEmptyStructuredAnswer,
+  isStemSubject,
+  serializeStructuredAnswer,
+  structuredAnswerHasContent,
+} from "../../utils/structuredAnswer";
+
+const TOTAL_QUESTIONS = 10;
+
+const diffBadge = {
+  easy: "ds-badge-primary",
+  medium: "ds-badge-warn",
+  hard: "ds-badge-danger",
+};
 
 const RAGAssessmentPage = () => {
   const { user, refreshUser } = useAuthStore();
   const navigate = useNavigate();
-  const [step, setStep] = useState("select"); // 'select', 'loading', 'questions', 'submitted'
-
-  // Chapter selection state
-  const [subjects, setSubjects] = useState([]);
-  const [chaptersBySubject, setChaptersBySubject] = useState({});
+  const [step, setStep] = useState("select");
+  const [subjects] = useState(["maths", "science", "english"]);
   const [selectedSubject, setSelectedSubject] = useState("");
-  const [selectedChapter, setSelectedChapter] = useState("");
-  const [numQuestions, setNumQuestions] = useState(5);
-
-  // Questions state
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState({});
+  const [sessionId, setSessionId] = useState(null);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [difficulty, setDifficulty] = useState("medium");
+  const [progressPercent, setProgressPercent] = useState(0);
+  const [answer, setAnswer] = useState("");
+  const [lastResult, setLastResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // Submission state
-  const [submittedAssessment, setSubmittedAssessment] = useState(null);
+  const [curriculumInfo, setCurriculumInfo] = useState(null);
+  const [evalEngine, setEvalEngine] = useState(null);
+  const grade = user?.current_level || 10;
 
   useEffect(() => {
-    // Set subjects directly - no need to fetch from API
-    setSubjects(["maths", "science", "english"]);
-  }, []);
+    ragQuestionService.getCurriculum(grade).then(setCurriculumInfo).catch(() => {});
+    ragQuestionService.getEvaluationStatus().then(setEvalEngine).catch(() => {});
+  }, [grade]);
 
-  const handleGenerateQuestions = async () => {
+  const resetSession = () => {
+    setStep("select");
+    setSessionId(null);
+    setCurrentQuestion(null);
+    setQuestionNumber(1);
+    setDifficulty("medium");
+    setProgressPercent(0);
+    setAnswer("");
+    setLastResult(null);
+    setError(null);
+  };
+
+  const resetAnswerForSubject = (subject) => {
+    if (isStemSubject(subject)) {
+      setAnswer(serializeStructuredAnswer(createEmptyStructuredAnswer()));
+    } else {
+      setAnswer("");
+    }
+  };
+
+  const handleStartAssessment = async () => {
     if (!selectedSubject) {
       setError("Please select a subject");
       return;
     }
-
     try {
       setStep("loading");
       setLoading(true);
       setError(null);
-
-      const data = await ragQuestionService.generateQuestions(
-        null, // No chapter - generate from all chapters
-        selectedSubject,
-        5 // 5 questions per chapter
-      );
-console.log("Generated questions:", data);
-      setQuestions(data.questions || []);
-      setAnswers({});
-      setStep("questions");
+      const data = await ragQuestionService.startAdaptiveSession(selectedSubject, grade);
+      setSessionId(data.session_id);
+      setCurrentQuestion(data.question);
+      setQuestionNumber(data.question_number);
+      setDifficulty(data.difficulty);
+      setProgressPercent(data.progress_percent);
+      resetAnswerForSubject(selectedSubject);
+      setLastResult(null);
+      setStep("question");
     } catch (err) {
-      setError(
-        "Failed to generate questions: " +
-          (err.response?.data?.detail || err.message)
-      );
+      setError("Failed to start: " + (err.response?.data?.detail || err.message));
       setStep("select");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleAnswerChange = (questionId, answer) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: answer,
-    }));
-  };
-
-  const handleSubmitAssessment = async () => {
-    // Check if all questions are answered
-    const unansweredQuestions = questions.filter((q) => !answers[q.id]?.trim());
-
-    if (unansweredQuestions.length > 0) {
-      if (
-        !window.confirm(
-          `You have ${unansweredQuestions.length} unanswered questions. Submit anyway?`
-        )
-      ) {
-        return;
-      }
-    }
-
+  const handleFinishAndEvaluate = async (sid) => {
     try {
       setLoading(true);
-      setError(null);
-
-      const answerArray = questions.map((q) => ({
-        question_id: q.id,
-        answer: answers[q.id] || "",
-        chapter: q.chapter,
-        question: q.question,
-      }));
-
-      const result = await ragQuestionService.submitAssessment(
-        "All Chapters",
-        selectedSubject,
-        answerArray
-      );
-
-      setSubmittedAssessment(result);
-
-      // Refresh user data to get updated levels
-      try {
-        await refreshUser();
-      } catch (refreshError) {
-        console.error("Failed to refresh user data:", refreshError);
-      }
-
-      // Redirect to evaluation page
+      const result = await ragQuestionService.finishAdaptiveSession(sid);
+      try { await refreshUser(); } catch (_) {}
       navigate(`/assessment-evaluation/${result.assessment_id}`);
     } catch (err) {
-      setError(
-        "Failed to submit assessment: " +
-          (err.response?.data?.detail || err.message)
-      );
+      setError("Failed to generate report: " + (err.response?.data?.detail || err.message));
+      setStep("completed");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleStartNew = () => {
-    setStep("select");
-    setSelectedChapter("");
-    setQuestions([]);
-    setAnswers({});
-    setSubmittedAssessment(null);
-    setError(null);
+  const handleSubmitAnswer = async () => {
+    const hasContent = isStemSubject(selectedSubject)
+      ? structuredAnswerHasContent(answer)
+      : Boolean(answer?.trim());
+
+    if (!hasContent) {
+      setError(
+        isStemSubject(selectedSubject)
+          ? "Add a final answer, working steps, or a graph before continuing."
+          : "Please enter your answer before continuing."
+      );
+      return;
+    }
+    if (!sessionId || !currentQuestion) return;
+    try {
+      setLoading(true);
+      setError(null);
+      const payload = isStemSubject(selectedSubject) ? answer : answer.trim();
+      const data = await ragQuestionService.submitAdaptiveAnswer(
+        sessionId, currentQuestion.id, payload
+      );
+      setLastResult(data.last_result);
+      setProgressPercent(data.progress_percent);
+      if (data.completed) {
+        setStep("finishing");
+        await handleFinishAndEvaluate(sessionId);
+        return;
+      }
+      setCurrentQuestion(data.question);
+      setQuestionNumber(data.question_number);
+      setDifficulty(data.difficulty);
+      resetAnswerForSubject(selectedSubject);
+    } catch (err) {
+      setError("Failed to submit: " + (err.response?.data?.detail || err.message));
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const renderChapterSelection = () => (
-    <div className="max-w-4xl mx-auto">
-      <div
-        className="rounded-lg shadow-md p-6"
-        style={{ backgroundColor: "#F5EDE5" }}
-      >
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">
-          Generate Assessment Questions
-        </h2>
-
-        {error && (
-          <div
-            className="mb-4 p-4 rounded-lg"
-            style={{
-              backgroundColor: "#FFEEF0",
-              border: "1px solid #FFC9CC",
-              color: "#991B1B",
-            }}
-          >
-            {error}
-          </div>
-        )}
-
-        {/* Subject Selection */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Subject
-          </label>
-          <select
-            value={selectedSubject}
-            onChange={(e) => setSelectedSubject(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
-            style={{ borderColor: "#C9BDB3", focusRingColor: "#323232" }}
-          >
-            <option value="">Select a subject...</option>
-            {subjects.map((subject) => (
-              <option key={subject} value={subject}>
-                {subject.charAt(0).toUpperCase() + subject.slice(1)}
-              </option>
-            ))}
-          </select>
-          <p className="mt-2 text-sm text-gray-600">
-            The system will generate 5 questions from each chapter in the
-            selected subject.
-          </p>
+  const renderSelect = () => (
+    <div className="mx-auto max-w-2xl ds-panel-raised p-8 animate-slide-up">
+      <p className="ds-mono-label mb-2 text-primary">Adaptive · 10 questions</p>
+      <h2 className="text-2xl font-bold text-foreground">Start diagnostic</h2>
+      <p className="mt-2 text-sm text-muted">
+        Grade {grade} content — difficulty starts at your level and adjusts with each answer.
+      </p>
+      {evalEngine && !evalEngine.ollama?.model_ready && (
+        <div className="mt-4 rounded-lg border border-warning/30 bg-warning/10 p-3 text-sm text-warning">
+          AI grader offline — answers will need re-evaluation for full scoring.
         </div>
-
-        {/* Generate Button */}
-        <button
-          onClick={handleGenerateQuestions}
-          disabled={!selectedSubject || loading}
-          className="w-full py-3 px-6 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{ backgroundColor: "#323232", color: "#DDD0C8" }}
+      )}
+      {curriculumInfo && (
+        <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-muted">
+          {curriculumInfo.framework}
+        </p>
+      )}
+      {curriculumInfo?.subjects && (
+        <p className="mt-2 text-xs text-muted">
+          Full blueprint diagnostics:{" "}
+          {Object.entries(curriculumInfo.subjects)
+            .filter(([, v]) => v.blueprint_ready)
+            .map(([k]) => k.charAt(0).toUpperCase() + k.slice(1))
+            .join(", ") || "legacy mode for this grade"}
+        </p>
+      )}
+      {error && (
+        <div className="mt-4 rounded-lg border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
+          {error}
+        </div>
+      )}
+      <div className="mt-6">
+        <label className="ds-mono-label mb-2 block">Subject</label>
+        <select
+          value={selectedSubject}
+          onChange={(e) => {
+            setSelectedSubject(e.target.value);
+            resetAnswerForSubject(e.target.value);
+          }}
+          className="ds-input"
         >
-          {loading ? "Generating..." : "Generate Questions"}
+          <option value="">Select subject…</option>
+          {subjects.map((s) => (
+            <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
+          ))}
+        </select>
+      </div>
+      <button
+        onClick={handleStartAssessment}
+        disabled={!selectedSubject || loading}
+        className="ds-btn-primary mt-6 w-full disabled:opacity-40"
+      >
+        {loading ? "Starting…" : "Begin assessment"}
+      </button>
+    </div>
+  );
+
+  const renderQuestion = () => (
+    <div className="mx-auto max-w-3xl ds-panel-raised p-8 animate-slide-up">
+      <div className="mb-6 flex items-start justify-between">
+        <div>
+          <p className="ds-mono-label text-primary capitalize">{selectedSubject}</p>
+          <h2 className="text-xl font-bold text-foreground">
+            Question {questionNumber}
+            <span className="font-mono text-muted"> / {TOTAL_QUESTIONS}</span>
+          </h2>
+        </div>
+        <button onClick={resetSession} className="ds-btn-ghost text-sm">Exit</button>
+      </div>
+
+      <div className="mb-6">
+        <div className="mb-2 flex justify-between font-mono text-[10px] uppercase tracking-widest text-muted">
+          <span>Progress</span>
+          <span>{progressPercent}%</span>
+        </div>
+        <div className="ds-progress-track">
+          <div className="ds-progress-fill" style={{ width: `${progressPercent}%` }} />
+        </div>
+      </div>
+
+      {lastResult && (
+        <div className={`mb-4 rounded-lg border p-3 text-sm ${
+          lastResult.correct
+            ? "border-primary/30 bg-primary/10 text-primary"
+            : lastResult.partial
+            ? "border-warning/30 bg-warning/10 text-warning"
+            : "border-danger/30 bg-danger/10 text-danger"
+        }`}>
+          {lastResult.method === "unresolved"
+            ? "Answer recorded — full grading after completion."
+            : lastResult.correct
+            ? "Correct — level up."
+            : lastResult.partial
+            ? "Partial — holding level."
+            : "Incorrect — easing difficulty."}
+          {lastResult.next_difficulty && (
+            <span className="ml-2 font-mono text-xs opacity-80">→ {lastResult.next_difficulty}</span>
+          )}
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-4 rounded-lg border border-danger/30 bg-danger/10 p-4 text-sm text-danger">{error}</div>
+      )}
+
+      {currentQuestion && (
+        <div className="mb-6 rounded-xl border border-border bg-surface p-5">
+          <div className="mb-4 flex flex-wrap gap-2">
+            <span className="ds-badge-muted">{currentQuestion.chapter}</span>
+            {currentQuestion.domain && (
+              <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-primary">
+                {currentQuestion.domain.replace(/_/g, " ")}
+              </span>
+            )}
+            {currentQuestion.section && (
+              <span className="rounded-full border border-border bg-surface-raised px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted">
+                {currentQuestion.section.replace(/_/g, " ")}
+              </span>
+            )}
+            {currentQuestion.generative && (
+              <span className="rounded-full border border-primary/40 bg-primary/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-primary">
+                generated
+              </span>
+            )}
+            <span className={diffBadge[difficulty] || diffBadge.medium}>{difficulty}</span>
+          </div>
+          {currentQuestion.context_text && (
+            <div className="mb-5 rounded-lg border border-border/80 bg-surface-raised p-4">
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted">Reading passage</p>
+              <div
+                className="prose-sm whitespace-pre-wrap leading-relaxed text-foreground [&_strong]:text-primary"
+                dangerouslySetInnerHTML={{
+                  __html: currentQuestion.context_text
+                    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                    .replace(/\n/g, "<br/>"),
+                }}
+              />
+            </div>
+          )}
+          <div
+            className="prose-sm whitespace-pre-wrap leading-relaxed text-foreground [&_strong]:text-primary"
+            dangerouslySetInnerHTML={{
+              __html: currentQuestion.question
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br/>"),
+            }}
+          />
+        </div>
+      )}
+
+      {isStemSubject(selectedSubject) ? (
+        <StructuredAnswerEditor
+          subject={selectedSubject}
+          value={answer}
+          onChange={setAnswer}
+          disabled={loading}
+        />
+      ) : (
+        <textarea
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+          placeholder="Write your answer…"
+          rows={5}
+          disabled={loading}
+          className="ds-input resize-none disabled:opacity-50"
+        />
+      )}
+
+      <div className="mt-6 flex justify-end">
+        <button
+          onClick={handleSubmitAnswer}
+          disabled={
+            loading ||
+            !(isStemSubject(selectedSubject)
+              ? structuredAnswerHasContent(answer)
+              : answer?.trim())
+          }
+          className="ds-btn-primary px-8 disabled:opacity-40"
+        >
+          {loading ? "Checking…" : questionNumber >= TOTAL_QUESTIONS ? "Submit final answer" : "Submit & continue"}
         </button>
       </div>
     </div>
   );
 
-  const renderQuestions = () => (
-    <div className="max-w-4xl mx-auto">
-      <div
-        className="rounded-lg shadow-md p-6 mb-6"
-        style={{ backgroundColor: "#F5EDE5" }}
-      >
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-800">
-              {selectedSubject} - {selectedChapter}
-            </h2>
-            <p className="text-gray-600 mt-1">{questions.length} questions</p>
-          </div>
-          <button
-            onClick={handleStartNew}
-            className="px-4 py-2 font-medium transition-colors"
-            style={{ color: "#323232" }}
-          >
-            Change Chapter
-          </button>
-        </div>
-
-        {error && (
-          <div
-            className="mb-4 p-4 rounded-lg"
-            style={{
-              backgroundColor: "#FFEEF0",
-              border: "1px solid #FFC9CC",
-              color: "#991B1B",
-            }}
-          >
-            {error}
-          </div>
-        )}
-
-        {/* Questions */}
-        <div className="space-y-6">
-          {questions.map((question, index) => (
-            <div
-              key={question.id}
-              className="pb-6 last:border-b-0"
-              style={{ borderBottom: "1px solid #C9BDB3" }}
-            >
-              <div className="flex items-start gap-4">
-                <div
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-medium"
-                  style={{ backgroundColor: "#323232", color: "#DDD0C8" }}
-                >
-                  {index + 1}
-                </div>
-                <div className="flex-1">
-                  <p className="text-gray-800 font-medium mb-3">
-                    {question.question}
-                  </p>
-                  <textarea
-                    value={answers[question.id] || ""}
-                    onChange={(e) =>
-                      handleAnswerChange(question.id, e.target.value)
-                    }
-                    placeholder="Type your answer here..."
-                    rows="4"
-                    className="w-full px-4 py-3 rounded-lg resize-none focus:ring-2 focus:border-transparent"
-                    style={{
-                      border: "1px solid #C9BDB3",
-                      backgroundColor: "#FFFFFF",
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Submit Button */}
-        <div className="mt-8 flex justify-between items-center">
-          <p className="text-gray-600">
-            Answered: {Object.values(answers).filter((a) => a?.trim()).length} /{" "}
-            {questions.length}
-          </p>
-          <button
-            onClick={handleSubmitAssessment}
-            disabled={loading}
-            className="py-3 px-8 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ backgroundColor: "#6B8E23", color: "#FFFFFF" }}
-          >
-            {loading ? "Submitting..." : "Submit Assessment"}
-          </button>
-        </div>
-      </div>
+  const renderLoading = () => (
+    <div className="flex min-h-[40vh] flex-col items-center justify-center gap-4">
+      <div className="h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      <p className="font-mono text-xs uppercase tracking-widest text-muted">
+        {step === "finishing" ? "Building your report…" : "Loading question…"}
+      </p>
     </div>
   );
-
-  const renderSubmitted = () => (
-    <div className="max-w-2xl mx-auto">
-      <div
-        className="rounded-lg shadow-md p-8 text-center"
-        style={{ backgroundColor: "#F5EDE5" }}
-      >
-        <div
-          className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-          style={{ backgroundColor: "#E8F5E9" }}
-        >
-          <svg
-            className="w-8 h-8"
-            style={{ color: "#6B8E23" }}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
-
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          Assessment Submitted Successfully!
-        </h2>
-
-        <p className="text-gray-600 mb-6">
-          Your answers have been saved and will be evaluated when the AI model
-          is ready.
-        </p>
-
-        {submittedAssessment && (
-          <div
-            className="rounded-lg p-4 mb-6 text-left"
-            style={{ backgroundColor: "#FFFFFF", border: "1px solid #C9BDB3" }}
-          >
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <p className="text-gray-600">Subject</p>
-                <p className="font-medium">{submittedAssessment.subject}</p>
-              </div>
-              <div>
-                <p className="text-gray-600">Chapter</p>
-                <p className="font-medium">{submittedAssessment.chapter}</p>
-              </div>
-              <div>
-                <p className="text-gray-600">Questions</p>
-                <p className="font-medium">
-                  {submittedAssessment.total_questions}
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-600">Status</p>
-                <p className="font-medium capitalize">
-                  {submittedAssessment.status.replace("_", " ")}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className="flex gap-4 justify-center">
-          <button
-            onClick={handleStartNew}
-            className="py-3 px-6 rounded-lg transition-colors font-medium"
-            style={{ backgroundColor: "#323232", color: "#DDD0C8" }}
-          >
-            Start New Assessment
-          </button>
-          <button
-            onClick={() => (window.location.href = "/progress")}
-            className="py-3 px-6 rounded-lg transition-colors font-medium"
-            style={{ backgroundColor: "#E8DDD3", color: "#323232" }}
-          >
-            View Progress
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderContent = () => {
-    if (step === "loading") {
-      return (
-        <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-center">
-            <div
-              className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4"
-              style={{ borderColor: "#323232", borderTopColor: "transparent" }}
-            ></div>
-            <p className="text-gray-600">Generating questions...</p>
-          </div>
-        </div>
-      );
-    }
-
-    if (step === "questions") {
-      return renderQuestions();
-    }
-
-    if (step === "submitted") {
-      return renderSubmitted();
-    }
-
-    return renderChapterSelection();
-  };
 
   return (
     <DashboardLayout>
-      <div className="p-6">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">
-            AI-Powered Assessments
-          </h1>
-          <p className="text-gray-600 mt-2">
-            Generate custom questions based on specific chapters and topics
+      <div className="animate-fade-in">
+        <header className="ds-page-header mb-8">
+          <p className="ds-mono-label mb-2 text-primary">Live diagnostic</p>
+          <h1 className="ds-page-title">Adaptive assessment</h1>
+          <p className="ds-page-subtitle">
+            Contextual questions that respond to how you perform.
           </p>
-        </div>
-
-        {renderContent()}
+        </header>
+        {step === "loading" || step === "finishing" ? renderLoading() : step === "question" ? renderQuestion() : renderSelect()}
       </div>
     </DashboardLayout>
   );

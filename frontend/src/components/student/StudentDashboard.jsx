@@ -61,61 +61,50 @@ const StudentDashboard = () => {
 
   if (loading) {
     return (
-      <div className="p-6 text-charcoal-muted">Loading dashboard...</div>
+      <div className="flex min-h-[40vh] items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
     );
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold text-charcoal">
-          Diagnostic Dashboard
-        </h1>
-        <p className="text-charcoal-muted mt-1">
-          Complete assessments across four skill areas, then review your topic
-          reports and learning roadmap.
+    <div className="space-y-8 animate-fade-in">
+      <header className="ds-page-header">
+        <p className="ds-mono-label mb-2 text-primary">Diagnostic platform</p>
+        <h1 className="ds-page-title">Your learning cockpit</h1>
+        <p className="ds-page-subtitle">
+          Assess skills, track weak topics, and follow a curated study roadmap.
         </p>
-      </div>
+      </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {SKILL_AREAS.map((area) => (
-          <Card key={area} className="p-4">
-            <p className="text-sm text-charcoal-muted">Skill area</p>
-            <p className="font-semibold text-charcoal">{SKILL_LABELS[area]}</p>
-          </Card>
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {SKILL_AREAS.map((area, i) => (
+          <div
+            key={area}
+            className={`ds-stat animate-slide-up stagger-${i + 1}`}
+          >
+            <p className="ds-stat-value">{SKILL_LABELS[area].split(" ")[0]}</p>
+            <p className="ds-stat-label">{SKILL_LABELS[area]}</p>
+          </div>
         ))}
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <Link
-          to="/assessment"
-          className="px-4 py-2 rounded-lg text-cream bg-charcoal font-medium"
-        >
-          Start Assessment
+        <Link to="/assessment" className="ds-btn-primary">
+          Start assessment
         </Link>
-        <Link
-          to="/resources"
-          className="px-4 py-2 rounded-lg font-medium border border-sand-border text-charcoal"
-          style={{ backgroundColor: "#F5EDE5" }}
-        >
-          Learning Roadmap
+        <Link to="/resources" className="ds-btn-outline">
+          Learning roadmap
         </Link>
-        <Link
-          to="/my-progress"
-          className="px-4 py-2 rounded-lg font-medium border border-sand-border text-charcoal"
-          style={{ backgroundColor: "#F5EDE5" }}
-        >
-          My Progress
+        <Link to="/my-progress" className="ds-btn-outline">
+          My progress
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="p-5">
-          <h2 className="text-lg font-semibold text-charcoal mb-4">
-            Areas for Improvement
-          </h2>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <Card title="Areas for improvement">
           {areasForImprovement.length === 0 ? (
-            <p className="text-charcoal-muted text-sm">
+            <p className="text-sm text-muted">
               No weaknesses recorded yet. Take an assessment to get started.
             </p>
           ) : (
@@ -123,29 +112,43 @@ const StudentDashboard = () => {
               {areasForImprovement.map((item, idx) => (
                 <li
                   key={idx}
-                  className="flex justify-between items-center text-sm border-b border-sand-border pb-2"
+                  className="flex items-center justify-between border-b border-border pb-3 last:border-0"
                 >
-                  <span className="text-charcoal">
-                    {item.subject} — {item.chapter}
+                  <div>
+                    <p className="text-sm font-medium text-foreground">
+                      {item.chapter}
+                    </p>
+                    <p className="ds-mono-label mt-0.5">{item.subject}</p>
+                  </div>
+                  <span
+                    className={`font-mono text-sm ${
+                      item.severity === "critical" ? "text-danger" : "text-warning"
+                    }`}
+                  >
+                    {item.accuracy}%
                   </span>
-                  <span className="text-charcoal-muted">{item.accuracy}%</span>
                 </li>
               ))}
             </ul>
           )}
         </Card>
 
-        <Card className="p-5">
-          <h2 className="text-lg font-semibold text-charcoal mb-4">
-            Recent Activity
-          </h2>
+        <Card title="Recent activity">
           {recentActivities.length === 0 ? (
-            <p className="text-charcoal-muted text-sm">No recent activity.</p>
+            <p className="text-sm text-muted">No recent activity.</p>
           ) : (
             <ul className="space-y-3">
               {recentActivities.map((activity, idx) => (
-                <li key={idx} className="text-sm text-charcoal-muted">
-                  {activity.message || activity.description || "Assessment activity"}
+                <li
+                  key={idx}
+                  className="flex items-center justify-between text-sm"
+                >
+                  <span className="text-foreground capitalize">
+                    {activity.subject} · {activity.chapter || "Diagnostic"}
+                  </span>
+                  {activity.score != null && (
+                    <span className="font-mono text-primary">{activity.score}</span>
+                  )}
                 </li>
               ))}
             </ul>

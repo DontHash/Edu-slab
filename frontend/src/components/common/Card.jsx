@@ -1,18 +1,3 @@
-/**
- * Reusable Card Component
- *
- * Props:
- * - children: Card content
- * - title: Optional card title
- * - className: Additional CSS classes
- * - padding: 'sm' | 'md' | 'lg'
- *
- * Usage:
- * <Card title="Dashboard">
- *   <p>Card content here</p>
- * </Card>
- */
-
 const Card = ({
   children,
   title,
@@ -28,24 +13,12 @@ const Card = ({
 
   return (
     <div
-      className={`rounded-xl shadow-sm border ${
-        paddingStyles[padding]
-      } ${className} ${
-        hoverable
-          ? "hover:shadow-md transition-all duration-200 cursor-pointer"
-          : ""
-      }`}
-      style={{
-        backgroundColor: "#F5EDE5",
-        borderColor: "#C9BDB3",
-        boxShadow: "0 1px 2px 0 rgba(50, 50, 50, 0.05)",
-      }}
+      className={`ds-panel ${paddingStyles[padding]} ${className} ${
+        hoverable ? "ds-panel-interactive" : ""
+      } animate-fade-in`}
     >
       {title && (
-        <h3
-          className="text-lg font-bold mb-5 pb-3"
-          style={{ color: "#323232", borderBottom: "1px solid #C9BDB3" }}
-        >
+        <h3 className="mb-5 border-b border-border pb-3 text-lg font-bold text-foreground">
           {title}
         </h3>
       )}
