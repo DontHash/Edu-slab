@@ -28,6 +28,7 @@ backend/assessments/
 # IDE
 .idea/
 .vscode/
+.cursor/
 *.swp
 
 # OS
@@ -36,6 +37,7 @@ Thumbs.db
 
 # Large / generated AI artifacts (keep source data in python_RAG/data)
 backend/app/services/faiss_index.bin
+backend/data/resource_url_cache.json
 faiss_index_out/
 
 # Logs
